@@ -41,6 +41,8 @@
 		30A0434914DC770100060A13 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30A0434614DC770100060A13 /* Localizable.strings */; };
 		30E1352710E2C1420031B30D /* Cordova.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* Cordova.plist */; };
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5B98BBA0163E1BC0007A5B8B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B98BB9E163E1BC0007A5B8B /* LoginViewController.m */; };
+		5B98BBA1163E1BC0007A5B8B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B98BB9F163E1BC0007A5B8B /* LoginViewController.xib */; };
 		5BBE94B3163346B700D87FA3 /* NativeControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94AC163346B700D87FA3 /* NativeControls.m */; };
 		5BBE94B716334EB800D87FA3 /* CDVNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE94B416334EB800D87FA3 /* CDVNavigationBar.xib */; };
 		5BBE94B816334EB800D87FA3 /* CDVNavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94B616334EB800D87FA3 /* CDVNavigationBarController.m */; };
@@ -106,6 +108,9 @@
 		30E1352610E2C1420031B30D /* Cordova.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Cordova.plist; path = ../Cordova.plist; sourceTree = "<group>"; };
 		30E5649113A7FCAF007403D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* RootBuilder-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RootBuilder-Prefix.pch"; sourceTree = "<group>"; };
+		5B98BB9D163E1BC0007A5B8B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		5B98BB9E163E1BC0007A5B8B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		5B98BB9F163E1BC0007A5B8B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		5BBE94AB163346B700D87FA3 /* NativeControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeControls.h; sourceTree = "<group>"; };
 		5BBE94AC163346B700D87FA3 /* NativeControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeControls.m; sourceTree = "<group>"; };
 		5BBE94B416334EB800D87FA3 /* CDVNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDVNavigationBar.xib; sourceTree = "<group>"; };
@@ -153,6 +158,9 @@
 				302D95F014D2391D003F00A1 /* MainViewController.xib */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
+				5B98BB9D163E1BC0007A5B8B /* LoginViewController.h */,
+				5B98BB9E163E1BC0007A5B8B /* LoginViewController.m */,
+				5B98BB9F163E1BC0007A5B8B /* LoginViewController.xib */,
 			);
 			name = Classes;
 			path = RootBuilder/Classes;
@@ -402,6 +410,7 @@
 				3088BBC1154F3926009F9C59 /* Default@2x~iphone.png in Resources */,
 				5BBE94B716334EB800D87FA3 /* CDVNavigationBar.xib in Resources */,
 				5BBE94D11633C31800D87FA3 /* Default~iphone.png in Resources */,
+				5B98BBA1163E1BC0007A5B8B /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +445,7 @@
 				5BBE94B816334EB800D87FA3 /* CDVNavigationBarController.m in Sources */,
 				5BBE94C31633786A00D87FA3 /* NavigationBar.m in Sources */,
 				5BBE94C41633786A00D87FA3 /* TabBar.m in Sources */,
+				5B98BBA0163E1BC0007A5B8B /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

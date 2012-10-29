@@ -16,6 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+function onLeftNavButton() {
+    alert('Left Button Pressed');
+};
+    
+function onRightNavButton() {
+    alert('Right Button Pressed');
+};
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,107 +43,6 @@ onDeviceReady: function() {
     //app.receivedEvent('deviceready');
     console.log("PhoneGap ready");
 
-    newLoc = location.href.substring(0, location.href.lastIndexOf("/")+1);
-    
-    // Initializating TabBar
-    nativeControls = new NativeControls();
-    nativeControls.createNavBar();
-    nativeControls.createTabBar();
-    
-    // Back Button
-    nativeControls.createTabBarItem(
-                                    "news",
-                                    "News",
-                                    "www/images/pound.png",
-                                    {"onSelect": function() {
-                                    $.mobile.changePage( "#page1", { transition: 'reverse slide' } );
-                                    nativeControls.setNavBarTitle("Page 1");
-                                    nativeControls.selectTabBarItem("page1");
-                                    selectedTabBarItem = "page1";
-                                    }}
-                                    );
-    
-    // Home tab
-    nativeControls.createTabBarItem(
-                                    "events",
-                                    "Events",
-                                    "www/images/pound.png",
-                                    {"onSelect": function() {
-                                    if ( selectedTabBarItem == "page1" ) {
-                                    $.mobile.changePage( "#page2", { transition: 'slide' } );
-                                    } else {
-                                    $.mobile.changePage( "#page2", { transition: 'reverse slide' } );
-                                    }
-                                    nativeControls.setNavBarTitle("Page 2");
-                                    nativeControls.selectTabBarItem("page2");
-                                    selectedTabBarItem = "page2";
-                                    }}
-                                    );
-    
-    // About tab
-    nativeControls.createTabBarItem(
-                                    "home",
-                                    "Home",
-                                    "www/images/question.png",
-                                    {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
-                                    }}
-                                    );
-    
-    // About tab
-    nativeControls.createTabBarItem(
-                                    "actions",
-                                    "Actions",
-                                    "www/images/question.png",
-                                    {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
-                                    }}
-                                    );
-    
-    // About tab
-    nativeControls.createTabBarItem(
-                                    "donate",
-                                    "Donate",
-                                    "www/images/question.png",
-                                    {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
-                                    }}
-                                    );
-    
-    // Compile the TabBar
-    nativeControls.showTabBar();
-    nativeControls.showTabBarItems("news", "events", "home", "actions", "donate");
-    
-    selectedTabBarItem = "home";
-    nativeControls.selectTabBarItem("home");
-    
-    // Setup NavBar
-    nativeControls.setNavBarTitle("Roots Builder");
-    
-    nativeControls.setupLeftNavButton(
-                                      "?",
-                                      "",
-                                      "onLeftNavButton"
-                                      );
-    
-    //nativeControls.hideLeftNavButton();
-    
-    nativeControls.setupRightNavButton(
-                                       "About",
-                                       "",
-                                       "onRightNavButton"
-                                       );
-    
-    nativeControls.showNavBar({});
     
     console.log("PhoneGap done");
     
@@ -153,5 +59,5 @@ onDeviceReady: function() {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
 };

@@ -28,5 +28,7 @@
 #import <Cordova/CDVViewController.h>
 
 @interface MainViewController : CDVViewController
-
+{
+    IBOutlet UINavigationBar* navBar;
+}
 @end

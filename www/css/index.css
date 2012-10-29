@@ -52,7 +52,8 @@ body {
     left:0px;
     top:0px;
     height:100%;                   /* text area height */
-    width: 100%;                   /* text area width */                               
+    width: 100%;                   /* text area width */
+    border: solid 2px red;
 }
 
 /* Landscape layout (with min-width) */

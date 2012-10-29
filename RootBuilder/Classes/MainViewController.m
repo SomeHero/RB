@@ -53,7 +53,7 @@
     // Set the main view to utilize the entire application frame space of the device.
     // Change this to suit your view's UI footprint needs in your application.
     self.view.frame = [[UIScreen mainScreen] applicationFrame];
-    
+
     [super viewWillAppear:animated];
 }
 
@@ -61,6 +61,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEdit:)];
+    
 }
 
 - (void) viewDidUnload

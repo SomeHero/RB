@@ -549,14 +549,14 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
 }
 
--(void) leftNavButtonTapped
+-(void) leftButtonTapped
 {
     NSString * jsCallBack = [NSString stringWithFormat:@"%@();", leftNavBarCallbackId];    
     [self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
 	
 }
 
--(void) rightNavButtonTapped
+-(void) rightButtonTapped
 {
     NSString * jsCallBack = [NSString stringWithFormat:@"%@();", rightNavBarCallbackId];    
     [self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
