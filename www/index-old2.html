@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+
+<link rel="apple-touch-icon" href="http://www.itabbar.com/wp-content/themes/boldy/itabbar/img/logo72X72_flat.png"/>
+<link rel="apple-touch-icon-precomposed" media="screen and (min-resolution: 326dpi)" href="http://www.itabbar.com/wp-content/themes/boldy/itabbar/img/logo72X72_flat.png" />
+<link rel="apple-touch-icon-precomposed" href="http://www.itabbar.com/wp-content/themes/boldy/itabbar/img/logo72X72_flat.png"/>
+<title>RootsBuilder</title>
+
+
+<!--<link rel="stylesheet" href="http://scripts.toolurl.com/mobile/1-tabbbar/themes/css/jqtouch.css"/> -->
+<link rel="stylesheet" href="libs/itabbar/src/apple.css"/>
+<link rel="stylesheet" href="libs/itabbar/src/itabbar.css"/><!--CSS order are important -->
+<link rel="stylesheet" href="libs/itabbar/src/add2home.css">
+<link rel="stylesheet" href="libs/itabbar/src/style.css"/>
+<link rel="stylesheet" href="css/index.css"/>
+
+</head>
+
+<body>
+<div id="page">
+
+<div class="searchbox">
+  <form action="" method="get">
+        <input id="search" placeholder="Search" type="search" />
+        <input id="submit" type="hidden" />
+        <span id="x">x</span>
+    </form>
+ 	<div onClick="moveDown();" class="my_button" id="my_button">Cancel</div>   
+</div>
+
+<div id="jqt">
+
+<!-- #home-->
+<div id="home" class="current">
+                <div class="toolbar">
+                    <h1>iTabbar</h1>
+                    <div onClick="moveDown();" class="button slideup" id="infoButton" >Search</div>
+                </div>
+                
+                <div id="wrapper">
+                <div class="scroller">
+                    <ul class="rounded">
+                        <li class="arrow"><a href="#categories">RSS Feed with YQL<small class="counter">5</small></a> </li>
+                        <li class="arrow"><a href="#twitterlist">Twitter Users list<small class="counter">7</small></a></li>
+                        <li class="arrow"><a href="#flickrlist">Flickr Photos<small class="counter">10</small></a></li>
+                        <li class="arrow"><a href="#youtubelist">Youtube Videos<small class="counter">4</small></a></li>
+                    </ul>
+                    <h2>External Links</h2>
+                    <ul class="rounded">
+                        <li class="forward"><a target="_blank" href="http://www.itabbar.com/">Homepage</a></li>
+                        <li class="forward"><a target="_blank" href="http://www.twitter.com/itabbar">Twitter</a></li>
+                        <li class="forward"><a target="_blank" href="http://www.box.com/s/3gfhlold7ojbu3ll399s">Download</a></li>
+                    </ul>
+                    <ul class="individual">
+                    <li><a href="mailto:&#105;&#110;&#102;&#111;&#115;&#064;&#105;&#116;&#097;&#098;&#098;&#097;&#114;&#046;&#099;&#111;&#109;">email</a></li>
+                        <li><a target="_blank" href="#">Donate</a></li>
+                    </ul>
+                    <div class="info">
+                        <p>Add this page to your home screen to view the custom icon, startup screen, and full screen mode.</p>
+                    </div>
+                </div>
+                </div>
+  </div>
+<!-- End #home -->
+    
+<!-- #single -->
+	<div id="single" class="">
+		<div class="toolbar">
+			<h1>item section</h1>
+            <a class="back" href="#">Back</a>        </div>
+		<div id="wrapper">
+			<div id="scroller">
+            <ul class="rounded_content">
+            <li id="singleappend">full item here</li>   
+            </ul>      
+            </div>
+	  </div>
+  </div>
+<!-- End #single -->
+
+<!-- #Sections -->
+	<div id="categories">
+		<div class="toolbar">
+			<h1>RSS FEED</h1>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">            
+			<ul class="edgetoedge">
+            <li class="list arrow"><a onClick="send('http://feeds2.feedburner.com/thenextweb')" id="" href="#rssfeed" class="">Thenextweb</a></li>
+            <li class="list arrow"><a onClick="send('http://feeds.feedburner.com/TechCrunch')" id="" href="#rssfeed" class="">Techcrunch</a></li>
+            <li class="list arrow"><a onClick="send('vstinstrument.com/feed')" id="" href="#rssfeed" class="">VSTinstrument.com</a></li>
+            <li class="list arrow"><a onClick="send('http://blog.jqtouch.com/rss')" id="" href="#rssfeed" class="">jQtouch</a></li>
+            <li class="list arrow"><a onClick="send('appsmobiledev.com/feed')" id="" href="#rssfeed" class="">Appsmobiledev</a></li>
+            <li class="list arrow"><a onClick="send('www.templateswise.com/rss.php?list=latest')" id="" href="#rssfeed" class="">Templateswise</a></li>
+            </ul>
+			</div>
+	  </div>
+  </div>
+<!-- End #Sections -->
+
+<!-- #twitterlist -->
+	<div id="twitterlist">
+		<div class="toolbar">
+			<h1>Twitter users list</h1>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">            
+			<ul class="edgetoedge">
+            <li class="list arrow"><a onClick="send('itabbar')" id="" href="#tweet" class="">@iTabbar</a></li>
+            <li class="list arrow"><a onClick="send('jqtouch')" id="" href="#tweet" class="">@jQtouch</a></li>
+            <li class="list arrow"><a onClick="send('iScroll')" id="" href="#tweet" class="">@iScroll</a></li>
+            <li class="list arrow"><a onClick="send('techcrunch')" id="" href="#tweet" class="">@Techcrunch</a></li>
+            <li class="list arrow"><a onClick="send('appsmobiledev')" id="" href="#tweet" class="">@appsmobiledev</a></li>
+            <li class="list arrow"><a onClick="send('ginocote')" id="" href="#tweet" class="">@Gino</a></li>
+            <li class="list arrow"><a onClick="send('pascalcarmoni')" id="" href="#tweet" class="">@pascalcarmoni</a></li>
+            <li class="list arrow"><a onClick="send('templateswise')" id="" href="#tweet" class="">@templateswise</a></li>
+            <li class="list arrow"><a onClick="send('FousduRoi')" id="" href="#tweet" class="">Les Fous du Roi</a></li>
+            </ul>
+			</div>
+	  </div>
+  </div>
+<!-- End #twitterlist -->
+
+<!-- #flickrlist -->
+	<div id="flickrlist">
+		<div class="toolbar">
+			<h1>Flickr users list</h1>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">            
+			<ul class="edgetoedge">
+            <li class="list arrow"><a onClick="send('52522100@N07')" id="" href="#flickr" class="">Techcrunch</a></li>
+            <li class="list arrow"><a onClick="send('11629624@N02')" id="" href="#flickr" class="">ginocote</a></li>
+            <li class="list arrow"><a onClick="send('57057611@N02')" id="" href="#flickr" class="">ric6000</a></li>
+            </ul>
+			</div>
+	  </div>
+  </div>
+<!-- End #flickrlist -->
+
+<!-- #flickrlist -->
+	<div id="youtubelist">
+		<div class="toolbar">
+			<h1>Youtube Videos</h1>
+		</div>
+		<div id="wrapper">
+			<div id="scroller">            
+			<ul class="edgetoedge">
+            <li class="list arrow"><a onClick="send('jqtouch')" id="" href="#youtube" class="">jQtouch</a></li>
+            <li class="list arrow"><a onClick="send('iscroll 4')" id="" href="#youtube" class="">iScroll</a></li>
+            <li class="list arrow"><a onClick="send('Techcrunch')" id="" href="#youtube" class="">Techcrunch</a></li>
+            <li class="list arrow"><a onClick="send('adventus')" id="" href="#youtube" class="">Adventus VST</a></li>
+            </ul>
+			</div>
+	  </div>
+  </div>
+<!-- End #flickrlist -->
+
+
+<!-- #rssfeed -->
+	<div id="rssfeed">
+		<div class="toolbar">
+			<h1>Techcrunch RSS</h1>
+            <a class="back" href="#">Back</a></div>
+		<div id="wrapper">
+			<div id="scroller">
+			<ul class="edgecontent" id="postcat"></ul>
+			</div>
+	  </div>
+  </div>
+<!-- End #rssfeed -->
+
+<!-- #tweet -->
+	<div id="tweet">
+		<div class="toolbar">
+			<h1>Techcrunch</h1>
+            <a class="back" href="#">Back</a></div>
+		<div id="wrapper">
+			<div id="scroller">
+			<div id="tweetappend"></div>
+			</div>
+	  </div>
+  </div>
+<!-- End #tweet -->
+
+<!-- #flickr -->
+	<div id="flickr">
+		<div class="toolbar">
+			<h1>Flickr Photos</h1>
+            <a class="back" href="#">Back</a></div>
+		<div id="wrapper">
+			<div id="scroller">
+			<div id="flickrappend"></div>
+			</div>
+	  </div>
+  </div>
+<!-- End #flickr -->
+
+<!-- #flickr -->
+	<div id="youtube">
+		<div class="toolbar">
+			<h1>Youtube videos</h1>
+            <a class="back" href="#">Back</a></div>
+		<div id="wrapper">
+			<div id="scroller">
+			<div id="youtubeappend"></div>
+			</div>
+	  </div>
+  </div>
+<!-- End #flickr -->
+
+
+<!-- #pages list -->
+	<div id="pageslist">
+		<div class="toolbar">
+			<h1>Pages</h1>
+		</div>
+		<div id="wrapper-old">
+			<div id="scroller">
+			<ul class="edgetoedge" id="pagesappend"></ul>
+			</div>
+	  </div>
+	</div>
+<!-- End #pages list -->
+  
+  
+<!-- #search -->
+   <form id="search"  class="form">
+		<div class="toolbar">
+			<h1>Search</h1>
+			 <a class="cancel" href="#">Cancel</a></div>
+		<div class="scroll">
+                    <ul class="rounded">
+                        <li><input type="search" id="searchid" name="s" value="" placeholder="Search" /></li>
+                    </ul>
+                    <a style="margin-top: 10px; margin-bottom: 10px; color:rgba(0,0,0,.9)" href="#rssfeed" id="submit" class="whiteButton">Submit</a>                </div>
+    </form>
+<!-- End #search -->
+    
+<!-- #search ori-->
+   <form id="search1" action="ajax_get.php" method="GET" class="form">
+		<div class="toolbar">
+			<h1>Search</h1>
+			 <a class="cancel" href="#">Cancel</a>        </div>
+		<div class="scroll">
+                    <ul class="rounded">
+                        <li><input type="text" name="s" value="" placeholder="Search" /></li>
+                    </ul>
+                    <a style="margin-top: 10px; margin-bottom: 10px; color:rgba(0,0,0,.9)" href="#" class="submit whiteButton">Submit</a>                </div>
+    </form>
+<!-- End #search ori-->
+    
+    <!-- #about -->
+    <div id="about" class="selectable">
+		<p><img src="http://www.itabbar.com/wp-content/themes/boldy/itabbar/img/iTab-glossy.png" /></p>
+		<p><strong>iTabbar</strong><br>Version 0.1 beta<br>
+			<a href="http://www.itabbar.com">By Gino Côté</a></p>
+		<p><em>Create powerful mobile apps with<br> just iTabbar, HTML, CSS, and jQuery.</em></p>
+		<p>
+			<a target="_blank" href="http://twitter.com/itabbar">@iTabbar on Twitter</a>		</p>
+		<p><br><br><a href="#" class="grayButton goback">Close</a></p>
+	</div>
+    <!-- End #about -->
+</div> 
+<!-- End #jqt -->
+
+<div id="loading"><p><img src="img/loading.gif" /></p></div>
+
+<nav id="tabbar">
+    <ul >
+     <!-- Action & navigation -->
+<li><a href="#home" class="current flip"><strong>Home</strong><div class="home"></div></a></li>    
+<li><a href="#categories" class="flip"><strong>RSS Feed</strong><div class="rss"></div></a></li>
+<li><a href="#twitterlist" class="flip"><strong>Twitter</strong><div class="twitter"></div></a></li>
+<li><a href="#flickrlist" class="flip"><small class="badge right">3</small><strong>Flickr</strong><div class="flickr"></div></a></li>
+<li><a onClick="moveDown();" class="flip"><strong>Search</strong><div class="search2"></div></a></li>
+
+    </ul>
+</nav>
+</div> <!-- End #page -->
+
+    <script type="text/javascript" src="libs/itabbar/src/iscroll.js"></script>
+    <script type='text/javascript' src='libs/itabbar/src/zepto.min.js'></script>
+    <script type='text/javascript' src='libs/itabbar/src/jqtouch.min.js'></script>
+    
+    <script type='text/javascript' src='libs/itabbar/src/jqt.autotitles.min.js'></script>
+    <script type='text/javascript' src='libs/itabbar/src/yql.js'></script>
+    <script type='text/javascript' src='libs/itabbar/src/twitter.js'></script>
+    
+    <script type="text/javascript" src="libs/itabbar/src/add2home.js" charset="utf-8"></script>
+    
+    <script type="text/javascript" src="js/app.js"></script>
+    
+<script type='text/javascript' src='libs/itabbar/src/itabbar.js'></script> 
+<script type='text/javascript' src='libs/itabbar/src/fullscreen.js'></script>  
+
+</body>
+</html>
