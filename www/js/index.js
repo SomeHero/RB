@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        nativeControls = new NativeControls();
     },
     // Bind Event Listeners
     //
@@ -39,9 +40,8 @@ onDeviceReady: function() {
     newLoc = location.href.substring(0, location.href.lastIndexOf("/")+1);
     
     // Initializating TabBar
-    nativeControls = new NativeControls();
-    nativeControls.createNavBar();
     nativeControls.createTabBar();
+    nativeControls.createNavBar();
     
     // Back Button
     nativeControls.createTabBarItem(
@@ -49,10 +49,7 @@ onDeviceReady: function() {
                                     "News",
                                     "www/images/pound.png",
                                     {"onSelect": function() {
-                                    $.mobile.changePage( "#page1", { transition: 'reverse slide' } );
-                                    nativeControls.setNavBarTitle("Page 1");
-                                    nativeControls.selectTabBarItem("page1");
-                                    selectedTabBarItem = "page1";
+                                    newsClicked();
                                     }}
                                     );
     
@@ -62,14 +59,8 @@ onDeviceReady: function() {
                                     "Events",
                                     "www/images/pound.png",
                                     {"onSelect": function() {
-                                    if ( selectedTabBarItem == "page1" ) {
-                                    $.mobile.changePage( "#page2", { transition: 'slide' } );
-                                    } else {
-                                    $.mobile.changePage( "#page2", { transition: 'reverse slide' } );
-                                    }
-                                    nativeControls.setNavBarTitle("Page 2");
-                                    nativeControls.selectTabBarItem("page2");
-                                    selectedTabBarItem = "page2";
+     
+                                    
                                     }}
                                     );
     
@@ -79,10 +70,7 @@ onDeviceReady: function() {
                                     "Home",
                                     "www/images/question.png",
                                     {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
+       
                                     }}
                                     );
     
@@ -92,10 +80,7 @@ onDeviceReady: function() {
                                     "Actions",
                                     "www/images/question.png",
                                     {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
+
                                     }}
                                     );
     
@@ -105,10 +90,7 @@ onDeviceReady: function() {
                                     "Donate",
                                     "www/images/question.png",
                                     {"onSelect": function() {
-                                    $.mobile.changePage( "#page3", { transition: 'slide' } );
-                                    nativeControls.setNavBarTitle("Page 3");
-                                    nativeControls.selectTabBarItem("page3");
-                                    selectedTabBarItem = "page3";
+                                    
                                     }}
                                     );
     
@@ -154,4 +136,10 @@ onDeviceReady: function() {
 
         console.log('Received Event: ' + id);
     }
-};
+},
+onLeftNavButton = function() {
+    alert('hello james');
+},
+                                    newsClicked = function() {
+                                    alert('news');
+                                    }

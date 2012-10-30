@@ -12,7 +12,9 @@
  */
 function NativeControls() {
     this.tabBarTag = 0;
+    this.tabBarCallbacks2 = {};
     this.tabBarCallbacks = {};
+    alert('here');
     this.selectedTabBarItem = null;
 }
 
@@ -74,11 +76,11 @@ NativeControls.prototype.hideTabBar = function(animate) {
  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
  */
 NativeControls.prototype.createTabBarItem = function(name, label, image, options) {
-    
-	var tag = this.tabBarTag++;
+    var tag = this.tabBarTag++;
     if (options && 'onSelect' in options && typeof(options['onSelect']) == 'function') {
-        this.tabBarCallbacks[tag] = {'onSelect':options.onSelect,'name':name};
+        this.tabBarCallbacks2[tag-1] = {'onSelect':options.onSelect,'name':name};
         //delete options.onSelect;
+        alert(typeof(this.tabBarCallbacks2[tag-1].onSelect));
     }
 	
     cordova.exec("NativeControls.createTabBarItem", name, label, image, tag, options);
@@ -139,8 +141,17 @@ NativeControls.prototype.selectTabBarItem = function(tab) {
 NativeControls.prototype.tabBarItemSelected = function(tag)
 {
 	this.selectedTabBarItem = tag;
-    if (typeof(this.tabBarCallbacks[tag].onSelect) == 'function')
-        this.tabBarCallbacks[tag].onSelect(this.tabBarCallbacks[tag].name);
+    console.log(this.tabBarCallbacks2);
+    alert(tag);
+    alert(this.tabBarCallbacks2);
+    alert(typeof(this.tabBarCallbacks2));
+    alert(this.tabBarCallbacks2[0].onSelect);
+    
+    if (typeof(this.tabBarCallbacks2[tag].onSelect) == 'function')
+    {
+        alert('called js');
+        this.tabBarCallbacks2[tag].onSelect(this.tabBarCallbacks2[tag].name);
+    }
 };
 
 /**
