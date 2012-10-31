@@ -62,6 +62,8 @@
 		<string>CDVBattery</string>
 		<key>NativeControls</key>
 		<string>NativeControls</string>
+		<key>DrupalPlugin</key>
+		<string>DrupalPlugin</string>
 	</dict>
 </dict>
 </plist>
