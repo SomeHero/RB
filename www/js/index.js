@@ -16,6 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+/*  Here is what a node looks like *
+ var node = {
+ title: "Sample Article",
+ body: {
+ und: [{
+ value: "Sample Body"
+ }]
+ },
+ type: 'article',
+ language: 'und'
+ }; */
 function onLeftNavButton() {
     alert('Left Button Pressed');
 };
@@ -23,9 +34,26 @@ function onLeftNavButton() {
 function onRightNavButton() {
     alert('Right Button Pressed');
 };
+function successCallback() {
+    console.log('success');
+};
+function nodeSuccessCallback(result) {
+    var nodes = result.nodes;
+    for (var i = 0; i < nodes.length; i++) {
+        var html = "<li data-nid='" + nodes[i].nid + "'><img src='" + nodes[i].logo + "' />" + nodes[i].title + "<br />" + nodes[i].teaser + "</li>";
+        $(html).appendTo( '#home-items' );
+    }
+    
+    $("#home-items").listview("refresh");
+
+};
+function failureCallback() {
+    console.log('failed');
+};
 var app = {
     // Application Constructor
     initialize: function() {
+        console.log('initialze app');
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -33,6 +61,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
+        console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
@@ -41,10 +70,9 @@ var app = {
     // function, we must explicity call `app.receivedEvent(...);`
 onDeviceReady: function() {
     //app.receivedEvent('deviceready');
-    console.log("PhoneGap ready");
 
-    
-    console.log("PhoneGap done");
+    window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+    window.plugins.drupal.nodeGetIndexWithType("petitions", nodeSuccessCallback,failureCallback);
     
    
 },
