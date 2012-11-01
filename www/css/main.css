@@ -16,6 +16,7 @@ input,
 select,
 textarea {
     color: #222;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
 body {
@@ -28,7 +29,7 @@ a {
 }
 
 a:visited {
-    color: #551a8b;
+    color: #00e;
 }
 
 a:hover {
@@ -74,112 +75,360 @@ body {
  font-family:Arial,  sans-serif;
  line-height:1.5;
  font-size:16px;
- background: #fff;
- padding:5px;
+ background: #f1f1f2;
+ padding:0px;
  color: #000;
  word-wrap: break-word;
  -webkit-text-size-adjust: none;
+ overflow:hidden;
+ text-align:center;
 }
 h1, h2, h3, h4, h5, h6{ font-weight: normal; }
 p img { float: left; margin: 0 10px 5px 0; padding: 0; }
 img { border: 0; max-width: 100%; }
 
 /*  Main Styles */
-body{
-    background: #f1f1f2;
+
+#all-container {
+margin:0 auto;
+height:100%;
+width:100%;
+max-width:768px;
+position:relative;
 }
-header{
-    top:0; left:0;
-    height:45px;
+#app-container {
+background-color:#ffffff;
+    position:absolute;
+    z-index:1;
+    top:0px; bottom:0px; left:0px;
+    width:100%;
+    overflow:hidden;
+	text-align:left;
+    -webkit-transform: translate3d(0px,0px,0px);
 }
+#tab-container{
+background-color:#ffffff;
+    position:absolute;
+    z-index:1;
+    top:0px; bottom:0px; left:0px;
+    width:100%;
+    overflow:hidden;
+	text-align:left;
+	-webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  -webkit-transform: translate3d(0px,0px,0px);
+  -webkit-box-shadow: -2px 0px 4px #00051c;
+    -moz-box-shadow: -2px 0px 4px #00051c;
+    box-shadow: -2px 0px 4px #00051c;
+}
+
+
 footer {
     bottom:0; left:0;
     height:48px;
-    background-color:#cccccc;
+    background-color:#ccc;
     border-top:1px solid #eee;
 }
 header, footer{
-    background-color:#cccccc;
+    background-color:#ccc;
     padding:0;
     position:absolute;
     z-index:2;
-    font-size:18px;
+    font-size:12px;
     width:100%;
     text-align:center;
     color:#333333;
     font-weight:bold;
-    text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+    text-shadow:1px 1px 0 #fff;
     line-height:45px;
 }
-h1{
+header{
+    top:0; left:0;
+    height:45px;
+	border-bottom:1px solid #eee;
+	    top:0; left:0;
+	-webkit-background-clip: border-box;
+-webkit-background-origin: padding-box;
+-webkit-background-size: auto;
+-webkit-border-image: none;
+-webkit-font-smoothing: antialiased;
+background-clip: border-box;
+background-color: #0053a0;
+background-repeat: repeat-x;
+background-position: center left;
+background-size: auto;
+color: white;
+display: block;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 14px;
+font-weight: bold;
+margin: 0;
+padding: 0;
+line-height: 45px;
+position: relative;
+text-shadow:1px 1px 0 #003668;
+}
+header h1{
     margin:0;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	text-shadow:1px 1px 0 #003668;
+	font-weight:bold;
+}
+
+header a.hd-btn{
+position: absolute;
+height:45px;
+top: 0px;
+color: #fff;
+padding:0 6px;
+line-height: 45px;
+text-shadow: 1px 1px 0 #fff;
+text-decoration: none;
+font-size: 14px;
+text-shadow:1px 1px 0 #003668;
+text-decoration:none;
+}
+header a.hd-btn.left-btn{
+left: 12px;
+padding-left:0;
+}
+header a.hd-btn.right-btn{
+right: 12px;
+padding-right:0;
+}
+
+div#profile-container {
+    position: absolute;
+    top:0;left:0;
+    width:100%;
+	height:100%;
+  overflow:auto;
+  z-index:0;
+}
+#profile.page, .modal.page {
+background-color:#ffffff;
+    position:absolute;
+    z-index:1;
+    top:45px; left:0;
+    width:100%;
+    overflow:auto;
+	text-align:left;
+}
+div.modal-container {
+    position: absolute;
+    top:105%;left:0;
+    width:100%;
+	height:100%;
+  overflow:hidden;
+  z-index:900;
+  	-webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  -webkit-transform: translate3d(0px,0px,0px);
+    -webkit-box-shadow: 0px -2px 4px #00051c;
+    -moz-box-shadow: 0px -2px 4px #00051c;
+    box-shadow: 0px -2px 4px #00051c;
+}
+
+#profile-closer{
+display:none;
+position:absolute;
+top:0;
+left:0;
+width:48px;
+height:100%;
+z-index:10;
+background-color:transparent;
+cursor:pointer;
 }
 #wrapper {
+background-color:#ffffff;
     position:absolute;
     z-index:1;
     top:45px; bottom:48px; left:0;
     width:100%;
-    overflow:auto;
+    overflow:scroll;
+	text-align:left;
 }
 #main-content {
-    position:absolute;
+	position:absolute;
     z-index:1;
     width:100%;
-    padding:0;
+    padding:1px 0;
+}
+.myScrollbarV {
+	position:absolute;
+	z-index:100;
+	width:4px;bottom:7px;top:2px;right:1px
 }
 
+.myScrollbarV > div {
+	position:absolute;
+	z-index:100;
+	width:100%;
+
+	/* The following is probably what you want to customize */
+	background:-webkit-gradient(linear, 0 0, 100% 0, from(#666), to(#999));
+	border:1px solid #555;
+	-webkit-background-clip:padding-box;
+	-webkit-box-sizing:border-box;
+	-webkit-border-radius:4px;
+	-webkit-box-shadow:inset 1px 1px 0 rgba(255,255,255,0.5);
+}
 #tab-bar{
     margin:0;
     padding:0;
+	-webkit-box-sizing: border-box;
+box-sizing: border-box;
+font-size: 12px;
+background: -webkit-gradient(linear, left top, left bottom, from(black), to(black), color-stop(.01, black), color-stop(.02, #555), color-stop(.03, #2D2D2D), color-stop(.5, #151515), color-stop(.51, black));
+bottom: 0;
+border-top: 1px rgba(255, 255, 255, 0.3) solid;
+height: 48px !important;
+overflow: hidden;
+position: absolute;
+width: 100%;
+z-index: 100 !important;
 }
 #tab-bar li {
     display: inline;
     float:left;
     width: 20%;
+	
 }
 #tab-bar a {
-    color: #666666;
-    display: block;
+    color: #787878;
     font-weight: bold;
     overflow: hidden;
-    position: relative;
     text-align: center;
+	font-size:12px;
     text-decoration: none;
     -webkit-touch-callout:none;
+-webkit-box-flex: 1;
+border-radius: .60em;
+bottom: 0px;
+display: inline-block;
+height: 48px;
+position: relative;
+top: 0;
+vertical-align: top;
+width: 100%;
+text-decoration: none;
+}
+#tab-bar a.current {
+background-color: rgba(255, 255, 255, .10);
+}
+#tab-bar a strong{
+bottom: 4px;
+color: #787878;
+font: bold 12px "Helvetica Neue", Helvetica;
+overflow: hidden;
+position: absolute;
+text-align: center;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 100%;
+-webkit-font-smoothing: antialiased;
+text-shadow:none;
+}
+#tab-bar a.current strong{
+color:#fff;
+}
+#tabbar a span.icon {
+display:block;
+margin-top: 4px;
+background-color: #7F7F7F;
+width: 100%;
+height: 100%;
+-webkit-mask-size: 28px;
+-webkit-mask-position: center top;
+-webkit-mask-repeat: no-repeat;
 }
 
 #pages{
     position:relative;
 }
 
-#pages > div {
-    display: none;
+#pages > div.page {
+display: none;
+background-color:#ffffff;
     position: absolute;
     top:0;left:0;
     width:100%;
-	height:100%;
-	background-color:#f1f1f2;
+		-webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  overflow:auto;
 }
-#pages > div.current {
+#pages > div.page.current {
     display: block;
+	left:0px !important;
+	z-index: 5;
+
 }
+div.page > h2, div.page > div, div.page > p{
+padding:0 12px;
+}
+div.page > h2{
+text-align:center;
+background-color:#f1f1f2;
+margin:0;
+padding:6px;
+}
+
+#pages > div.page ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+    width:100%;
+    text-align:left;
+}
+#pages > div.page ul li {
+    padding:0 12px;
+    height:48px;
+    line-height:48px;
+    border-bottom:1px solid #ccc;
+    border-top:1px solid #fff;
+    background-color:#fafafa;
+    font-size:14px;
+	cursor:pointer;
+}
+#pages > div.page#events ul li {
+    padding:0 12px;
+    height:96px;
+    line-height:96px;
+
+}
+#pages > div ul li:hover {
+background-color:#eeeeee;
+}
+
+.animate {
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+}
+
 .in, .out {
     -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 400ms;
-}
-@-webkit-keyframes fade-in {
-    from { opacity: 0; } to { opacity: 1; }
+    -webkit-animation-duration: 500ms;
 }
 .fade.in {
-    -webkit-animation-name: fade-in;
     z-index: 5;
 }
 .fade.out {
     z-index: 0;
 }
-
-
-
 
 
 
