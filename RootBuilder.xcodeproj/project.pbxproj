@@ -49,6 +49,23 @@
 		5BBE94C31633786A00D87FA3 /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94C01633786A00D87FA3 /* NavigationBar.m */; };
 		5BBE94C41633786A00D87FA3 /* TabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94C21633786A00D87FA3 /* TabBar.m */; };
 		5BBE94D11633C31800D87FA3 /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE94D01633C31800D87FA3 /* Default~iphone.png */; };
+		5BC86FE31640AA4A00053DE1 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FD01640AA4A00053DE1 /* ASIAuthenticationDialog.m */; };
+		5BC86FE41640AA4A00053DE1 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FD31640AA4A00053DE1 /* ASIDataCompressor.m */; };
+		5BC86FE51640AA4A00053DE1 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FD51640AA4A00053DE1 /* ASIDataDecompressor.m */; };
+		5BC86FE61640AA4A00053DE1 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FD71640AA4A00053DE1 /* ASIDownloadCache.m */; };
+		5BC86FE71640AA4A00053DE1 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FD91640AA4A00053DE1 /* ASIFormDataRequest.m */; };
+		5BC86FE81640AA4A00053DE1 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FDB1640AA4A00053DE1 /* ASIHTTPRequest.m */; };
+		5BC86FE91640AA4A00053DE1 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FDF1640AA4A00053DE1 /* ASIInputStream.m */; };
+		5BC86FEA1640AA4A00053DE1 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FE11640AA4A00053DE1 /* ASINetworkQueue.m */; };
+		5BC86FED1640AA6900053DE1 /* DrupalPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC86FEC1640AA6900053DE1 /* DrupalPlugin.m */; };
+		5BC86FEF1640ABB900053DE1 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC86FEE1640ABB900053DE1 /* libz.1.2.5.dylib */; };
+		5BC87023164365E000053DE1 /* DIOSComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC87015164365E000053DE1 /* DIOSComment.m */; };
+		5BC87024164365E000053DE1 /* DIOSConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC87018164365E000053DE1 /* DIOSConnect.m */; };
+		5BC87025164365E000053DE1 /* DIOSFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8701A164365E000053DE1 /* DIOSFile.m */; };
+		5BC87026164365E000053DE1 /* DIOSNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8701C164365E000053DE1 /* DIOSNode.m */; };
+		5BC87027164365E000053DE1 /* DIOSTaxonomy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8701E164365E000053DE1 /* DIOSTaxonomy.m */; };
+		5BC87028164365E000053DE1 /* DIOSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC87020164365E000053DE1 /* DIOSUser.m */; };
+		5BC87029164365E000053DE1 /* DIOSViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC87022164365E000053DE1 /* DIOSViews.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +138,44 @@
 		5BBE94C11633786A00D87FA3 /* TabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBar.h; sourceTree = "<group>"; };
 		5BBE94C21633786A00D87FA3 /* TabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBar.m; sourceTree = "<group>"; };
 		5BBE94D01633C31800D87FA3 /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		5BC86FCF1640AA4A00053DE1 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		5BC86FD01640AA4A00053DE1 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		5BC86FD11640AA4A00053DE1 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		5BC86FD21640AA4A00053DE1 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		5BC86FD31640AA4A00053DE1 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		5BC86FD41640AA4A00053DE1 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		5BC86FD51640AA4A00053DE1 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		5BC86FD61640AA4A00053DE1 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		5BC86FD71640AA4A00053DE1 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		5BC86FD81640AA4A00053DE1 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		5BC86FD91640AA4A00053DE1 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		5BC86FDA1640AA4A00053DE1 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		5BC86FDB1640AA4A00053DE1 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		5BC86FDC1640AA4A00053DE1 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		5BC86FDD1640AA4A00053DE1 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		5BC86FDE1640AA4A00053DE1 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		5BC86FDF1640AA4A00053DE1 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		5BC86FE01640AA4A00053DE1 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		5BC86FE11640AA4A00053DE1 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		5BC86FE21640AA4A00053DE1 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		5BC86FEB1640AA6900053DE1 /* DrupalPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrupalPlugin.h; sourceTree = "<group>"; };
+		5BC86FEC1640AA6900053DE1 /* DrupalPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrupalPlugin.m; sourceTree = "<group>"; };
+		5BC86FEE1640ABB900053DE1 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		5BC87014164365E000053DE1 /* DIOSComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSComment.h; sourceTree = "<group>"; };
+		5BC87015164365E000053DE1 /* DIOSComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSComment.m; sourceTree = "<group>"; };
+		5BC87016164365E000053DE1 /* DIOSConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSConfig.h; sourceTree = "<group>"; };
+		5BC87017164365E000053DE1 /* DIOSConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSConnect.h; sourceTree = "<group>"; };
+		5BC87018164365E000053DE1 /* DIOSConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSConnect.m; sourceTree = "<group>"; };
+		5BC87019164365E000053DE1 /* DIOSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSFile.h; sourceTree = "<group>"; };
+		5BC8701A164365E000053DE1 /* DIOSFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSFile.m; sourceTree = "<group>"; };
+		5BC8701B164365E000053DE1 /* DIOSNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSNode.h; sourceTree = "<group>"; };
+		5BC8701C164365E000053DE1 /* DIOSNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSNode.m; sourceTree = "<group>"; };
+		5BC8701D164365E000053DE1 /* DIOSTaxonomy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSTaxonomy.h; sourceTree = "<group>"; };
+		5BC8701E164365E000053DE1 /* DIOSTaxonomy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSTaxonomy.m; sourceTree = "<group>"; };
+		5BC8701F164365E000053DE1 /* DIOSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSUser.h; sourceTree = "<group>"; };
+		5BC87020164365E000053DE1 /* DIOSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSUser.m; sourceTree = "<group>"; };
+		5BC87021164365E000053DE1 /* DIOSViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSViews.h; sourceTree = "<group>"; };
+		5BC87022164365E000053DE1 /* DIOSViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSViews.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RootBuilder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "RootBuilder-Info.plist"; path = "../RootBuilder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +184,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				301BF5BD109A6A2B0062928A /* CFNetwork.framework in Frameworks */,
+				5BC86FEF1640ABB900053DE1 /* libz.1.2.5.dylib in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -137,7 +194,6 @@
 				301BF5B7109A6A2B0062928A /* AddressBookUI.framework in Frameworks */,
 				301BF5B9109A6A2B0062928A /* AudioToolbox.framework in Frameworks */,
 				301BF5BB109A6A2B0062928A /* AVFoundation.framework in Frameworks */,
-				301BF5BD109A6A2B0062928A /* CFNetwork.framework in Frameworks */,
 				301BF5BF109A6A2B0062928A /* CoreLocation.framework in Frameworks */,
 				301BF5C1109A6A2B0062928A /* MediaPlayer.framework in Frameworks */,
 				301BF5C3109A6A2B0062928A /* QuartzCore.framework in Frameworks */,
@@ -193,6 +249,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5BC86FEE1640ABB900053DE1 /* libz.1.2.5.dylib */,
+				5BC87013164365E000053DE1 /* drupal-ios-sdk */,
+				5BC86FCE1640AA2F00053DE1 /* AsiHttpRequest */,
 				301BF56E109A69640062928A /* www */,
 				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -265,6 +324,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				5BC86FEB1640AA6900053DE1 /* DrupalPlugin.h */,
+				5BC86FEC1640AA6900053DE1 /* DrupalPlugin.m */,
 				5BBE94BF1633786A00D87FA3 /* NavigationBar.h */,
 				5BBE94C01633786A00D87FA3 /* NavigationBar.m */,
 				5BBE94C11633786A00D87FA3 /* TabBar.h */,
@@ -316,6 +377,55 @@
 				30A0434614DC770100060A13 /* Localizable.strings */,
 			);
 			path = se.lproj;
+			sourceTree = "<group>";
+		};
+		5BC86FCE1640AA2F00053DE1 /* AsiHttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5BC86FCF1640AA4A00053DE1 /* ASIAuthenticationDialog.h */,
+				5BC86FD01640AA4A00053DE1 /* ASIAuthenticationDialog.m */,
+				5BC86FD11640AA4A00053DE1 /* ASICacheDelegate.h */,
+				5BC86FD21640AA4A00053DE1 /* ASIDataCompressor.h */,
+				5BC86FD31640AA4A00053DE1 /* ASIDataCompressor.m */,
+				5BC86FD41640AA4A00053DE1 /* ASIDataDecompressor.h */,
+				5BC86FD51640AA4A00053DE1 /* ASIDataDecompressor.m */,
+				5BC86FD61640AA4A00053DE1 /* ASIDownloadCache.h */,
+				5BC86FD71640AA4A00053DE1 /* ASIDownloadCache.m */,
+				5BC86FD81640AA4A00053DE1 /* ASIFormDataRequest.h */,
+				5BC86FD91640AA4A00053DE1 /* ASIFormDataRequest.m */,
+				5BC86FDA1640AA4A00053DE1 /* ASIHTTPRequest.h */,
+				5BC86FDB1640AA4A00053DE1 /* ASIHTTPRequest.m */,
+				5BC86FDC1640AA4A00053DE1 /* ASIHTTPRequestConfig.h */,
+				5BC86FDD1640AA4A00053DE1 /* ASIHTTPRequestDelegate.h */,
+				5BC86FDE1640AA4A00053DE1 /* ASIInputStream.h */,
+				5BC86FDF1640AA4A00053DE1 /* ASIInputStream.m */,
+				5BC86FE01640AA4A00053DE1 /* ASINetworkQueue.h */,
+				5BC86FE11640AA4A00053DE1 /* ASINetworkQueue.m */,
+				5BC86FE21640AA4A00053DE1 /* ASIProgressDelegate.h */,
+			);
+			name = AsiHttpRequest;
+			sourceTree = "<group>";
+		};
+		5BC87013164365E000053DE1 /* drupal-ios-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				5BC87014164365E000053DE1 /* DIOSComment.h */,
+				5BC87015164365E000053DE1 /* DIOSComment.m */,
+				5BC87016164365E000053DE1 /* DIOSConfig.h */,
+				5BC87017164365E000053DE1 /* DIOSConnect.h */,
+				5BC87018164365E000053DE1 /* DIOSConnect.m */,
+				5BC87019164365E000053DE1 /* DIOSFile.h */,
+				5BC8701A164365E000053DE1 /* DIOSFile.m */,
+				5BC8701B164365E000053DE1 /* DIOSNode.h */,
+				5BC8701C164365E000053DE1 /* DIOSNode.m */,
+				5BC8701D164365E000053DE1 /* DIOSTaxonomy.h */,
+				5BC8701E164365E000053DE1 /* DIOSTaxonomy.m */,
+				5BC8701F164365E000053DE1 /* DIOSUser.h */,
+				5BC87020164365E000053DE1 /* DIOSUser.m */,
+				5BC87021164365E000053DE1 /* DIOSViews.h */,
+				5BC87022164365E000053DE1 /* DIOSViews.m */,
+			);
+			path = "drupal-ios-sdk";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,6 +556,22 @@
 				5BBE94C31633786A00D87FA3 /* NavigationBar.m in Sources */,
 				5BBE94C41633786A00D87FA3 /* TabBar.m in Sources */,
 				5B98BBA0163E1BC0007A5B8B /* LoginViewController.m in Sources */,
+				5BC86FE31640AA4A00053DE1 /* ASIAuthenticationDialog.m in Sources */,
+				5BC86FE41640AA4A00053DE1 /* ASIDataCompressor.m in Sources */,
+				5BC86FE51640AA4A00053DE1 /* ASIDataDecompressor.m in Sources */,
+				5BC86FE61640AA4A00053DE1 /* ASIDownloadCache.m in Sources */,
+				5BC86FE71640AA4A00053DE1 /* ASIFormDataRequest.m in Sources */,
+				5BC86FE81640AA4A00053DE1 /* ASIHTTPRequest.m in Sources */,
+				5BC86FE91640AA4A00053DE1 /* ASIInputStream.m in Sources */,
+				5BC86FEA1640AA4A00053DE1 /* ASINetworkQueue.m in Sources */,
+				5BC86FED1640AA6900053DE1 /* DrupalPlugin.m in Sources */,
+				5BC87023164365E000053DE1 /* DIOSComment.m in Sources */,
+				5BC87024164365E000053DE1 /* DIOSConnect.m in Sources */,
+				5BC87025164365E000053DE1 /* DIOSFile.m in Sources */,
+				5BC87026164365E000053DE1 /* DIOSNode.m in Sources */,
+				5BC87027164365E000053DE1 /* DIOSTaxonomy.m in Sources */,
+				5BC87028164365E000053DE1 /* DIOSUser.m in Sources */,
+				5BC87029164365E000053DE1 /* DIOSViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

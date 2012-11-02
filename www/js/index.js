@@ -234,7 +234,7 @@ onDeviceReady: function() {
     })
     .show(1000, function() {
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.nodeGetIndexWithType("petitions", function(result) {
+          window.plugins.drupal.petitionsGetIndex(function(result) {
                                                      $("#home-list").empty();
                                                      
                                                      var source   = $("#homeitem-template").html();
@@ -261,7 +261,7 @@ onDeviceReady: function() {
           })
     .show(1000, function() {
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.nodeGetIndexWithType("petitions", function(result) {
+          window.plugins.drupal.newsGetIndex(function(result) {
                                                      $("#news-list").empty();
                                                      
                                                      var source   = $("#newsitem-template").html();
@@ -288,7 +288,7 @@ onDeviceReady: function() {
           })
     .show(1000, function() {
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.nodeGetIndexWithType("petitions", function(result) {
+          window.plugins.drupal.petitionsGetIndex(function(result) {
                                                      $("#events-list").empty();
                                                      
                                                      var source   = $("#eventitem-template").html();
@@ -306,6 +306,18 @@ onDeviceReady: function() {
           })
     .show();
 
+    $("#signin-submit").on('click', function(e) {
+                           e.preventDefault();
+                           
+                           var userName = "admin";
+                           var password = "turnkey";
+                           
+                           window.plugins.drupal.login(userName, password, function() {
+                                                       alert('login success');
+                                                       }, function() {
+                                                       alert('login failed');
+                                                       });
+     });
     
    
 },

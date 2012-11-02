@@ -125,6 +125,24 @@
     [super writeJavascript:[pluginResult toSuccessCallbackString:callbackId]];        
     [dict release];
 }
+- (void) newsGetIndex:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
+    NSString* callbackId = [arguments objectAtIndex:0];
+    
+    DIOSNode *diosNode = [[DIOSNode alloc] initWithSession:self.currentSession];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[diosNode newsGetIndex],@"nodes", nil];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
+    [super writeJavascript:[pluginResult toSuccessCallbackString:callbackId]];
+    [dict release];
+}
+- (void) petitionsGetIndex:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
+    NSString* callbackId = [arguments objectAtIndex:0];
+    
+    DIOSNode *diosNode = [[DIOSNode alloc] initWithSession:self.currentSession];
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[diosNode petitionsGetIndex],@"nodes", nil];
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
+    [super writeJavascript:[pluginResult toSuccessCallbackString:callbackId]];
+    [dict release];
+}
 - (void) nodeGetIndexWithType:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
     NSString* callbackId = [arguments objectAtIndex:0];
     
