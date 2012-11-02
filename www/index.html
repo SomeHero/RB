@@ -33,20 +33,36 @@
 <!-- START YOU PAGE -->
 
  <div id="profile-container" class="full-page">
- 
-
 <header>
 <h1>
 You
 <h1>
 </header>
 <div id="profile" class="page">
-	<h2>The Profile Page</h2>
-	<p>
-PROFILE PAGE
-  </p>
+<div class="fb-button">
+            <button type="button" id="fb-btn" class="rb-btn fb">
+                Connect with Facebook
+            </button>
+			</div>
+            <div class="or"> - &nbsp;OR&nbsp; -</div>
+           <!-- <h5>
+                Or Sign in with Email or Phone #</h5>-->
+            <div id="signin-form">
+<form action="#"  method="post">                    
+
+<span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span>
+<span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span>
+<button type="submit" id="signin-submit" class="rb-btn blue">
+                      Sign In with Email</button>
+</form>            </div>
+            <div id="main-body-sub-links">
+                <p style="text-align: center">
+                    <a href="#">Forgot password?</a>&nbsp;
+                    | &nbsp;<a href="#" data-ajax="false">Create Account</a>
+                </p>
+            </div>
+        </div>
   </div>
-</div>
 
 <!--MODAL GOES HERE-->
 
@@ -210,7 +226,7 @@ Mobylyze
 </div>
 </div>
 
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript">
             if (typeof jQuery == 'undefined')
             {
@@ -223,7 +239,7 @@ Mobylyze
 		<script type="text/javascript" src="js/jquery.animate-enhanced.js"></script>
 		<script type="text/javascript" src="js/noClickDelay.js"></script>
         <script type="text/javascript" src="js/helper.js"></script>
-        <script type="text/javascript" src="cordova-2.1.0.js"></script>
+        <!--<script type="text/javascript" src="cordova-2.1.0.js"></script>-->
 		<script type="text/javascript" src="js/main.js"></script>
 		
 <script id="modal-template" type="text/x-handlebars-template">

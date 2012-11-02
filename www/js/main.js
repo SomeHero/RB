@@ -6,12 +6,14 @@ var viewport = {
 	panelwidth : $('#all-container').width()
 };
 var myScroll;
+var youScroll;
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
 
 
 //GLOBAL FUNCTIONS		
 function resetSizing(){
+$('#profile-container').css('width', (viewport.panelwidth  - 48) + 'px');
 $('#pages > div.page').css('width', viewport.panelwidth  + 'px');
 $('#all-container').css('height', viewport.height + 'px');
 $('#wrapper').css('height', (viewport.height - 93) + 'px');
@@ -32,7 +34,6 @@ setTimeout(function () {
 	}, 0);
 	}else{
 	//do nothing
-
 	}
 }
 
