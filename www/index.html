@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <title></title>
@@ -16,56 +17,154 @@
         <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-		
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-        
 		<link rel="stylesheet" href="css/normalize.css">
+		
+		<link rel="stylesheet" href="css/viewnavigator.css" type="text/css" />
+		
         <link rel="stylesheet" href="css/main.css">
-            <script src="js/vendor/modernizr-2.6.1.min.js"></script>
-            <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
     <body>
+<!-- START ALL CONTAINER -->
+<div id="all-container">	
 <!-- START APP CONTAINER -->
+<div id="app-container">
+<!-- START YOU PAGE -->
 
+ <div id="profile-container" class="full-page">
+ 
+
+<header>
+<h1>
+You
+<h1>
+</header>
+<div id="profile" class="page">
+	<h2>The Profile Page</h2>
+	<p>
+PROFILE PAGE
+  </p>
+  </div>
+</div>
+
+<!--MODAL GOES HERE-->
+
+<div id="tab-container" class="">
+<a id="profile-closer" href="#"></a>
 <!-- START HEADER -->
 <header>
 <h1>
 Mobylyze
 <h1>
+<a id="profile-link" href="#profile" class="hd-btn left-btn btn-you unslid">You</a>
+<a id="about-link" href="#profile" class="hd-btn right-btn btn-about">About</a>
 </header>
 <!-- START CONTENT CONTAINER -->
-<div id="wrapper">
+<div id="wrapper" class="scrollable">
     <div id="main-content">
-	
+	<div id="scroll-top"></div>
 <!-- START PAGES CONTAINER -->
 <div id="pages">
-    <div id="news">
-	The News Page
+    <div id="news" class="page" tabnum="1">
+	<h2>The News Page</h2>
+	<p>
 	"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
+</p>
+<p>
 1914 translation by H. Rackham
-
+</p>
+<p>
 "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
 "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-
-1914 translation by H. Rackham
-
-"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
-    </div>
-    <div id="events">
-	The Events Page
-    </div>
-	    <div id="home" class="current">
-		The Home Page
-        <ul id="home-items" data-role="listview">
-            <li>first item</li>
+</p>
+<p>
+1914 translation by H. Rackham "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+  </p>
+  </div>
+    <div id="events" class="page" tabnum="2">
+	<h2>The Events Page</h2>
+	<ul>
+            <li>Some Stuff</li>
+            <li>More Stuff</li>
+            <li>Big Stuff</li>
+            <li>Small Stuff</li>
+            <li>Geek Stuff</li>
+            <li>Nerd Stuff</li>
+            <li>Fast Stuff</li>
+            <li>Slow Stuff</li>
+            <li>Good Stuff</li>
+            <li>Bad Stuff</li>
+            <li>Your Stuff</li>
+            <li>My Stuff</li>
+            <li>Their Stuff</li>
+            <li>Our Stuff</li>
+            <li>Super Stuff</li>
+            <li>Uber Stuff</li>
+            <li>Stuff Stuff</li>
+            <li>French Stuff</li>
+            <li>German Stuff</li>
+            <li>English Stuff</li>
+            <li>American Stuff</li>
+            <li>Stuff</li>
         </ul>
     </div>
-	    <div id="action">
-		The Action Page
+	    <div id="home" class="page current" tabnum="3">
+		<h2>The Home Page</h2>
+		<ul>
+            <li>Some Stuff</li>
+            <li>More Stuff</li>
+            <li>Big Stuff</li>
+            <li>Small Stuff</li>
+            <li>Geek Stuff</li>
+            <li>Nerd Stuff</li>
+            <li>Fast Stuff</li>
+            <li>Slow Stuff</li>
+            <li>Good Stuff</li>
+            <li>Bad Stuff</li>
+            <li>Your Stuff</li>
+            <li>My Stuff</li>
+            <li>Their Stuff</li>
+            <li>Our Stuff</li>
+            <li>Super Stuff</li>
+            <li>Uber Stuff</li>
+            <li>Stuff Stuff</li>
+            <li>French Stuff</li>
+            <li>German Stuff</li>
+            <li>English Stuff</li>
+            <li>American Stuff</li>
+            <li>Stuff</li>
+        </ul>
     </div>
-    <div id="donate">
-	The Donate Page
+	    <div id="action" class="page" tabnum="4">
+		<h2>The Action Page</h2>
+    </div>
+    <div id="donate" class="page" tabnum="5">
+	<h2>The Donate Page</h2>
+	<ul>
+            <li>Some Stuff</li>
+            <li>More Stuff</li>
+            <li>Big Stuff</li>
+            <li>Small Stuff</li>
+            <li>Geek Stuff</li>
+            <li>Nerd Stuff</li>
+            <li>Fast Stuff</li>
+            <li>Slow Stuff</li>
+            <li>Good Stuff</li>
+            <li>Bad Stuff</li>
+            <li>Your Stuff</li>
+            <li>My Stuff</li>
+            <li>Their Stuff</li>
+            <li>Our Stuff</li>
+            <li>Super Stuff</li>
+            <li>Uber Stuff</li>
+            <li>Stuff Stuff</li>
+            <li>French Stuff</li>
+            <li>German Stuff</li>
+            <li>English Stuff</li>
+            <li>American Stuff</li>
+            <li>Stuff</li>
+        </ul>
     </div>
 </div>
 </div>
@@ -73,40 +172,73 @@ Mobylyze
 
 <!-- START FOOTER -->
 <footer>
+<nav>
 <ul id="tab-bar">
-    <li>
-        <a href="#news">News</a>
-		
+    <li id="news-tab" class="tab" tab="1">
+        <a href="#news">
+		<span class="icon"></span>
+		<strong>News<strong>
+		</a>
     </li>
-    <li>
-        <a href="#events">Events</a>
+    <li id="events-tab" class="tab" tab="2">
+        <a href="#events">
+		<span class="icon"></span>
+		<strong>Events<strong>
+		</a>
     </li>
-    <li>
-        <a href="#home">Home</a>
+    <li id="home-tab" class="tab" tab="3">
+        <a href="#home" class="current">
+		<span class="icon"></span>
+		<strong>Home<strong>
+		</a>
     </li>
-	<li>
-        <a href="#action">Action</a>
-    </li>
-		<li>
-        <a href="#donate">Donate</a>
+    <li id="action-tab" class="tab" tab="4">
+        <a href="#action">
+		<span class="icon"></span>
+		<strong>Action<strong>
+		</a>
+    <li id="donate-tab" class="tab" tab="5">
+        <a href="#donate">
+		<span class="icon"></span>
+		<strong>Donate<strong>
+		</a>
     </li>
 </ul>
+</nav>
 </footer>
+</div>
+</div>
+</div>
 
-        <!-- Add your site or application content here -->
-
-        <script src="js/vendor/zepto.min.js"></script>
-		<script type="application/javascript" src="js/iscroll.js"></script>
-        <script src="js/helper.js"></script>
-		<script src="js/main.js"></script>
-        <script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
-        <script type="text/javascript" charset="utf-8" src="js/drupal-phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.2.0.js"></script>
-        <script>
-            app.initialize();
-        </script>
-
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined')
+            {
+                document.write(unescape("%3Cscript src='js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+            }
+            </script>
+		<script type="text/javascript" src="js/handlebars.js"></script>
+		<script type="text/javascript" src="js/viewnavigator.js"></script>
+		<script type="text/javascript" src="js/iscroll.js"></script>
+		<script type="text/javascript" src="js/jquery.animate-enhanced.js"></script>
+		<script type="text/javascript" src="js/noClickDelay.js"></script>
+        <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="cordova-2.1.0.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		
+<script id="modal-template" type="text/x-handlebars-template">
+<div id="{{ModalID}}" class="modal-container full-page">
+<header>
+<h1>
+{{ PageHeading }}
+<h1>
+<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-{{PageID}}-back">Back</a>
+</header>
+<div id="{{PageID}}-page" class="modal page">
+<h2>{{PageTitle}}</h2>
+{{{PageContent}}}
+  </div>
+</div>
+</script>
     </body>
 </html>
