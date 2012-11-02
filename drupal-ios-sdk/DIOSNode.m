@@ -94,6 +94,13 @@
     [self runMethod];
     return [self connResult];
 }
+-(NSDictionary *) eventsGetIndex {
+    [self setMethod:@"node.get"];
+    [self setRequestMethod:@"GET"];
+    [self setMethodUrl:[NSString stringWithFormat:@"events"]];
+    [self runMethod];
+    return [self connResult];
+}
 - (void) dealloc {
     [super dealloc];
   

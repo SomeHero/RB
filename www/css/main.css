@@ -568,7 +568,7 @@ border-bottom:1px solid #eeeeee;
     font-size:14px;
 	cursor:pointer;
 }
-#pages > div.page#events ul li {
+#pages > div.page#events_old ul li {
     padding:0 12px;
     height:96px;
     line-height:96px;

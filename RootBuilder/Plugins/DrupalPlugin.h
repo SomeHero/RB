@@ -35,6 +35,7 @@
 - (void) nodeGetIndex:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
 - (void) newsGetIndex:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
 - (void) petitionsGetIndex:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void) eventsGetIndex:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
 - (void) nodeGetIndexWithType:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
 
 //file methods

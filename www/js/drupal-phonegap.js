@@ -74,6 +74,9 @@
     DrupalPlugin.prototype.newsGetIndex = function(successCallback, failureCallback) {
         return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "newsGetIndex", []);
     }
+DrupalPlugin.prototype.eventsGetIndex = function(successCallback, failureCallback) {
+    return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "eventsGetIndex", []);
+}
 
     DrupalPlugin.prototype.viewGet = function(viewName, successCallback, failureCallback) {
         return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "viewGet", [{viewName: viewName}]);

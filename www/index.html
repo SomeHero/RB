@@ -223,9 +223,17 @@ Mobylyze
 </script>
 <script id="eventitem-template" type="text/x-handlebars-template">
             {{#each nodes}}
-            <li data-nid="{{nid}}">
-            <a href="#"><img src="{{logo}}" />{{title}}</a>
-            </li>
+    <li data-nid="{{nid}}">
+    <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
+    <div class="item-contect">
+    <a href="#">{{title}}</a>
+    <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{event_date}}</span>
+    <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{location}}</span>
+    <p style="margin-top: 2px; font-size: 12px; line-height: 14px;">
+    {{teaser}}
+    </p>
+    </div>
+    </li>
             {{/each}}
 </script>
 <script id="homeitem-template" type="text/x-handlebars-template">

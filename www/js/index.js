@@ -288,7 +288,7 @@ onDeviceReady: function() {
           })
     .show(1000, function() {
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.petitionsGetIndex(function(result) {
+          window.plugins.drupal.eventsGetIndex(function(result) {
                                                      $("#events-list").empty();
                                                      
                                                      var source   = $("#eventitem-template").html();
