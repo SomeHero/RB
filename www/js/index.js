@@ -9,7 +9,7 @@ var myScroll;
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
 var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span><button type="submit" id="signin-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
-var createAccountModal = {ModalID: "modal-create-account", PageID: "create-account", PageHeading: "Create Account", PageTitle: "Create Account", PageContent: createAccountContent};
+var createAccountModal = {ModalID: "modal-create-account", PageID: "create-account", PageHeading: "Create Account", PageTitle: "Create a Mobylyze Account", PageContent: createAccountContent};
 
 //GLOBAL FUNCTIONS
 

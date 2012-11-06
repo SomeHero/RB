@@ -501,7 +501,11 @@ position:absolute;
 left:50%;
 margin-left:-12px;
 top:2px;
+-webkit-background-size: 24px 24px ;
 
+-moz-background-size: 24px 24px ;
+
+background-size: 24px 24px ;
 }
 #news-tab a span.icon{
 background-image: url('../img/tab-bar/rss_24.png');
@@ -543,6 +547,15 @@ background-image: -o-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('.
 background-image: -ms-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
 background-image: image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
 }
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+
+#news-tab a span.icon{background-image:url('../img/tab-bar/rss_48.png');}
+#events-tab a span.icon{background-image:url('../img/tab-bar/calendar_48.png');}
+#home-tab a span.icon{background-image:url('../img/tab-bar/home_48.png');}
+#action-tab a span.icon{background-image:url('../img/tab-bar/star_48.png');}
+#donate-tab a span.icon{background-image:url('../img/tab-bar/checkmark_48.png');}
+}
+
 
 #pages{
     position:relative;
