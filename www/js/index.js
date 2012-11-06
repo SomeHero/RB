@@ -1,58 +1,4 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-/*  Here is what a node looks like *
- var node = {
- title: "Sample Article",
- body: {
- und: [{
- value: "Sample Body"
- }]
- },
- type: 'article',
- language: 'und'
- }; */
-function onLeftNavButton() {
-    alert('Left Button Pressed');
-};
-    
-function onRightNavButton() {
-    alert('Right Button Pressed');
-};
-function successCallback() {
-    console.log('success');
-};
-function nodeSuccessCallback(result) {
-    var nodes = result.nodes;
-    for (var i = 0; i < nodes.length; i++) {
-        var html = "<li data-nid='" + nodes[i].nid + "'><img src='" + nodes[i].logo + "' />" + nodes[i].title +  "</li>";
-        $(html).appendTo( '#home-items' );
-    }
-    
-    resetSizing();
-    //initScroll();
-    
-    //$("#home-items").listview("refresh");
 
-};
-function failureCallback() {
-    console.log('failed');
-};
 //GLOBAL VARS
 var viewport = {
     width  : $(window).width(),
@@ -62,15 +8,47 @@ var viewport = {
 var myScroll;
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
-
+var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span><button type="submit" id="signin-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
+var createAccountModal = {ModalID: "modal-create-account", PageID: "create-account", PageHeading: "Create Account", PageTitle: "Create Account", PageContent: createAccountContent};
 
 //GLOBAL FUNCTIONS
+
+function whichTransitionEvent(){
+    var t;
+    var el = document.createElement('fakeelement');
+    var transitions = {
+      'transition':'transitionEnd',
+      'OTransition':'otransitionend',
+      'MSTransition':'msTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    }
+
+    for(t in transitions){
+        if( el.style[t] !== undefined ){
+            return transitions[t];
+        }
+    }
+}
+
 function resetSizing(){
+	$('#profile-container').css('width', (viewport.panelwidth  - 48) + 'px');
     $('#pages > div.page').css('width', viewport.panelwidth  + 'px');
     $('#all-container').css('height', viewport.height + 'px');
     $('#wrapper').css('height', (viewport.height - 93) + 'px');
     $('#main-content').css('height', $('#pages > div.page.current').height() + 'px');
     $('div.page').css('min-height', viewport.height + 'px');
+}
+function resetViewport(){
+    viewport.height = $(window).height();
+    viewport.width = $(window).width();
+    viewport.panelwidth = $('#all-container').width();
+}
+function resetPositioning(){
+	$('body, html').css('top', '0px');
+    $('.container').css('top', '0px');
+    $('.container.slid-right').css("left", (viewport.panelwidth - 48) + "px");
+	$('.modal-container.slid-up').css("top", "0px");
 }
 
 function initScroll() {
@@ -88,12 +66,6 @@ function resetScroll(){
         //do nothing
         
 	}
-}
-
-function resetViewport(){
-    viewport.height = $(window).height();
-    viewport.width = $(window).width();
-    viewport.panelwidth = $('#all-container').width();
 }
 
 function page(toPage) {
@@ -114,6 +86,21 @@ function page(toPage) {
         myScroll.scrollToElement('#scroll-top', 0);
 	}
 }
+
+function createModal(modalName) {
+var source   = $("#modal-template").html();
+var template = Handlebars.compile(source);
+var data = modalName;
+var modal = template(data);
+$('#all-container').append(modal);
+resetSizing();
+$('.modal-container#modal-'+ modalName.PageID).css("top", "0px");
+$('.modal-container#modal-'+ modalName.PageID).addClass("slid-up");
+$('.modal-container').removeClass("active");
+$('.modal-container#modal-'+ modalName.PageID).addClass("active");
+}
+
+
 //APP-UI JUNK
 function loadView( title ) {
     
@@ -137,6 +124,25 @@ function resetList() {
                                       $(this).removeClass( "listSelected" );
                                       });
 }
+
+//DRUPAL STUFF?
+function successCallback() {
+    console.log('success');
+};
+function nodeSuccessCallback(result) {
+    var nodes = result.nodes;
+    for (var i = 0; i < nodes.length; i++) {
+        var html = "<li data-nid='" + nodes[i].nid + "'><img src='" + nodes[i].logo + "' />" + nodes[i].title +  "</li>";
+        $(html).appendTo( '#home-items' );
+    }
+    resetSizing();
+};
+function failureCallback() {
+    console.log('failed');
+};
+
+
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -150,17 +156,14 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
+		document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     // deviceready Event Handler
     //
     // The scope of `this` is the event. In order to call the `receivedEvent`
     // function, we must explicity call `app.receivedEvent(...);`
-onDeviceReady: function() {
+	onDeviceReady: function() {
     //app.receivedEvent('deviceready');
-    //APP-UI JUNK
-    window.viewNavigator = new ViewNavigator( '#tab-container', 'headerButton' );
-    //APP-UI JUNK END
-    
     
     viewport = {
         width  : $(window).width(),
@@ -174,6 +177,7 @@ onDeviceReady: function() {
     $(window).bind('resize', function () {
                    resetViewport();
                    resetSizing();
+				   resetPositioning();
                    resetScroll();
                    });
     
@@ -204,25 +208,33 @@ onDeviceReady: function() {
                     });
     $('.btn-about').on('click', function(e){
                        e.preventDefault();
-                       var source   = $("#modal-template").html();
-                       var template = Handlebars.compile(source);
-                       var data = aboutModal;
-                       var modal = template(data);
-                       $('#all-container').append(modal);
-                       resetSizing();
-                       $('#modal-about').css("top", "0px");
-                       $('#modal-about').addClass("slid-up");
+                       createModal(aboutModal);
                        });
-    $('#all-container').on('click', '.btn-about-back', function(e){
+$('#all-container').on('click', '.modal-container.active .btn-modal-back', function(e){
                            e.preventDefault();
-                           $('#modal-about').css("top", "105%");
-                           $('#modal-about').removeClass("slid-up");
+                           $('.modal-container.active').css("top", "105%");
+                           $('.modal-container.active').removeClass("slid-up");
+						   var transitionEnd = whichTransitionEvent();
+						   
+						   $('.modal-container.active').on(transitionEnd, function(e){
+						   $('.modal-container.active').remove();
+						   $('#all-container .modal-container').last().addClass("active");
+						   });
+						   
                            });
+$('#btn-create-account').on('click', function(e){
+                           e.preventDefault();
+                           createModal(createAccountModal);
+                           });
+	
+    $(document).on('blur', 'input', function () {
+                   console.log('resetting');
+                   resetPositioning();
+                       });
     
     //APP-UI JUNK
     $('.page ul li').on('click', function(e){
                         alert('SHOW DETAILS');
-                        //loadView( "TEST" );
                         });
     
     $('#home')
@@ -240,11 +252,11 @@ onDeviceReady: function() {
                                                      var source   = $("#homeitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
-                                                     var modal = template(result);
-                                                     $('#home-list').append(modal);
+                                                     var item = template(result);
+                                                     $('#home-list').append(item);
                                                      
                                                      resetSizing();
-                                                     //initScroll();
+                                                     resetScroll();
                                                      
                                                      //$("#home-items").listview("refresh");
                                                      
@@ -267,11 +279,11 @@ onDeviceReady: function() {
                                                      var source   = $("#newsitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
-                                                     var modal = template(result);
-                                                     $('#news-list').append(modal);
+                                                     var item = template(result);
+                                                     $('#news-list').append(item);
                                                      
                                                      resetSizing();
-                                                     //initScroll();
+                                                     resetScroll();
                                                      
                                                      //$("#home-items").listview("refresh");
                                                      
@@ -294,14 +306,11 @@ onDeviceReady: function() {
                                                      var source   = $("#eventitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
-                                                     var modal = template(result);
-                                                     $('#events-list').append(modal);
+                                                     var item = template(result);
+                                                     $('#events-list').append(item);
                                                      
                                                      resetSizing();
-                                                     //initScroll();
-                                                     
-                                                     //$("#home-items").listview("refresh");
-                                                     
+                                                     resetScroll();
                                                      },failureCallback);
           })
     .show();
@@ -359,4 +368,19 @@ onDeviceReady: function() {
                                }
                             });
                                
-                               
+       
+
+
+
+/*  Here is what a node looks like *
+ var node = {
+ title: "Sample Article",
+ body: {
+ und: [{
+ value: "Sample Body"
+ }]
+ },
+ type: 'article',
+ language: 'und'
+ }; */
+	   
