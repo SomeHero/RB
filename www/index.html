@@ -27,12 +27,12 @@
     </head>
     <body>
 <!-- START ALL CONTAINER -->
-<div id="all-container">	
+<div id="all-container" class="container">
 <!-- START APP CONTAINER -->
-<div id="app-container">
+<div id="app-container" class="container">
 <!-- START YOU PAGE -->
 
- <div id="profile-container" class="full-page">
+ <div id="profile-container" class="container">
 <header>
 <h1>
 You
@@ -58,7 +58,7 @@ You
             <div id="main-body-sub-links">
                 <p style="text-align: center">
                     <a href="#">Forgot password?</a>&nbsp;
-                    | &nbsp;<a href="#" data-ajax="false">Create Account</a>
+                    | &nbsp;<a id="btn-create-account" href="#" data-ajax="false">Create Account</a>
                 </p>
             </div>
         </div>
@@ -66,15 +66,15 @@ You
 
 <!--MODAL GOES HERE-->
 
-<div id="tab-container" class="">
+<div id="tab-container" class="container">
 <a id="profile-closer" href="#"></a>
 <!-- START HEADER -->
 <header>
 <h1>
 Mobylyze
 <h1>
-<a id="profile-link" href="#profile" class="hd-btn left-btn btn-you unslid">You</a>
-<a id="about-link" href="#profile" class="hd-btn right-btn btn-about">About</a>
+<a id="profile-link" href="#profile" class="hd-btn left-btn btn-you unslid"><span class="hd-btn-text">You</span></a>
+<a id="about-link" href="#profile" class="hd-btn right-btn btn-about"><span class="hd-btn-text">About</span></a>
 </header>
 <!-- START CONTENT CONTAINER -->
 <div id="wrapper" class="scrollable">
@@ -193,12 +193,12 @@ Mobylyze
             app.initialize();
         </script>
 <script id="modal-template" type="text/x-handlebars-template">
-<div id="{{ModalID}}" class="modal-container full-page">
+<div id="{{ModalID}}" class="modal-container">
 <header>
 <h1>
 {{ PageHeading }}
 <h1>
-<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-{{PageID}}-back">Back</a>
+<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-modal-back">Back</a>
 </header>
 <div id="{{PageID}}-page" class="modal page">
 <h2>{{PageTitle}}</h2>

@@ -333,7 +333,7 @@ line-height: 45px;
 text-shadow: 1px 1px 0 #fff;
 text-decoration: none;
 font-size: 14px;
-text-shadow:1px 1px 0 #003668;
+text-shadow:1px 1px 0 #001638;
 text-decoration:none;
 }
 header a.hd-btn.left-btn{
@@ -344,7 +344,9 @@ header a.hd-btn.right-btn{
 right: 12px;
 padding-right:0;
 }
-
+.hd-btn-text{
+padding:0 6px;
+}
 div#profile-container {
     position: absolute;
     top:0;left:0;
@@ -499,21 +501,47 @@ position:absolute;
 left:50%;
 margin-left:-12px;
 top:2px;
+
 }
 #news-tab a span.icon{
 background-image: url('../img/tab-bar/rss_24.png');
+background-image: -webkit-image-set(url('../img/tab-bar/rss_24.png') 1x, url('../img/tab-bar/rss_48.png') 2x);
+background-image: -moz-image-set(url('../img/tab-bar/rss_24.png') 1x, url('../img/tab-bar/rss_48.png') 2x);
+background-image: -o-image-set(url('../img/tab-bar/rss_24.png') 1x, url('../img/tab-bar/rss_48.png') 2x);
+background-image: -ms-image-set(url('../img/tab-bar/rss_24.png') 1x, url('../img/tab-bar/rss_48.png') 2x);
+background-image: image-set(url('../img/tab-bar/rss_24.png') 1x, url('../img/tab-bar/rss_48.png') 2x);
 }
 #events-tab a span.icon{
 background-image: url('../img/tab-bar/calendar_24.png');
+background-image: -webkit-image-set(url('../img/tab-bar/calendar_24.png') 1x, url('../img/tab-bar/calendar_48.png') 2x);
+background-image: -moz-image-set(url('../img/tab-bar/calendar_24.png') 1x, url('../img/tab-bar/calendar_48.png') 2x);
+background-image: -o-image-set(url('../img/tab-bar/calendar_24.png') 1x, url('../img/tab-bar/calendar_48.png') 2x);
+background-image: -ms-image-set(url('../img/tab-bar/calendar_24.png') 1x, url('../img/tab-bar/calendar_48.png') 2x);
+background-image: image-set(url('../img/tab-bar/calendar_24.png') 1x, url('../img/tab-bar/calendar_48.png') 2x);
 }
 #home-tab a span.icon{
 background-image: url('../img/tab-bar/home_24.png');
+background-image: -webkit-image-set(url('../img/tab-bar/home_24.png') 1x, url('../img/tab-bar/home_48.png') 2x);
+background-image: -moz-image-set(url('../img/tab-bar/home_24.png') 1x, url('../img/tab-bar/home_48.png') 2x);
+background-image: -o-image-set(url('../img/tab-bar/home_24.png') 1x, url('../img/tab-bar/home_48.png') 2x);
+background-image: -ms-image-set(url('../img/tab-bar/home_24.png') 1x, url('../img/tab-bar/home_48.png') 2x);
+background-image: image-set(url('../img/tab-bar/home_24.png') 1x, url('../img/tab-bar/home_48.png') 2x);
 }
 #action-tab a span.icon{
 background-image: url('../img/tab-bar/star_24.png');
+background-image: -webkit-image-set(url('../img/tab-bar/star_24.png') 1x, url('../img/tab-bar/star_48.png') 2x);
+background-image: -moz-image-set(url('../img/tab-bar/star_24.png') 1x, url('../img/tab-bar/star_48.png') 2x);
+background-image: -o-image-set(url('../img/tab-bar/star_24.png') 1x, url('../img/tab-bar/star_48.png') 2x);
+background-image: -ms-image-set(url('../img/tab-bar/star_24.png') 1x, url('../img/tab-bar/star_48.png') 2x);
+background-image: image-set(url('../img/tab-bar/star_24.png') 1x, url('../img/tab-bar/star_48.png') 2x);
 }
 #donate-tab a span.icon{
 background-image: url('../img/tab-bar/checkmark_24.png');
+background-image: -webkit-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
+background-image: -moz-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
+background-image: -o-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
+background-image: -ms-image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
+background-image: image-set(url('../img/tab-bar/checkmark_24.png') 1x, url('../img/tab-bar/checkmark_48.png') 2x);
 }
 
 #pages{
@@ -522,6 +550,7 @@ background-image: url('../img/tab-bar/checkmark_24.png');
 
 #pages > div.page {
 display: none;
+-webkit-transform: translate3d(0px,0px,0px);
 background-color:#ffffff;
     position: absolute;
     top:0;left:0;
@@ -561,7 +590,7 @@ border-bottom:1px solid #eeeeee;
 
 }
 #pages > div.page ul li {
-    padding:0 12px;
+    padding:12px 12px;
     border-bottom:1px solid #ccc;
     border-top:1px solid #fff;
     background-color:#fafafa;
