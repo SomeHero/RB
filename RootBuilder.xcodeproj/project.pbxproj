@@ -83,6 +83,13 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = CordovaLib;
 		};
+		5BFACF95164AE4120046E89D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BFACF8E164AE4120046E89D /* CordovaLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 68A32D7114102E1C006B237C;
+			remoteInfo = CordovaLib;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +183,7 @@
 		5BC87020164365E000053DE1 /* DIOSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSUser.m; sourceTree = "<group>"; };
 		5BC87021164365E000053DE1 /* DIOSViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIOSViews.h; sourceTree = "<group>"; };
 		5BC87022164365E000053DE1 /* DIOSViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIOSViews.m; sourceTree = "<group>"; };
+		5BFACF8E164AE4120046E89D /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = "../../../../../Documents/phonegap-phonegap-26d211b/lib/ios/CordovaLib/CordovaLib.xcodeproj"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* RootBuilder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "RootBuilder-Info.plist"; path = "../RootBuilder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +257,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5BFACF8E164AE4120046E89D /* CordovaLib.xcodeproj */,
 				5BC86FEE1640ABB900053DE1 /* libz.1.2.5.dylib */,
 				5BC87013164365E000053DE1 /* drupal-ios-sdk */,
 				5BC86FCE1640AA2F00053DE1 /* AsiHttpRequest */,
@@ -428,6 +437,14 @@
 			path = "drupal-ios-sdk";
 			sourceTree = "<group>";
 		};
+		5BFACF8F164AE4120046E89D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BFACF96164AE4120046E89D /* libCordova.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -476,6 +493,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 5BFACF8F164AE4120046E89D /* Products */;
+					ProjectRef = 5BFACF8E164AE4120046E89D /* CordovaLib.xcodeproj */;
+				},
+				{
 					ProductGroup = 301BF52E109A57CC0062928A /* Products */;
 					ProjectRef = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
 				},
@@ -493,6 +514,13 @@
 			fileType = archive.ar;
 			path = libCordova.a;
 			remoteRef = 301BF534109A57CC0062928A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5BFACF96164AE4120046E89D /* libCordova.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCordova.a;
+			remoteRef = 5BFACF95164AE4120046E89D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
