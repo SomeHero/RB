@@ -6,6 +6,7 @@ var viewport = {
 	panelwidth : $('#all-container').width()
 };
 var myScroll;
+var currentView;
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
 var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span><button type="submit" id="signin-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
@@ -141,9 +142,34 @@ function failureCallback() {
     console.log('failed');
 };
 
+function getUser() {
+    if(window.localStorage["user"] != null)
+    {
+        var currentUser = JSON.parse(window.localStorage["user"]);
+
+        return currentUser;
+    }
+    
+    return null;
+};
+function loginUser() {
+    
+};
+function logoutUser(success, failed) {
+    
+    window.plugins.drupal.logout(function() {
+                                 console.log('user has been logged out');
+                                 success();
+                                 }, function() {
+                                 console.log('logout failed');
+                                 failed();
+                                 });
+};
+
 
 
 var app = {
+
     // Application Constructor
     initialize: function() {
         console.log('initialze app');
@@ -156,7 +182,9 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+        
+        //Ryan - I had to comment this out to run correctly from the simulator
+		//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     // deviceready Event Handler
     //
@@ -200,6 +228,16 @@ var app = {
                             });
     $('.unslid').on('click', function(e){
                     e.preventDefault();
+                    var user = getUser();
+                    
+                    if(user == null)
+                    {
+                    $("signin").show();
+                    $("profile").hide();
+                    } else {
+                    $("signin").hide();
+                    $("profile").show();
+                    }
                     $('#tab-container').addClass("slid-right");
                     $('#tab-container').css("left", (viewport.panelwidth - 48) + "px");
                     $(this).addClass("slid");
@@ -237,18 +275,24 @@ $('#btn-create-account').on('click', function(e){
                         alert('SHOW DETAILS');
                         });
     
-    $('#home')
-    .bind('beforeShow', function() {
-
-    })
-    .bind('afterShow', function() {
-    
-    })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.petitionsGetIndex(function(result) {
-                                                     $("#home-list").empty();
-                                                     
+    $('#home-list').bind('inview', function(event, isInView) {
+                         
+          if(isInView && currentView != 'home'){
+          
+          currentView = 'home';
+                         
+          console.log("home show");
+          
+          $("#home-list").empty();
+                         
+          window.plugins.drupal.eventsGetIndex(function(result) {
+                                               
+                                               var currentUser = getUser();
+                                               if(currentUser != null)
+                                               {
+                                                   console.log(currentUser.user.name);
+                                               }
+                                               
                                                      var source   = $("#homeitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
@@ -261,21 +305,19 @@ $('#btn-create-account').on('click', function(e){
                                                      //$("#home-items").listview("refresh");
                                                      
                                                      },failureCallback);
-    })
-    .show();
+                         }
+                         });
     
-    $('#news')
-    .bind('beforeShow', function() {
-          
-          })
-    .bind('afterShow', function() {
-          
-          })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+    $('#news-list').bind('inview', function(event, isInView) {
+        
+         if (isInView && currentView != 'news') {
+
+         currentView = news;
+         console.log("news show");
+                         $("#news-list").empty();
+                         
           window.plugins.drupal.newsGetIndex(function(result) {
-                                                     $("#news-list").empty();
-                                                     
+                                                    
                                                      var source   = $("#newsitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
@@ -288,20 +330,19 @@ $('#btn-create-account').on('click', function(e){
                                                      //$("#home-items").listview("refresh");
                                                      
                                                      },failureCallback);
-          })
-    .show();
+                                             }
+    });
     
-    $('#events')
-    .bind('beforeShow', function() {
-          
-          })
-    .bind('afterShow', function() {
-          
-          })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+        $('#events-list').bind('inview', function(event, isInView) {
+            
+            if (isInView && currentView != 'events') {
+                               
+                               currentView = events;
+                               console.log("events show");
+                               
+                               $("#events-list").empty();
+                               
           window.plugins.drupal.eventsGetIndex(function(result) {
-                                                     $("#events-list").empty();
                                                      
                                                      var source   = $("#eventitem-template").html();
                                                      var template = Handlebars.compile(source);
@@ -312,25 +353,40 @@ $('#btn-create-account').on('click', function(e){
                                                      resetSizing();
                                                      resetScroll();
                                                      },failureCallback);
-          })
-    .show();
+                               }
+                          });
 
     $("#signin-submit").on('click', function(e) {
                            e.preventDefault();
                            
                            var userName = "admin";
                            var password = "turnkey";
-                           
-                           window.plugins.drupal.login(userName, password, function() {
-                                                       alert('login success');
+ 
+                           window.plugins.drupal.login(userName, password, function(result) {
+                                                       window.localStorage["user"] =  JSON.stringify(result);
+                                                       
+                                                       $('#profile-closer').css("display", "none");
+                                                       $('#tab-container').removeClass("slid-right");
+                                                       $('#tab-container').css("left", "0px");
+                                                       $(this).addClass("unslid");
+                                                       $(this).removeClass("slid");
+                                                       
                                                        }, function() {
                                                        alert('login failed');
                                                        });
      });
+        $("#user-logout-button").on('click', function(e) {
+                                    e.preventDefault();
+                                    
+                                    logoutUser(function() {
+                                               console.log('user logged out');
+                                               },
+                                               function() {
+                                               console.log('user logged in');
+                                               });
+                                    
+                                    });
     
-   
-},
-
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
