@@ -9,6 +9,7 @@
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width">
         <meta http-equiv="cleartype" content="on">
+
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
@@ -18,6 +19,9 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
 		<link rel="stylesheet" href="css/normalize.css">
+		
+		<link rel="stylesheet" href="css/viewnavigator.css" type="text/css" />
+		
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
@@ -32,10 +36,31 @@
 <header>
 <h1>
 You
-</h1>
+<h1>
 </header>
 <div id="profile" class="page">
+<div class="fb-button">
+            <button type="button" id="fb-btn" class="rb-btn fb">
+                Connect with Facebook
+            </button>
+			</div>
+            <div class="or"> - &nbsp;OR&nbsp; -</div>
+           <!-- <h5>
+                Or Sign in with Email or Phone #</h5>-->
+            <div id="signin-form">
+<form action="#"  method="post">                    
 
+<span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span>
+<span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span>
+<button type="submit" id="signin-submit" class="rb-btn blue">
+                      Sign In with Email</button>
+</form>            </div>
+            <div id="main-body-sub-links">
+                <p style="text-align: center">
+                    <a href="#">Forgot password?</a>&nbsp;
+                    | &nbsp;<a id="btn-create-account" href="#" data-ajax="false">Create Account</a>
+                </p>
+            </div>
         </div>
   </div>
 
@@ -45,9 +70,9 @@ You
 <a id="profile-closer" href="#"></a>
 <!-- START HEADER -->
 <header>
-<h1 id="hd-tab" class="hd-logo">
-
-</h1>
+<h1>
+Mobylyze
+<h1>
 <a id="profile-link" href="#profile" class="hd-btn left-btn btn-you unslid"><span class="hd-btn-text">You</span></a>
 <a id="about-link" href="#profile" class="hd-btn right-btn btn-about"><span class="hd-btn-text">About</span></a>
 </header>
@@ -58,67 +83,27 @@ You
 <!-- START PAGES CONTAINER -->
 <div id="pages">
     <div id="news" class="page" tabnum="1">
-        <div id="news-scroller" class="scroller wf">
+        <h2>The News Page</h2>
+        
         <ul id="news-list">
+            
         </ul>
-		</div>
     </div>
     <div id="events" class="page" tabnum="2">
-	
-	<div id="events-scroller" class="scroller wf">
-	<div class="scrollee">
+	<h2>The Events Page</h2>
 	<ul id="events-list">
-	
     </ul>
-	</div>
-	</div>
     </div>
 	    <div id="home" class="page current" tabnum="3">
-		
-		<div id="home-scroller" class="scroller wf">
-		<div class="scrollee">
+		<h2>The Home Page</h2>
 		<ul id="home-list">
-
         </ul>
-		</div>
-		</div>
     </div>
 	    <div id="action" class="page" tabnum="4">
-		
-		<div id="action-scroller" class="scroller wf">
-		<div class="scrollee">
-		<ul id="action-list">
-		 <li>Some Stuff</li>
-            <li>More Stuff</li>
-            <li>Big Stuff</li>
-            <li>Small Stuff</li>
-            <li>Geek Stuff</li>
-            <li>Nerd Stuff</li>
-            <li>Fast Stuff</li>
-            <li>Slow Stuff</li>
-            <li>Good Stuff</li>
-            <li>Bad Stuff</li>
-            <li>Your Stuff</li>
-            <li>My Stuff</li>
-            <li>Their Stuff</li>
-            <li>Our Stuff</li>
-            <li>Super Stuff</li>
-            <li>Uber Stuff</li>
-            <li>Stuff Stuff</li>
-            <li>French Stuff</li>
-            <li>German Stuff</li>
-            <li>English Stuff</li>
-            <li>American Stuff</li>
-            <li>Stuff</li>
-			</ul>
-		</div>
-		</div>
-
+		<h2>The Action Page</h2>
     </div>
-    <div id="bundles" class="page" tabnum="5">
-
-	<div id="bundles-scroller" class="scroller wf">
-	<div class="scrollee">
+    <div id="donate" class="page" tabnum="5">
+	<h2>The Donate Page</h2>
 	<ul>
             <li>Some Stuff</li>
             <li>More Stuff</li>
@@ -143,11 +128,7 @@ You
             <li>American Stuff</li>
             <li>Stuff</li>
         </ul>
-		</div>
-		</div>
     </div>
-	<div id="wall" class="page">
-	</div>
 </div>
 </div>
     </div>
@@ -159,35 +140,33 @@ You
     <li id="news-tab" class="tab" tab="1">
         <a href="#news">
 		<span class="icon"></span>
-		<strong>News</strong>
+		<strong>News<strong>
 		</a>
     </li>
     <li id="events-tab" class="tab" tab="2">
         <a href="#events">
 		<span class="icon"></span>
-		<strong>Events</strong>
+		<strong>Events<strong>
 		</a>
     </li>
-    <li id="home-tab" class="tab current" tab="3">
+    <li id="home-tab" class="tab" tab="3">
         <a href="#home" class="current">
 		<span class="icon"></span>
-		<strong>Home</strong>
+		<strong>Home<strong>
 		</a>
-		<span id="home-bg"><span>
     </li>
     <li id="action-tab" class="tab" tab="4">
         <a href="#action">
 		<span class="icon"></span>
-		<strong>Action</strong>
+		<strong>Action<strong>
 		</a>
-    <li id="bundles-tab" class="tab" tab="5">
-        <a href="#bundles">
+    <li id="donate-tab" class="tab" tab="5">
+        <a href="#donate">
 		<span class="icon"></span>
-		<strong>Bundles</strong>
+		<strong>Donate<strong>
 		</a>
     </li>
 </ul>
-<div id="tab-bar-bg"></div>
 </nav>
 </footer>
 </div>
@@ -202,6 +181,7 @@ You
             }
             </script>
 		<script type="text/javascript" src="js/handlebars.js"></script>
+		<script type="text/javascript" src="js/viewnavigator.js"></script>
 		<script type="text/javascript" src="js/iscroll.js"></script>
 		<script type="text/javascript" src="js/jquery.animate-enhanced.js"></script>
 		<script type="text/javascript" src="js/noClickDelay.js"></script>
@@ -212,11 +192,6 @@ You
         <script>
             app.initialize();
         </script>
-<script id="html-content-template" type="text/x-handlebars-template">
-<div id="{{ContentID}}" class="content-container">
-{{{PageContent}}}
-</div>
-</script>
 <script id="modal-template" type="text/x-handlebars-template">
 <div id="{{ModalID}}" class="modal-container">
 <header>

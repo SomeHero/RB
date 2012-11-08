@@ -5,6 +5,10 @@ var viewport = {
     height : $(window).height(),
 	panelwidth : $('#all-container').width()
 };
+<<<<<<< HEAD
+var myScroll;
+var currentView;
+=======
 
 var appui = {
 footerHeight : 49,
@@ -17,40 +21,18 @@ var eventsScroll = null;
 var homeScroll = null;
 var actionScroll = null;
 var bundlesScroll= null;
+>>>>>>> upstream/jquery-mobile
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
-var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
+var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
 var createAccountModal = {ModalID: "modal-create-account", PageID: "create-account", PageHeading: "Create Account", PageTitle: "Create a Mobylyze Account", PageContent: createAccountContent};
 
-var youContentAnon = {ContentID: "you-content-anon", PageContent:'<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><span class="form-holder"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></span><button type="button" id="signin-submit" class="rb-btn blue">Sign In with Email</button></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Forgot password?</a>&nbsp; | &nbsp;<a id="btn-create-account" href="#" data-ajax="false">Create Account</a></p></div>'};
-var youContentAuth = {ContentID: "you-content-auth", PageContent:'<button type="button" id="user-profile-button" class="rb-btn blue">Profile</button><button type="button" id="user-network-button" class="rb-btn blue">Network</button><button type="submit" id="user-actions-button" class="rb-btn blue">Actions</button><button type="submit" id="user-events-button" class="rb-btn blue">Events</button><button type="submit" id="user-bundles-button" class="rb-btn blue">Bundles</button><button type="button" id="signout-submit" class="rb-btn orange">Sign Out</button>'};
+var youContentAnon = {ContentID: "you-content-anon", PageContent:'<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="password" class="required" placeholder="Password" name="Password"></span><button type="button" id="signin-submit" class="rb-btn blue">Sign In with Email</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Forgot password?</a>&nbsp; | &nbsp;<a id="btn-create-account" href="#" data-ajax="false">Create Account</a></p></div>'};
+var youContentAuth = {ContentID: "you-content-auth", PageContent:'<div>Hi, Johnny</div><button type="button" id="signout-submit" class="rb-btn orange">Sign Out</button>'};
 
 var transitionEnd = 'webkitTransitionEnd';
+var userAuthenticated = false;
 
-//USER FUNCTIONS
-function getUser() {
-    if(window.localStorage["user"] != null)
-    {
-        var currentUser = JSON.parse(window.localStorage["user"]);
-        
-        return currentUser;
-    }
-    
-    return null;
-};
-function loginUser() {
-    
-};
-function logoutUser(success, failed) {
-    
-    window.plugins.drupal.logout(function() {
-                                 console.log('user has been logged out');
-                                 success();
-                                 }, function() {
-                                 console.log('logout failed');
-                                 failed();
-                                 });
-};
 //GLOBAL FUNCTIONS
 
 function whichTransitionEvent(){
@@ -300,9 +282,34 @@ function failureCallback() {
     console.log('failed');
 };
 
+function getUser() {
+    if(window.localStorage["user"] != null)
+    {
+        var currentUser = JSON.parse(window.localStorage["user"]);
+
+        return currentUser;
+    }
+    
+    return null;
+};
+function loginUser() {
+    
+};
+function logoutUser(success, failed) {
+    
+    window.plugins.drupal.logout(function() {
+                                 console.log('user has been logged out');
+                                 success();
+                                 }, function() {
+                                 console.log('logout failed');
+                                 failed();
+                                 });
+};
+
 
 
 var app = {
+
     // Application Constructor
     initialize: function() {
         console.log('initialze app');
@@ -315,7 +322,9 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+        
+        //Ryan - I had to comment this out to run correctly from the simulator
+		//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     // deviceready Event Handler
 	onDeviceReady: function() {
@@ -362,16 +371,33 @@ $('#tab-container').animate({left: "0px", useTranslate3d:true, leaveTransforms:f
 
                             
                             });
+<<<<<<< HEAD
+    $('.unslid').on('click', function(e){
+                    e.preventDefault();
+                    var user = getUser();
+                    
+                    if(user == null)
+                    {
+                    $("signin").show();
+                    $("profile").hide();
+                    } else {
+                    $("signin").hide();
+                    $("profile").show();
+                    }
+                    $('#tab-container').addClass("slid-right");
+                    $('#tab-container').css("left", (viewport.panelwidth - 48) + "px");
+                    $(this).addClass("slid");
+                    $(this).removeClass("unslid");
+                    $('#profile-closer').css("display", "block");
+=======
     $('#tab-container').on('click', '#profile-link.unslid', function(e){
 //ANIMATE PROFILE IN
 	e.preventDefault();
 $('#profile.page').empty();
-var user = getUser();
-                           
 var source   = $("#html-content-template").html();
 var template = Handlebars.compile(source);
 var data = youContentAnon;
-if(user != null) {
+if (userAuthenticated == true){
 data = youContentAuth;
 }
 var content = template(data);
@@ -383,6 +409,7 @@ $('#profile.page').append(content);
 		$('#profile-closer').css("display", "block");
 	});
 
+>>>>>>> upstream/jquery-mobile
                     });
     $('.btn-about').on('click', function(e){
                        e.preventDefault();
@@ -419,55 +446,49 @@ $('#all-container').on('click', '#btn-create-account', function(e){
                         alert('SHOW DETAILS');
                         });
     
+<<<<<<< HEAD
+    $('#home-list').bind('inview', function(event, isInView) {
+                         
+          if(isInView && currentView != 'home'){
+          
+          currentView = 'home';
+                         
+          console.log("home show");
+          
+          $("#home-list").empty();
+                         
+          window.plugins.drupal.eventsGetIndex(function(result) {
+                                               
+                                               var currentUser = getUser();
+                                               if(currentUser != null)
+                                               {
+                                                   console.log(currentUser.user.name);
+                                               }
+                                               
+=======
 	
 
 	//SIGN IN SUMMIT
     $('#profile-container').on('click', '#signin-submit', function(e) {
                            e.preventDefault();
-                               var userName = $("#signin-username").val();
-                               var password = $("#signin-password").val();
-                            
-                               window.plugins.drupal.logout(function() {
-                                                            console.log('user logout success');
-                                                            }, function() {
-                                                            console.log('user logout failed');
-                                                            });
-                           window.plugins.drupal.login(userName, password, function(result) {
-                                                       window.localStorage["user"] =  JSON.stringify(result);
-                                                       
+                           var userName = "admin";
+                           var password = "turnkey";
+                           window.plugins.drupal.login(userName, password, function() {
+                                                       userAuthenticated = true;
 $('#profile.page').empty();
 var source   = $("#html-content-template").html();
 var template = Handlebars.compile(source);
 var data = youContentAnon;
-var user = getUser();
-if(user != null) {
-  data = youContentAuth;
+if (userAuthenticated == true){
+data = youContentAuth;
 }
 var content = template(data);
 $('#profile.page').append(content);
+alert('Logged In');
                                                        }, function() {
                                                        alert('login failed');
                                                        });
      });
-        //SIGN OUT SUMMIT
-        $('#profile-container').on('click', '#signout-submit', function(e) {
-                                   e.preventDefault();
-                                   
-                                   window.plugins.drupal.logout(function(result) {
-                                                                window.localStorage.removeItem("user");
-                                                                
-                                                                $('#profile.page').empty();
-                                                                var source = $("#html-content-template").html();
-                                                                var template = Handlebars.compile(source);
-                                                                var data = youContentAnon;
-        
-                                                                var content = template(data);
-                                                                $('#profile.page').append(content);
-                                                                }, function(result) {
-                                                                console.log('logout failed');
-                                                                });
-                                   });
-
     
    
 },
@@ -528,6 +549,7 @@ $('#profile.page').append(content);
           window.plugins.drupal.petitionsGetIndex(function(result) {
                                                      $("#home-list").empty();
                                                      
+>>>>>>> upstream/jquery-mobile
                                                      var source   = $("#homeitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
@@ -535,9 +557,19 @@ $('#profile.page').append(content);
                                                      $('#home-list').append(item);
 
                                                      },failureCallback);
-    })
-    .show();
+                         }
+                         });
     
+<<<<<<< HEAD
+    $('#news-list').bind('inview', function(event, isInView) {
+        
+         if (isInView && currentView != 'news') {
+
+         currentView = news;
+         console.log("news show");
+                         $("#news-list").empty();
+                         
+=======
 	
 	
 	//NEWS LOAD
@@ -550,9 +582,9 @@ $('#profile.page').append(content);
           })
     .show(1000, function() {
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+>>>>>>> upstream/jquery-mobile
           window.plugins.drupal.newsGetIndex(function(result) {
-                                                     $("#news-list").empty();
-                                                     
+                                                    
                                                      var source   = $("#newsitem-template").html();
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
@@ -563,20 +595,19 @@ $('#profile.page').append(content);
                                                      resetScroll("news");
 
                                                      },failureCallback);
-          })
-    .show();
+                                             }
+    });
     
-    $('#events')
-    .bind('beforeShow', function() {
-          
-          })
-    .bind('afterShow', function() {
-          
-          })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+        $('#events-list').bind('inview', function(event, isInView) {
+            
+            if (isInView && currentView != 'events') {
+                               
+                               currentView = events;
+                               console.log("events show");
+                               
+                               $("#events-list").empty();
+                               
           window.plugins.drupal.eventsGetIndex(function(result) {
-                                                     $("#events-list").empty();
                                                      
                                                      var source   = $("#eventitem-template").html();
                                                      var template = Handlebars.compile(source);
@@ -587,10 +618,102 @@ $('#profile.page').append(content);
                                                      resetSizing();
                                                      resetScroll("events");
                                                      },failureCallback);
-          })
-    .show();
+                               }
+                          });
 
- */
+	//SIGN OUT SUMMIT
+    $('#profile-container').on('click', '#signout-submit', function(e) {
+                           e.preventDefault();
+<<<<<<< HEAD
+                           
+                           var userName = "admin";
+                           var password = "turnkey";
+ 
+                           window.plugins.drupal.login(userName, password, function(result) {
+                                                       window.localStorage["user"] =  JSON.stringify(result);
+                                                       
+                                                       $('#profile-closer').css("display", "none");
+                                                       $('#tab-container').removeClass("slid-right");
+                                                       $('#tab-container').css("left", "0px");
+                                                       $(this).addClass("unslid");
+                                                       $(this).removeClass("slid");
+                                                       
+=======
+                          
+                           window.plugins.drupal.logout(function() {
+                                                       userAuthenticated = false;
+$('#profile.page').empty();
+var source   = $("#html-content-template").html();
+var template = Handlebars.compile(source);
+var data = youContentAnon;
+if (userAuthenticated == true){
+data = youContentAuth;
+}
+var content = template(data);
+$('#profile.page').append(content);
+alert('Logged Out');
+>>>>>>> upstream/jquery-mobile
+                                                       }, function() {
+                                                       alert('logtout failed');
+                                                       });
+     });
+<<<<<<< HEAD
+        $("#user-logout-button").on('click', function(e) {
+                                    e.preventDefault();
+                                    
+                                    logoutUser(function() {
+                                               console.log('user logged out');
+                                               },
+                                               function() {
+                                               console.log('user logged in');
+                                               });
+                                    
+                                    });
+    
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+    },
+};
+                        jQuery(function($) {
+                               
+                               var _oldShow = $.fn.show;
+                               
+                               $.fn.show = function(speed, oldCallback) {
+                               return $(this).each(function() {
+                                                   var
+                                                   obj         = $(this),
+                                                   newCallback = function() {
+                                                   if ($.isFunction(oldCallback)) {
+                                                   oldCallback.apply(obj);
+                                                   }
+                                                   
+                                                   obj.trigger('afterShow');
+                                                   };
+                                                   
+                                                   // you can trigger a before show if you want
+                                                   obj.trigger('beforeShow');
+                                                   
+                                                   // now use the old function to show the element passing the new callback
+                                                   _oldShow.apply(obj, [speed, newCallback]);
+                                                });
+                               }
+                            });
+                               
+       
+
+
+
+=======
+	 */
+>>>>>>> upstream/jquery-mobile
 /*  Here is what a node looks like *
  var node = {
  title: "Sample Article",
