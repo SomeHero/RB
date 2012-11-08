@@ -17,6 +17,11 @@ var eventsScroll = null;
 var homeScroll = null;
 var actionScroll = null;
 var bundlesScroll= null;
+var pullDownEl, pullDownOffset,
+	pullUpEl, pullUpOffset,
+	generatedCount = 0;
+
+var loader = $('<div class="loader"><p><span class="offset" /><span class="loader-image" /></span><span class="loader-message" /></span></span></div>');
 
 var aboutModal = {ModalID: "modal-about", PageID: "about", PageHeading: "About", PageTitle: "The About Page", PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"};
 var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>'
@@ -72,8 +77,6 @@ function whichTransitionEvent(){
 }
 
 function resetSizing(){
-
-	$('.modal-container').css('top', (viewport.height + 40) + 'px');
 	$('#profile-container').css('width', (viewport.panelwidth  - 48) + 'px');
     $('#pages > div.page').css('width', viewport.panelwidth  + 'px');
     $('#all-container').css('height', viewport.height + 'px');
@@ -97,6 +100,21 @@ function hideOtherPages(){
 $('#pages > div.page').css("display", "none");
 $('#pages > div.page.current').css("display", "block");
 }
+function showEmptyLoader(message){
+$('.loader').remove();
+$('.page.current').prepend(loader);
+    if (message) {
+        $(".loader-message").text(message);
+    } else {
+        $(".loader-message").empty();
+    }
+$('.loader').css('display','block');
+}
+function hideEmptyLoader(){
+$('.loader').fadeOut('fast', function() {
+    $('.loader').remove();
+  });
+}
 
 function initScroll() {
 setTimeout(function () {
@@ -109,13 +127,55 @@ bundlesScroll = new iScroll('bundles-scroller', {hideScrollbar: true, scrollbarC
                }, 100);
 }
 
+
+function pullDownAction () {
+		var el, li, i;
+		el = document.getElementById('home-list');
+
+		for (i=0; i<3; i++) {
+			li = document.createElement('li');
+			li.innerText = 'New Home Item ' + (++generatedCount);
+			el.insertBefore(li, el.childNodes[0]);
+		}
+		
+		homeScroll.refresh();		
+}
+
+
 function resetScroll(page){
 setTimeout(function () {
 if (page == "home"){
 if (homeScroll != null){
 homeScroll.refresh();
 }else{
-homeScroll = new iScroll('home-scroller', {hideScrollbar: true, scrollbarClass: 'myScrollbar' });
+homeScroll = new iScroll('home-scroller', {hideScrollbar: true, scrollbarClass: 'myScrollbar',
+		useTransition: true,
+		topOffset: pullDownOffset,
+		onRefresh: function () {
+		if (pullDownEl.className.match('loading')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+				}
+		},
+		onScrollMove: function () {
+			if (this.y > 5 && !pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'flip';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
+				this.minScrollY = 0;
+			} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
+				this.minScrollY = -pullDownOffset;
+			}
+		},
+		onScrollEnd: function () {
+			if (pullDownEl.className.match('flip')) {
+				pullDownEl.className = 'loading';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';				
+				pullDownAction();	// Execute custom function (ajax call?)
+			}
+		}
+	}); 
 }
 }else if (page == "news"){
 if (newsScroll != null){
@@ -205,10 +265,12 @@ var modal = template(data);
 $('#all-container').append(modal);
 resetSizing();
 $('.modal-container#modal-'+ modalName.PageID).css('top', (viewport.height + 40) + 'px');
-$('.modal-container#modal-'+ modalName.PageID).animate({top: "0px", useTranslate3d:true, leaveTransforms:false }, 400, function() {
-//$('.modal-container').removeClass("active");
+$('.modal-container#modal-'+ modalName.PageID).css('display', 'block');
+$('.modal-container').removeClass("active");
 $('.modal-container#modal-'+ modalName.PageID).addClass("active");
 $('.modal-container#modal-'+ modalName.PageID).addClass("slid-up");
+$('.modal-container#modal-'+ modalName.PageID).animate({top: "0px", useTranslate3d:true, leaveTransforms:false }, 400, function() {
+
 });
 
 }
@@ -217,7 +279,9 @@ function compileTemplateStatic(content){
 }
 
 function getNews(){
+
 if(window.plugins != undefined && ($('#news-list li').length == 0)){
+showEmptyLoader("Getting News...");
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
           window.plugins.drupal.newsGetIndex(function(result) {
                                                      
@@ -225,6 +289,7 @@ if(window.plugins != undefined && ($('#news-list li').length == 0)){
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
                                                      var item = template(result);
+													 $('.loader').remove();
                                                      $('#news-list').append(item);
                                                      resetSizing();
                                                      resetScroll("news");
@@ -235,7 +300,9 @@ resetScroll("news");
 }
 }
 function getEvents(){
+
 if(window.plugins != undefined && ($('#events-list li').length == 0)){
+showEmptyLoader("Getting Events...");
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
           window.plugins.drupal.eventsGetIndex(function(result) {
                                                      
@@ -243,6 +310,7 @@ if(window.plugins != undefined && ($('#events-list li').length == 0)){
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
                                                      var item = template(result);
+													 $('.loader').remove();
                                                      $('#events-list').append(item);
                                                      
                                                      resetSizing();
@@ -254,6 +322,11 @@ resetScroll("events");
 }
 }
 function getHome(){
+pullDownEl = document.getElementById('pullDown');
+pullDownOffset = pullDownEl.offsetHeight;
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false); 
+
 if(window.plugins != undefined && ($('#home-list li').length == 0)){
           window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
           window.plugins.drupal.petitionsGetIndex(function(result) {
@@ -263,7 +336,9 @@ if(window.plugins != undefined && ($('#home-list li').length == 0)){
                                                      var template = Handlebars.compile(source);
                                                      var data = { nodes: result }
                                                      var item = template(result);
+													 $('.loader').remove();
                                                      $('#home-list').append(item);
+													 
 													resetSizing();
                                                      resetScroll("home");
 													 
@@ -315,7 +390,7 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+		//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     // deviceready Event Handler
 	onDeviceReady: function() {
@@ -390,18 +465,12 @@ $('#profile.page').append(content);
                        });
 $('#all-container').on('click', '.modal-container.active .btn-modal-back', function(e){
 e.preventDefault();
-$('.modal-container.active').animate({top: (viewport.height + 40) + 'px', useTranslate3d:true, leaveTransforms:false }, 500, function() {
 $('.modal-container.active').removeClass("slid-up");
+$('.modal-container.active').animate({top: (viewport.height + 40) + 'px', useTranslate3d:true, leaveTransforms:false }, 400, function() {
 $('.modal-container.active').remove();
 $('#all-container .modal-container').last().addClass("active");
 });
 
-						//	$('.modal-container.active').css("top", "105%");
-                        //   $('.modal-container.active').removeClass("slid-up");
-						//   $('.modal-container.active').on(transitionEnd, function(e){
-						//   $('.modal-container.active').remove();
-						//   $('#all-container .modal-container').last().addClass("active");
-						//   });
 						   
                            });
 $('#all-container').on('click', '#btn-create-account', function(e){
@@ -432,7 +501,7 @@ $('#all-container').on('click', '#btn-create-account', function(e){
                                                             }, function() {
                                                             console.log('user logout failed');
                                                             });
-                           window.plugins.drupal.login(userName, password, function(result) {
+                               window.plugins.drupal.login(userName, password, function(result) {
                                                        window.localStorage["user"] =  JSON.stringify(result);
                                                        
 $('#profile.page').empty();
@@ -455,7 +524,6 @@ $('#profile.page').append(content);
                                    
                                    window.plugins.drupal.logout(function(result) {
                                                                 window.localStorage.removeItem("user");
-                                                                
                                                                 $('#profile.page').empty();
                                                                 var source = $("#html-content-template").html();
                                                                 var template = Handlebars.compile(source);
@@ -508,90 +576,9 @@ $('#profile.page').append(content);
                                                 });
                                }
                             });
-                               
-       
 
 
-	//HOME LOAD
-	
-	/*
-    $('#home')
-    .bind('beforeShow', function() {
-
-    })
-    .bind('afterShow', function() {
-    resetSizing();
-    resetScroll("home");
-    })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.petitionsGetIndex(function(result) {
-                                                     $("#home-list").empty();
-                                                     
-                                                     var source   = $("#homeitem-template").html();
-                                                     var template = Handlebars.compile(source);
-                                                     var data = { nodes: result }
-                                                     var item = template(result);
-                                                     $('#home-list').append(item);
-
-                                                     },failureCallback);
-    })
-    .show();
-    
-	
-	
-	//NEWS LOAD
-    $('#news')
-    .bind('beforeShow', function() {
-          
-          })
-    .bind('afterShow', function() {
-          
-          })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.newsGetIndex(function(result) {
-                                                     $("#news-list").empty();
-                                                     
-                                                     var source   = $("#newsitem-template").html();
-                                                     var template = Handlebars.compile(source);
-                                                     var data = { nodes: result }
-                                                     var item = template(result);
-                                                     $('#news-list').append(item);
-                                                     
-                                                     resetSizing();
-                                                     resetScroll("news");
-
-                                                     },failureCallback);
-          })
-    .show();
-    
-    $('#events')
-    .bind('beforeShow', function() {
-          
-          })
-    .bind('afterShow', function() {
-          
-          })
-    .show(1000, function() {
-          window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-          window.plugins.drupal.eventsGetIndex(function(result) {
-                                                     $("#events-list").empty();
-                                                     
-                                                     var source   = $("#eventitem-template").html();
-                                                     var template = Handlebars.compile(source);
-                                                     var data = { nodes: result }
-                                                     var item = template(result);
-                                                     $('#events-list').append(item);
-                                                     
-                                                     resetSizing();
-                                                     resetScroll("events");
-                                                     },failureCallback);
-          })
-    .show();
-
- */
-/*  Here is what a node looks like *
+/*  Here is what a node looks like 
  var node = {
  title: "Sample Article",
  body: {
