@@ -3,10 +3,10 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.mobylyze"
         version   = "2.0.0">
-    <name>Hello World</name>
+    <name>Mobylyze</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Mobylyze
     </description>
 
     <author href="http://somehero.com" email="james@somehero.com">
