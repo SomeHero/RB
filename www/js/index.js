@@ -315,7 +315,7 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-		document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+		//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     // deviceready Event Handler
 	onDeviceReady: function() {
