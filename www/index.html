@@ -77,6 +77,9 @@ You
 		
 		<div id="home-scroller" class="scroller wf">
 		<div class="scrollee">
+		<div id="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+		</div>
 		<ul id="home-list">
 
         </ul>
@@ -226,7 +229,6 @@ You
 <a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-modal-back">Back</a>
 </header>
 <div id="{{PageID}}-page" class="modal page">
-<h2>{{PageTitle}}</h2>
 {{{PageContent}}}
   </div>
 </div>
@@ -247,7 +249,7 @@ You
     {{/each}}
 </script>
 <script id="eventitem-template" type="text/x-handlebars-template">
-            {{#each nodes}}
+    {{#each nodes}}
     <li data-nid="{{nid}}">
     <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
     <div class="item-contect">
