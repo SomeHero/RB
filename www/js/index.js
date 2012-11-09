@@ -486,6 +486,9 @@ var app = {
             resetPositioning();
             resetScroll();
         });
+        
+        // remove splash screen
+        navigator.splashscreen.hide();
 
         $('#tab-bar a').on('click', function(e) {
             e.preventDefault();
@@ -617,6 +620,12 @@ var app = {
             }, function(result) {
                 console.log('logout failed');
             });
+        });
+        
+        //CREATE ACCOUNT
+        $('#profile-container').on('click', '#create-account-submit', function(e) {
+                                   e.preventDefault();
+                                   alert('create account');
         });
 
 
