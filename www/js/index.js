@@ -25,7 +25,14 @@ var aboutModal = {
     PageID: "about",
     PageHeading: "About",
     PageTitle: "The About Page",
-    PageContent: "<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>"
+    PageContent: '<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>'
+};
+var createSomethingModal = {
+    ModalID: "modal-create",
+    PageID: "create",
+    PageHeading: "Create",
+    PageTitle: "Create",
+    PageContent: '<p>Here you can create something, I believe.</p><div id="create-buttons-holder"><button type="button" id="poll-button" class="rb-btn blue">+ Create Poll</button><button type="button" id="petition-button" class="rb-btn blue">+ Create Petition</button><button type="button" id="campaign-button" class="rb-btn blue">+ Create Campaign</button><button type="button" id="bundle-button" class="rb-btn blue">+ Create Bundle</button></div>'
 };
 var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><form action="#"  method="post"><span class="form-holder"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></form></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>';
 var createAccountModal = {
@@ -282,23 +289,23 @@ function page(toPage, tabNum) {
 
     if (tabNum == 3) {
         getHome();
-        $('header h1#hd-tab').empty();
-        $('header h1#hd-tab').addClass("hd-logo");
+        //$('header h1#hd-tab').empty();
+        //$('header h1#hd-tab').addClass("hd-logo");
     } else {
         //not home tab
-        $('header h1#hd-tab').removeClass("hd-logo");
+        //$('header h1#hd-tab').removeClass("hd-logo");
         if (tabNum == 1) {
             getNews();
-            $('header h1#hd-tab').text("News");
+            //$('header h1#hd-tab').text("News");
         } else if (tabNum == 2) {
             getEvents();
-            $('header h1#hd-tab').text("Events");
+            //$('header h1#hd-tab').text("Events");
         } else if (tabNum == 4) {
             getAction();
-            $('header h1#hd-tab').text("Take Action");
+            //$('header h1#hd-tab').text("Take Action");
         } else if (tabNum == 5) {
             getBundles();
-            $('header h1#hd-tab').text("Bundles");
+            //$('header h1#hd-tab').text("Bundles");
         } else {
 
         }
@@ -425,7 +432,7 @@ function getBundles() {
 
 
 
-//DRUPAL STUFF?
+//DRUPAL STUFF
 
 function successCallback() {
     console.log('success');
@@ -453,13 +460,10 @@ var app = {
         this.bindEvents();
     },
     // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-	//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+	document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     //DEVICE READY
     onDeviceReady: function() {
@@ -475,7 +479,18 @@ var app = {
         getHome();
         resetSizing();
         resetScroll('home');
-
+        
+        // remove splash screen
+		if (navigator.splashscreen){
+        navigator.splashscreen.hide();
+		}
+		
+		//check if logged in
+		var user = getUser();
+        if (user !== null) {
+		$('#create-link').removeClass('hidden');
+		$('#about-link').addClass('hidden');
+        }
 		
 		
 		
@@ -486,10 +501,8 @@ var app = {
             resetPositioning();
             resetScroll();
         });
-        
-        // remove splash screen
-        navigator.splashscreen.hide();
 
+		
         $('#tab-bar a').on('click', function(e) {
             e.preventDefault();
             var toPage = $(this.hash);
@@ -504,6 +517,17 @@ var app = {
         $('#profile-closer').on('click', function(e) {
             //ANIMATE PROFILE OUT
             e.preventDefault();
+		
+		//check if logged in now		
+		var user = getUser();
+        if (user !== null) {
+		$('#create-link').removeClass('hidden');
+		$('#about-link').addClass('hidden');
+        }else{
+		$('#about-link').removeClass('hidden');
+		$('#create-link').addClass('hidden');
+		}
+		
             $('#profile-closer').css("display", "none");
             $('#tab-container').animate({
                 left: "0px",
@@ -547,6 +571,10 @@ var app = {
             e.preventDefault();
             createModal(aboutModal);
         });
+		$('.btn-create').on('click', function(e) {
+            e.preventDefault();
+            createModal(createSomethingModal);
+        });
         $('#all-container').on('click', '.modal-container.active .btn-modal-back', function(e) {
             e.preventDefault();
             $('.modal-container.active').removeClass("slid-up");
@@ -576,7 +604,7 @@ var app = {
             alert('SHOW DETAILS');
         });
 
-        //SIGN IN SUMMIT
+        //SIGN IN SUBMIT
         $('#profile-container').on('click', '#signin-submit', function(e) {
             e.preventDefault();
             var userName = $("#signin-username").val();
