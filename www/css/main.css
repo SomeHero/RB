@@ -383,12 +383,12 @@ line-height: 45px;
 position: relative;
 text-shadow:1px 1px 0 #003668;
 background: #2d7bbf;
-background-image: -webkit-gradient(linear, left top, left bottom, from( #2e7cbf /*{d-bup-background-start}*/), to( #0e7cbf /*{d-bup-background-end}*/));
-background-image: -webkit-linear-gradient( #2e7cbf /*{d-bup-background-start}*/, #0e7cbf /*{d-bup-background-end}*/);
-background-image: -moz-linear-gradient( #2e7cbf /*{d-bup-background-start}*/, #0e7cbf /*{d-bup-background-end}*/);
-background-image: -ms-linear-gradient( #2e7cbf /*{d-bup-background-start}*/, #0e7cbf /*{d-bup-background-end}*/);
-background-image: -o-linear-gradient( #2e7cbf /*{d-bup-background-start}*/, #0e7cbf /*{d-bup-background-end}*/);
-background-image: linear-gradient( #2e7cbf /*{d-bup-background-start}*/, #0e7cbf /*{d-bup-background-end}*/);
+background-image: -webkit-gradient(linear, left top, left bottom, from( #4987be /*{d-bup-background-start}*/), to( #2a689f /*{d-bup-background-end}*/));
+background-image: -webkit-linear-gradient( #4987be /*{d-bup-background-start}*/, #2a689f /*{d-bup-background-end}*/);
+background-image: -moz-linear-gradient( #4987be /*{d-bup-background-start}*/, #2a689f /*{d-bup-background-end}*/);
+background-image: -ms-linear-gradient( #4987be /*{d-bup-background-start}*/, #2a689f /*{d-bup-background-end}*/);
+background-image: -o-linear-gradient( #4987be /*{d-bup-background-start}*/, #2a689f /*{d-bup-background-end}*/);
+background-image: linear-gradient( #4987be /*{d-bup-background-start}*/, #2a689f /*{d-bup-background-end}*/);
 border-bottom:1px solid #003668;
  -moz-box-shadow:    0px 1px 0px 0px #fff;
   -webkit-box-shadow: 0px 1px 0px 0px #fff;
@@ -407,17 +407,17 @@ header h1.hd-logo{
 	width:100%;
 background-repeat:no-repeat;
 background-position:center center;
--webkit-background-size: 120px 38px ;
--moz-background-size: 120px 38px ;
-background-size: 120px 38px ;
-background-image: url('../img/nav-bar/logo-128x36.png');
+-webkit-background-size: 95px 36px ;
+-moz-background-size: 95px 36px ;
+background-size: 95px 36px ;
+background-image: url('../img/nav-bar/logo-95x36.png');
 	position:absolute;
 	top:4px;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 header h1.hd-logo{
-background-image: url('../img/nav-bar/logo-128x36@2x.png');
+background-image: url('../img/nav-bar/logo-95x36@2x.png');
 }
 }
 
@@ -433,6 +433,14 @@ text-decoration: none;
 font-size: 14px;
 text-shadow:1px 1px 0 #001638;
 text-decoration:none;
+background-repeat:no-repeat;
+background-position:center center;
+}
+header a.hd-btn.pill-btn{
+width:50px;
+-webkit-background-size: 50px 30px ;
+-moz-background-size: 50px 30px ;
+background-size: 50px 30px ;
 }
 header a.hd-btn.left-btn{
 left: 12px;
@@ -442,24 +450,41 @@ header a.hd-btn.right-btn{
 right: 12px;
 padding-right:0;
 }
+header a.hd-btn.pill-btn.left-btn{
+left: 8px;
+}
+header a.hd-btn.pill-btn.right-btn{
+right: 8px;
+}
 .hd-btn-text{
 padding:0;
 }
-header a.hd-btn.left-btn.btn-you{
-background-repeat:no-repeat;
-background-position:left center;
-padding-left:26px;
--webkit-background-size: 19px 19px ;
--moz-background-size: 19px 19px ;
-background-size: 19px 19px ;
-background-image: url('../img/nav-bar/nav-you-19x19.png');
+header a.hd-btn.btn-you{
+background-image: url('../img/nav-bar/nav-you-50x30.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+header a.hd-btn.btn-you{
+background-image: url('../img/nav-bar/nav-you-50x30@2x.png');
+}
+}
+header a.hd-btn.btn-create{
+background-image: url('../img/nav-bar/nav-create-50x30.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+header a.hd-btn.btn-create{
+background-image: url('../img/nav-bar/nav-create-50x30@2x.png');
+}
+}
+header a.hd-btn.btn-about{
+background-image: url('../img/nav-bar/nav-about-50x30.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
+header a.hd-btn.btn-about{
+background-image: url('../img/nav-bar/nav-about-50x30@2x.png');
+}
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
-header a.hd-btn.left-btn.btn-you{
-background-image: url('../img/nav-bar/nav-you-19x19@2x.png');
-}
-}
+
 
 div#profile-container {
     position: absolute;
