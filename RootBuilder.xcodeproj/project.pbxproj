@@ -37,6 +37,13 @@
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5B98BBA0163E1BC0007A5B8B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B98BB9E163E1BC0007A5B8B /* LoginViewController.m */; };
 		5B98BBA1163E1BC0007A5B8B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B98BB9F163E1BC0007A5B8B /* LoginViewController.xib */; };
+		5BA12AA0164D5F32001E7B4A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12A9F164D5F32001E7B4A /* Default.png */; };
+		5BA12AA2164D5F4B001E7B4A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA1164D5F4B001E7B4A /* Default@2x.png */; };
+		5BA12AA4164D5F88001E7B4A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA3164D5F88001E7B4A /* Default-568h@2x.png */; };
+		5BA12AA6164D5F99001E7B4A /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA5164D5F99001E7B4A /* Default-Portrait~ipad.png */; };
+		5BA12AA8164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA7164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png */; };
+		5BA12AAA164D5FC9001E7B4A /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA9164D5FC9001E7B4A /* Default-Landscape~ipad.png */; };
+		5BA12AAC164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AAB164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png */; };
 		5BBE94B3163346B700D87FA3 /* NativeControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94AC163346B700D87FA3 /* NativeControls.m */; };
 		5BBE94B716334EB800D87FA3 /* CDVNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE94B416334EB800D87FA3 /* CDVNavigationBar.xib */; };
 		5BBE94B816334EB800D87FA3 /* CDVNavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE94B616334EB800D87FA3 /* CDVNavigationBarController.m */; };
@@ -113,6 +120,13 @@
 		5B98BB9D163E1BC0007A5B8B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		5B98BB9E163E1BC0007A5B8B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		5B98BB9F163E1BC0007A5B8B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		5BA12A9F164D5F32001E7B4A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5BA12AA1164D5F4B001E7B4A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5BA12AA3164D5F88001E7B4A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5BA12AA5164D5F99001E7B4A /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		5BA12AA7164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		5BA12AA9164D5FC9001E7B4A /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		5BA12AAB164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		5BBE94AB163346B700D87FA3 /* NativeControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeControls.h; sourceTree = "<group>"; };
 		5BBE94AC163346B700D87FA3 /* NativeControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeControls.m; sourceTree = "<group>"; };
 		5BBE94B416334EB800D87FA3 /* CDVNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDVNavigationBar.xib; sourceTree = "<group>"; };
@@ -238,6 +252,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5BA12AAB164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png */,
+				5BA12AA9164D5FC9001E7B4A /* Default-Landscape~ipad.png */,
+				5BA12AA7164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png */,
+				5BA12AA5164D5F99001E7B4A /* Default-Portrait~ipad.png */,
+				5BA12AA3164D5F88001E7B4A /* Default-568h@2x.png */,
+				5BA12AA1164D5F4B001E7B4A /* Default@2x.png */,
+				5BA12A9F164D5F32001E7B4A /* Default.png */,
 				5BFACF9F164B4D9E0046E89D /* CordovaLib.xcodeproj */,
 				5BFACF9D164B4A770046E89D /* app_icon_114x114.png */,
 				5BFACF9B164B4A230046E89D /* app_icon_57x57.png */,
@@ -505,6 +526,13 @@
 				5BFACF9A164B49340046E89D /* app_icon_144x144.png in Resources */,
 				5BFACF9C164B4A230046E89D /* app_icon_57x57.png in Resources */,
 				5BFACF9E164B4A770046E89D /* app_icon_114x114.png in Resources */,
+				5BA12AA0164D5F32001E7B4A /* Default.png in Resources */,
+				5BA12AA2164D5F4B001E7B4A /* Default@2x.png in Resources */,
+				5BA12AA4164D5F88001E7B4A /* Default-568h@2x.png in Resources */,
+				5BA12AA6164D5F99001E7B4A /* Default-Portrait~ipad.png in Resources */,
+				5BA12AA8164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png in Resources */,
+				5BA12AAA164D5FC9001E7B4A /* Default-Landscape~ipad.png in Resources */,
+				5BA12AAC164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
