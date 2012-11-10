@@ -173,7 +173,18 @@
     [dict release];
     [view release];
 }
+-(void)userSave:(NSMutableArray*) arguments withDict:(NSMutableDictionary*) options {
+    NSString* callbackId = [arguments objectAtIndex:0];
+    
+    NSMutableDictionary *user = (NSMutableDictionary*) [options objectForKey: @"user"];
+    
+    DIOSUser *diosUser = [[DIOSUser alloc] initWithSession:self.currentSession];
+    NSDictionary *result = [diosUser userSave: user];
 
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:result];
+    [super writeJavascript:[pluginResult toSuccessCallbackString:callbackId]];
+    [result release];
+}
 - (void) fileSave:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
     NSString* callbackId = [arguments objectAtIndex:0];
     

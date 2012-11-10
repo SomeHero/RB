@@ -623,9 +623,26 @@ var app = {
         });
         
         //CREATE ACCOUNT
-        $('#profile-container').on('click', '#create-account-submit', function(e) {
-                                   e.preventDefault();
-                                   alert('create account');
+        $('#all-container').on('click', '#create-account-submit', function(e) {
+             e.preventDefault();
+                            
+             console.log('create an account');
+                               
+             var userName = $("#join-username").val();
+             var password = $("#join-password").val();
+                
+             var user = { name : userName,
+                               mail : userName,
+                               pass : password };
+                               
+             window.plugins.drupal.userSave(user, function() {
+                                                              alert('new user created');
+                                                              }, function() {
+                                                              alert('new user failed');
+                                                              });
+                               
+             
+                                  
         });
 
 

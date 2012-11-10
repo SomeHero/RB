@@ -82,6 +82,10 @@ DrupalPlugin.prototype.eventsGetIndex = function(successCallback, failureCallbac
         return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "viewGet", [{viewName: viewName}]);
     }
 
+
+    DrupalPlugin.prototype.userSave = function(user, successCallback, failureCallback) {
+        return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "userSave", [{user: user}]);
+    }
     DrupalPlugin.prototype.fileSave = function(file, successCallback, failureCallback) {
         return cordova.exec(successCallback, failureCallback, "DrupalPlugin", "fileSave", [{file: file}]);
     }
