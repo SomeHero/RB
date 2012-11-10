@@ -425,7 +425,7 @@ function getBundles() {
 
 
 
-//DRUPAL STUFF?
+//DRUPAL STUFF
 
 function successCallback() {
     console.log('success');
@@ -453,13 +453,10 @@ var app = {
         this.bindEvents();
     },
     // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // `load`, `deviceready`, `offline`, and `online`.
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-	//document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+	document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     //DEVICE READY
     onDeviceReady: function() {
