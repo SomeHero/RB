@@ -34,7 +34,7 @@ var createSomethingModal = {
     PageTitle: "Create",
     PageContent: '<p>Here you can create something, I believe.</p><div id="create-buttons-holder"><button type="button" id="poll-button" class="rb-btn blue">+ Create Poll</button><button type="button" id="petition-button" class="rb-btn blue">+ Create Petition</button><button type="button" id="campaign-button" class="rb-btn blue">+ Create Campaign</button><button type="button" id="bundle-button" class="rb-btn blue">+ Create Bundle</button></div>'
 };
-var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><span class="form-holder"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"></span><span class="form-holder"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>';
+var createAccountContent = '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><span id="create-account-form-holder" class="form-holder"><input type="email" id="join-username" class="required" placeholder="Your Email Address" name="Email" /></span><span class="form-holder"><input type="password" id="join-password" class="required" placeholder="Password" name="Password" /></span><button type="button" id="create-account-submit" class="rb-btn blue">Create Account</button></div><div id="main-body-sub-links"><p style="text-align: center"><a href="#">Already a member?  Sign In</a></p></div>';
 var createAccountModal = {
     ModalID: "modal-create-account",
     PageID: "create-account",
@@ -60,7 +60,6 @@ var transitionEnd = 'webkitTransitionEnd';
 //GLOBAL FUNCTIONS
 
 //USER FUNCTIONS
-
 function getUser() {
     if (window.localStorage.length !== 0 && window.localStorage["user"] !== null) {
         var currentUser = JSON.parse(window.localStorage["user"]);
@@ -68,21 +67,76 @@ function getUser() {
     }
     return null;
 }
-
-function loginUser() {
+function createUser(userName, password, success, failed) {
+    var user = { name : userName,
+        mail : userName,
+        pass : password,
+        signature : '<b>James R</b>',
+        firstname : 'Sebastian'
+        
+    };
+    
+    window.plugins.drupal.userSave(user,  function(result) {
+                                   console.log(result);
+                                   
+                                   window.localStorage["user"] = JSON.stringify(result);
+                                   
+                                   $('#profile.page').empty();
+                                   var source = $("#html-content-template").html();
+                                   var template = Handlebars.compile(source);
+                                   var data = youContentAnon;
+                                   var user = getUser();
+                                   if (user !== null) {
+                                        data = youContentAuth;
+                                   }
+                                   var content = template(data);
+                                   $('#profile.page').append(content);
+                                   success();
+                                   }, function() {
+                                        failed();
+                                   });
 
 }
 
+function loginUser(userName, password, success, failed) {
+    window.plugins.drupal.login(userName, password, function(result) {
+                                window.localStorage["user"] = JSON.stringify(result);
+                                
+                                $('#profile.page').empty();
+                                var source = $("#html-content-template").html();
+                                var template = Handlebars.compile(source);
+                                var data = youContentAnon;
+                                var user = getUser();
+                                if (user !== null) {
+                                     data = youContentAuth;
+                                }
+                                var content = template(data);
+                                $('#profile.page').append(content);
+                                success();
+                                }, function() {
+                                failed();
+                                });
+}
 function logoutUser(success, failed) {
 
     window.plugins.drupal.logout(function() {
+        window.localStorage.removeItem("user");
+                                 $('#profile.page').empty();
+                                 var source = $("#html-content-template").html();
+                                 var template = Handlebars.compile(source);
+                                 var data = youContentAnon;
+                                 
+                                 var content = template(data);
+                                 $('#profile.page').append(content);
         console.log('user has been logged out');
         success();
     }, function() {
-        console.log('logout failed');
+        window.localStorage.removeItem("user");
+                                 console.log('logout failed');
         failed();
     });
 }
+// END USER FUNCTIONS
 
 
 function whichTransitionEvent() {
@@ -451,9 +505,8 @@ function failureCallback() {
     console.log('failed');
 }
 
-
-
 var app = {
+    
     // Application Constructor
     initialize: function() {
         console.log('initialze app');
@@ -463,10 +516,11 @@ var app = {
     bindEvents: function() {
         console.log('bindEvents app');
         document.addEventListener('deviceready', this.onDeviceReady, false);
-	document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
+	    //document.addEventListener('DOMContentLoaded', this.onDeviceReady, false); //THIS IS JUST FOR DEBUGGING!
     },
     //DEVICE READY
     onDeviceReady: function() {
+
         //SET VARS
         transitionEnd = whichTransitionEvent();
         viewport = {
@@ -610,69 +664,38 @@ var app = {
             var userName = $("#signin-username").val();
             var password = $("#signin-password").val();
 
-            window.plugins.drupal.logout(function() {
-                console.log('user logout success');
-            }, function() {
-                console.log('user logout failed');
-            });
-            window.plugins.drupal.login(userName, password, function(result) {
-                window.localStorage["user"] = JSON.stringify(result);
-
-                $('#profile.page').empty();
-                var source = $("#html-content-template").html();
-                var template = Handlebars.compile(source);
-                var data = youContentAnon;
-                var user = getUser();
-                if (user !== null) {
-                    data = youContentAuth;
-                }
-                var content = template(data);
-                $('#profile.page').append(content);
-            }, function() {
-                alert('login failed');
-            });
+                                              loginUser(userName, password, function() {
+                                                   console.log('sign in success');
+                                                   }, function() {
+                                                   console.log('sign in failed');
+                                                   });
+                                   
+            
         });
         //SIGN OUT SUBMIT
         $('#profile-container').on('click', '#signout-submit', function(e) {
             e.preventDefault();
 
-            window.plugins.drupal.logout(function(result) {
-                window.localStorage.removeItem("user");
-                $('#profile.page').empty();
-                var source = $("#html-content-template").html();
-                var template = Handlebars.compile(source);
-                var data = youContentAnon;
-
-                var content = template(data);
-                $('#profile.page').append(content);
-            }, function(result) {
-                console.log('logout failed');
-            });
+                                   logoutUser(function() {
+                                              console.log('logout success');
+                                              }, function() {
+                                              console.log('logout failed');
+                                              });
         });
         
         //CREATE ACCOUNT
         $('#all-container').on('click', '#create-account-submit', function(e) {
              e.preventDefault();
                          
-                               alert($('#create-account-submit').html());
-             var userName = $("#join-form").find("#join-username").val();
-             var password = $("#join-form").find("#join-password").val();
+             var userName = $("#join-username").val();
+             var password = $("#join-password").val();
                 
-             console.log(userName);
-             console.log(password);
-                          
-             console.log('hello');
-                               
-             var user = { name : userName,
-                               mail : userName,
-                               pass : password };
-                               
-             window.plugins.drupal.userSave(user, function() {
-                                                              alert('new user created');
-                                                              }, function() {
-                                                              alert('new user failed');
-                                                              });
-                               
+             createUser(userName, password, function() {
+                                          console.log('user account created and logged in')
+                                          },
+                                          function() {
+                                          console.log('user account create failed');
+                                          });
              
                                   
         });

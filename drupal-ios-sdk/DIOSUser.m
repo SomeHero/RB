@@ -60,6 +60,10 @@
 - (NSDictionary *) userSave:(NSMutableDictionary *)userDict {
   [self setMethod:@"user.save"];
   [self setMethodUrl:@"user"];
+    
+    NSString* firstName = [userDict objectForKey:@"firstName"];
+    NSLog(@"%@", firstName);
+    
   if ([userDict objectForKey:@"uid"] != nil && ![[userDict objectForKey:@"uid"] isEqualToString:@""]) {
     [self setMethodUrl:[NSString stringWithFormat:@"user/%@", [userDict objectForKey:@"uid"]]];
     [self setRequestMethod:@"PUT"];
@@ -69,6 +73,9 @@
       [self addParam:[userDict objectForKey:@"name"] forKey:@"name"];
       [self addParam:[userDict objectForKey:@"mail"] forKey:@"mail"];
       [self addParam:[userDict objectForKey:@"pass"] forKey:@"pass"];
+      
+      [self addParam: @"12311" forKey:@"field_facebookid"];
+      [self addParam:[userDict objectForKey:@"firstName"] forKey:@"field_firstname"];
   }
   
   [self runMethod];
