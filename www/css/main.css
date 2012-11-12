@@ -144,16 +144,16 @@ top: -4px;
 .rb-btn
 {
  width:100%;  
- -moz-border-radius: 5px;
+ -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 border-radius: 3px ;
--moz-box-shadow: 0px 1px 4px rgba(0,0,0,.3);
--webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, .3) ;
-box-shadow: 0px 1px 4px rgba(0, 0, 0, .3) ; 
+-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5), -1px 0px 1px rgba(0,0,0,0.5), 1px 0px 1px rgba(0,0,0,0.5), inset 0px 1px 0px 0px rgba(255,255,255,0.3), inset 0px 0px 0px 0px rgba(255,255,255,0.5);
+-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5), -1px 0px 1px rgba(0,0,0,0.5), 1px 0px 1px rgba(0,0,0,0.5), inset 0px 1px 0px 0px rgba(255,255,255,0.3), inset 0px 0px 0px 0px rgba(255,255,255,0.5);
+box-shadow: 0px 1px 3px rgba(0,0,0,0.5), -1px 0px 1px rgba(0,0,0,0.5), 1px 0px 1px rgba(0,0,0,0.5), inset 0px 1px 0px 0px rgba(255,255,255,0.3), inset 0px 0px 0px 0px rgba(255,255,255,0.5); 
 -webkit-background-clip: padding-box;
 -moz-background-clip: padding;
 background-clip: padding-box;
-border: 1px solid #F0F0F0;
+border: 1px solid rgba(255,255,255,.7);
 font-weight: bold;
 color: white !important;
 text-decoration:none !important;
@@ -213,14 +213,14 @@ background-image: linear-gradient( #EA385C , #B9012F );
 
 .rb-btn.fb
 {
-background: #3B5998;
-text-shadow: 0  1px  0 #102A67;
-background-image: -webkit-gradient(linear, left top, left bottom, from( #4A6BB0 ), to( #3B5998 ));
-background-image: -webkit-linear-gradient( #4A6BB0 , #3B5998 );
-background-image: -moz-linear-gradient( #4A6BB0 , #3B5998 );
-background-image: -ms-linear-gradient( #4A6BB0 , #3B5998 );
-background-image: -o-linear-gradient( #4A6BB0 , #3B5998 );
-background-image: linear-gradient( #4A6BB0 , #3B5998 );
+background: #586b96;
+text-shadow: 0  1px  0 #384b76;
+background-image: -webkit-gradient(linear, left top, left bottom, from( #6f87ac ), to( #586b96 ));
+background-image: -webkit-linear-gradient( #6f87ac , #586b96 );
+background-image: -moz-linear-gradient( #6f87ac , #586b96 );
+background-image: -ms-linear-gradient( #6f87ac , #586b96 );
+background-image: -o-linear-gradient( #6f87ac , #586b96 );
+background-image: linear-gradient( #6f87ac , #586b96 );
 }
 
 div.or
@@ -527,13 +527,13 @@ div#profile-container {
 	height:100%;
   overflow:hidden;
   z-index:0;
-    background: #2d7bbf;
-    background-image: -webkit-gradient(linear, left top, left bottom, from( #4987be ), to( #2a689f ));
-    background-image: -webkit-linear-gradient( #4987be , #2a689f );
-    background-image: -moz-linear-gradient( #4987be , #2a689f );
-    background-image: -ms-linear-gradient( #4987be , #2a689f );
-    background-image: -o-linear-gradient( #4987be , #2a689f );
-    background-image: linear-gradient( #4987be , #2a689f );
+    background: #0d5b9f;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #29679e ), to( #0d5b9f ));
+    background-image: -webkit-linear-gradient( #29679e , #0d5b9f );
+    background-image: -moz-linear-gradient( #29679e , #0d5b9f );
+    background-image: -ms-linear-gradient( #29679e , #0d5b9f );
+    background-image: -o-linear-gradient( #29679e , #0d5b9f );
+    background-image: linear-gradient( #29679e , #0d5b9f );
 }
 div#profile-container header{
 background-image: none;
