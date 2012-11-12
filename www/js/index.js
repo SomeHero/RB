@@ -6,7 +6,7 @@ var viewport = {
 };
 
 var appui = {
-	footerHeight: 49,
+	footerHeight: 48,
 	headerHeight: 47
 };
 
@@ -43,85 +43,30 @@ var createAccountModal = {
 	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
 };
 
+var testDetail = {
+	DetailID: "details-test",
+	PageID: "details",
+	PageHeading: "Item Details",
+	PageContent: '<div>ITEM DETAILS</div>'
+};
+
 var youContentAnon = {
+	PageID: "page-anonymous",
+	PageHeading: "Log In",
 	ContentID: "you-content-anon",
-	PageContent: '<header><h1>Log In</h1></header><div id="profile" class="page anon"><div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div></div>'
+	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
 };
 var youContentAuth = {
-	ContentID: "you-content-auth",
-	PageContent: '<header><h1>You</h1></header><div id="profile" class="page auth"><div><button type="button" id="user-profile-button" class="rb-btn blue">Profile</button><button type="button" id="user-network-button" class="rb-btn blue">Network</button><button type="submit" id="user-actions-button" class="rb-btn blue">Actions</button><button type="submit" id="user-events-button" class="rb-btn blue">Events</button><button type="submit" id="user-bundles-button" class="rb-btn blue">Bundles</button><button type="button" id="signout-submit" class="rb-btn orange">Sign Out</button></div></div>'
+	PageID: "page-authenticated",
+	PageHeading: "You",
+	ContentID: "you-content-anon",
+	PageContent: '<button type="button" id="user-profile-button" class="rb-btn blue">Profile</button><button type="button" id="user-network-button" class="rb-btn blue">Network</button><button type="submit" id="user-actions-button" class="rb-btn blue">Actions</button><button type="submit" id="user-events-button" class="rb-btn blue">Events</button><button type="submit" id="user-bundles-button" class="rb-btn blue">Bundles</button><button type="button" id="signout-submit" class="rb-btn orange">Sign Out</button>'
 };
 
 var transitionEnd = 'webkitTransitionEnd';
 
-var sliding = startClientX = startPixelOffset = pixelOffset = 0;
 
 //GLOBAL FUNCTIONS
-
-//SLIDING
-
-function slideStart(event) {
-startClientX = startPixelOffset = pixelOffset = 0;
-	if (event.originalEvent.touches) event = event.originalEvent.touches[0];
-	if (sliding === 0) {
-		sliding = 1;
-		startClientX = event.clientX;
-	}
-}
-
-function slide(event) {
-	event.preventDefault();
-	if (event.originalEvent.touches) {
-		event = event.originalEvent.touches[0];
-	}
-	
-	
-	
-	var deltaSlide = event.clientX - startClientX;
-
-	if (sliding === 1 && deltaSlide !== 0) {
-		sliding = 2;
-		startPixelOffset = pixelOffset;
-		$(document).on('touchend', slideEnd);
-	}
-
-	if (sliding == 2) {
-	
-		var touchPixelRatio = 1;
-		var position = $("#tab-container").position();
-		if ((position.left === 0 && event.clientX < startClientX)){
-			touchPixelRatio = 5;
-			$(document).off('touchend', slideEnd);
-        }else if((position.left === (viewport.panelwidth - 48) && event.clientX > startClientX)) {
-			touchPixelRatio = 5;
-			pixelOffset = startPixelOffset + deltaSlide / touchPixelRatio;
-		
-			$('#temp').remove();
-			$('<style id="temp">#tab-container{-webkit-transform:translate3d(' + pixelOffset + 'px,0,0)}</style>').appendTo('head');
-			$(document).off('touchend', slideEnd);
-		}else{
-		pixelOffset = startPixelOffset + deltaSlide / touchPixelRatio;
-	
-		$('#temp').remove();
-		$('<style id="temp">#tab-container{-webkit-transform:translate3d(' + pixelOffset + 'px,0,0)}</style>').appendTo('head');
-}
-	}
-}
-
-function slideEnd(event) {
-
-	$(document).off('touchend', slideEnd);
-	
-	if (sliding == 2) {
-		sliding = 0;
-		if (event.clientX > startClientX) {
-			slideProfileOpen();
-		} else {
-			slideProfileClosed();
-
-		}
-	}
-}
 
 
 
@@ -154,7 +99,7 @@ function updateProfile() {
 
 	$('#profile-container').empty();
 	var user = getUser();
-	var source = $("#html-content-template").html();
+	var source = $('#profile-template').html();
 	var template = Handlebars.compile(source);
 	var data = youContentAnon;
 	if (user !== null) {
@@ -379,6 +324,40 @@ function createModal(modalName) {
 
 }
 
+function loadDetailView(template, content){
+var source = $("#" + template).html();
+var template = Handlebars.compile(source);
+var data = content;
+var detailview = template(data);
+	$('#app-container').append(detailview);
+	resetSizing();
+	$('.detail-container#' + content.DetailID).css('left', viewport.panelwidth + 'px');
+	$('.detail-container#' + content.DetailID).css('display', 'block');
+	
+$('#tab-container').animate({
+		left: -viewport.panelwidth + "px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 500, function() {
+
+	});
+$('#tab-container header > *').animate({
+		opacity: 0,
+		useTranslate3d: false
+	}, 300, function() {
+
+	});
+$('.detail-container#' + content.DetailID).animate({
+		left: "0px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 300, function() {
+
+	});
+	
+	
+}
+
 //OPEN PROFILE
 
 function slideProfileOpen() {
@@ -390,7 +369,6 @@ function slideProfileOpen() {
 		useTranslate3d: true,
 		leaveTransforms: false
 	}, 300, function() {
-		$('#temp').remove();
 		$('#profile-link').removeClass("unslid").addClass("slid");
 		$('#tab-container').addClass("slid-right");
 		$('#profile-closer').css("display", "block");
@@ -414,7 +392,6 @@ function slideProfileClosed() {
 		useTranslate3d: true,
 		leaveTransforms: false
 	}, 200, function() {
-		$('#temp').remove();
 		$('#tab-container').removeClass("slid-right");
 		$('#profile-link').removeClass("slid").addClass("unslid");
 		$('#profile-closer').css("display", "none");
@@ -494,7 +471,8 @@ function getHome() {
 			var item = template(result);
 			$('.loader').remove();
 			$('#home-list').append(item);
-
+		
+			
 			resetSizing();
 			resetScroll("home");
 
@@ -608,7 +586,6 @@ var app = {
 
 		//EVENT BINDINGS
 
-
 		//RESIZE
 		$(window).bind('resize', function() {
 			resetViewport();
@@ -671,6 +648,33 @@ var app = {
 
 
 		});
+		$('#all-container').on('click', '.btn-detail-back', function(e) {
+			e.preventDefault();
+$('#tab-container').animate({
+		left: "0px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 300, function() {
+
+	});
+	
+$('#tab-container header > *').css('opacity', '1');
+
+	$(this).closest('div.detail-container').animate({
+		left: viewport.panelwidth + "px",
+		useTranslate3d: true
+	}, 300, function() {
+		$(this).closest('div.detail-container').remove();
+	});
+	
+	$(this).closest('div.detail-container header > *').animate({
+		opacity: 0,
+		useTranslate3d: true
+	}, 300, function() {
+
+	});
+	
+		});
 		$('#all-container').on('click', '#btn-create-account', function(e) {
 			e.preventDefault();
 			createModal(createAccountModal);
@@ -682,8 +686,8 @@ var app = {
 		});
 
 		//DEBUG
-		$('div.page ul li').on('click', function(e) {
-			alert('SHOW DETAILS');
+		$('#home').on('click', '#home-list li', function(e) {
+			loadDetailView("detail-template", testDetail);
 		});
 
 		//SIGN IN SUBMIT
