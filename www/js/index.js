@@ -71,7 +71,6 @@ var transitionEnd = 'webkitTransitionEnd';
 
 
 //USER FUNCTIONS
-
 function getUser() {
 	if (window.localStorage.length !== 0 && window.localStorage["user"] !== null) {
 		var currentUser = JSON.parse(window.localStorage["user"]);
@@ -79,21 +78,76 @@ function getUser() {
 	}
 	return null;
 }
-
-function loginUser() {
+function createUser(userName, password, success, failed) {
+    var user = { name : userName,
+        mail : userName,
+        pass : password,
+        signature : '<b>James R</b>',
+        firstname : 'Sebastian'
+        
+    };
+    
+    window.plugins.drupal.userSave(user,  function(result) {
+                                   console.log(result);
+                                   
+                                   window.localStorage["user"] = JSON.stringify(result);
+                                   
+                                   $('#profile.page').empty();
+                                   var source = $("#html-content-template").html();
+                                   var template = Handlebars.compile(source);
+                                   var data = youContentAnon;
+                                   var user = getUser();
+                                   if (user !== null) {
+                                        data = youContentAuth;
+                                   }
+                                   var content = template(data);
+                                   $('#profile.page').append(content);
+                                   success();
+                                   }, function() {
+                                        failed();
+                                   });
 
 }
 
+function loginUser(userName, password, success, failed) {
+    window.plugins.drupal.login(userName, password, function(result) {
+                                window.localStorage["user"] = JSON.stringify(result);
+                                
+                                $('#profile.page').empty();
+                                var source = $("#html-content-template").html();
+                                var template = Handlebars.compile(source);
+                                var data = youContentAnon;
+                                var user = getUser();
+                                if (user !== null) {
+                                     data = youContentAuth;
+                                }
+                                var content = template(data);
+                                $('#profile.page').append(content);
+                                success();
+                                }, function() {
+                                failed();
+                                });
+}
 function logoutUser(success, failed) {
 
-	window.plugins.drupal.logout(function() {
-		console.log('user has been logged out');
-		success();
-	}, function() {
-		console.log('logout failed');
-		failed();
-	});
+    window.plugins.drupal.logout(function() {
+        window.localStorage.removeItem("user");
+                                 $('#profile.page').empty();
+                                 var source = $("#html-content-template").html();
+                                 var template = Handlebars.compile(source);
+                                 var data = youContentAnon;
+                                 
+                                 var content = template(data);
+                                 $('#profile.page').append(content);
+        console.log('user has been logged out');
+        success();
+    }, function() {
+        window.localStorage.removeItem("user");
+                                 console.log('logout failed');
+        failed();
+    });
 }
+// END USER FUNCTIONS
 
 function updateProfile() {
 
@@ -513,8 +567,6 @@ function nodeSuccessCallback(result) {
 function failureCallback() {
 	console.log('failed');
 }
-
-
 
 var app = {
 	// Application Constructor

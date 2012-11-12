@@ -527,7 +527,13 @@ div#profile-container {
 	height:100%;
   overflow:hidden;
   z-index:0;
-  background-color:#0A487F ;
+    background: #2d7bbf;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #4987be ), to( #2a689f ));
+    background-image: -webkit-linear-gradient( #4987be , #2a689f );
+    background-image: -moz-linear-gradient( #4987be , #2a689f );
+    background-image: -ms-linear-gradient( #4987be , #2a689f );
+    background-image: -o-linear-gradient( #4987be , #2a689f );
+    background-image: linear-gradient( #4987be , #2a689f );
 }
 div#profile-container header{
 background-image: none;
