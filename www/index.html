@@ -28,15 +28,8 @@
 <div id="app-container" class="container">
 <!-- START YOU PAGE -->
 
- <div id="profile-container" class="container">
-<header>
-<h1>
-You
-</h1>
-</header>
-<div id="profile" class="page">
+ <div id="profile-container" class="container txt-rev">
 
-        </div>
   </div>
 
 <!--MODAL GOES HERE-->
@@ -58,13 +51,13 @@ You
 	<div id="scroll-top"></div>
 <!-- START PAGES CONTAINER -->
 <div id="pages">
-    <div id="news" class="page" tabnum="1">
+    <div id="news" class="page" tabpanel="1">
         <div id="news-scroller" class="scroller wf">
         <ul id="news-list">
         </ul>
 		</div>
     </div>
-    <div id="events" class="page" tabnum="2">
+    <div id="events" class="page" tabpanel="2">
 	
 	<div id="events-scroller" class="scroller wf">
 	<div class="scrollee">
@@ -74,7 +67,7 @@ You
 	</div>
 	</div>
     </div>
-	    <div id="home" class="page current" tabnum="3">
+	    <div id="home" class="page current" tabpanel="3">
 		
 		<div id="home-scroller" class="scroller wf">
 		<div class="scrollee">
@@ -87,7 +80,7 @@ You
 		</div>
 		</div>
     </div>
-	    <div id="action" class="page" tabnum="4">
+	    <div id="action" class="page" tabpanel="4">
 		
 		<div id="action-scroller" class="scroller wf">
 		<div class="scrollee">
@@ -119,7 +112,7 @@ You
 		</div>
 
     </div>
-    <div id="bundles" class="page" tabnum="5">
+    <div id="bundles" class="page" tabpanel="5">
 
 	<div id="bundles-scroller" class="scroller wf">
 	<div class="scrollee">
@@ -210,6 +203,7 @@ You
 		<script type="text/javascript" src="js/jquery.animate-enhanced.js"></script>
 		<script type="text/javascript" src="js/noClickDelay.js"></script>
         <script type="text/javascript" src="js/helper.js"></script>
+		<script type="text/javascript" src="js/touchswipe.js"></script>
         <script type="text/javascript" src="cordova-2.1.0.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/drupal-phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -227,7 +221,7 @@ You
 <h1>
 {{ PageHeading }}
 <h1>
-<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-modal-back">Back</a>
+<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-modal-back"><span class="hd-btn-text">Back</span></a>
 </header>
 <div id="{{PageID}}-page" class="modal page">
 {{{PageContent}}}
