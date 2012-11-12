@@ -66,6 +66,8 @@
 		<string>NativeControls</string>
 		<key>DrupalPlugin</key>
 		<string>DrupalPlugin</string>
+		<key>org.apache.cordova.facebook.Connect</key>
+		<string>FacebookConnectPlugin</string>
 	</dict>
 </dict>
 </plist>
