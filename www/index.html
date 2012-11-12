@@ -17,8 +17,12 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-		<link rel="stylesheet" href="css/normalize.css">
+		
+		<!-- STYLES -->
+		<link rel="stylesheet" href="css/normalize.css">	
         <link rel="stylesheet" href="css/main.css">
+		
+		<!-- MODERNIZE -->
         <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
     <body>
@@ -216,6 +220,21 @@
 {{{PageContent}}}
 </div>
 </script>
+<script id="detail-template" type="text/x-handlebars-template">
+<div id="{{DetailID}}" class="detail-container">
+<header>
+<h1>
+{{ PageHeading }}
+<h1>
+<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-detail-back"><span class="hd-btn-text">Back</span></a>
+</header>
+<div class="page-holder">
+<div id="{{PageID}}-page" class="detail page">
+{{{PageContent}}}
+  </div>
+  </div>
+</div>
+</script>
 <script id="modal-template" type="text/x-handlebars-template">
 <div id="{{ModalID}}" class="modal-container">
 <header>
@@ -224,10 +243,20 @@
 <h1>
 <a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-modal-back"><span class="hd-btn-text">Back</span></a>
 </header>
+<div class="page-holder">
 <div id="{{PageID}}-page" class="modal page">
 {{{PageContent}}}
   </div>
+  </div>
 </div>
+</script>
+<script id="profile-template" type="text/x-handlebars-template">
+<header><h1> {{ PageHeading }} </h1></header>
+<div id="profile" class="page {{PageID}}">
+<div id="{{ContentID}}" class="content-container">
+{{{PageContent}}}
+</div>
+  </div>
 </script>
 <script id="newsitem-template" type="text/x-handlebars-template">
     {{#each nodes}}
@@ -261,10 +290,11 @@
 </script>
 <script id="homeitem-template" type="text/x-handlebars-template">
             {{#each nodes}}
-            <li data-nid="{{nid}}">
+            <li class="home-item" data-nid="{{nid}}">
             <a href="#"><img src="{{logo}}" />{{title}}</a>
             </li>
             {{/each}}
 </script>
+
     </body>
 </html>
