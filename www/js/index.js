@@ -22,10 +22,6 @@ var startClientX = 0;
 var startPixelOffset = 0;
 var pixelOffset = 0;
 
-var isMouseDown = false;
-
-var loader = $('<div class="loader"><p><span class="offset" /><span class="loader-image" /></span><span class="loader-message" /></span></span></div>');
-
 var aboutModal = {
 	ModalID: "modal-about",
 	PageID: "about",
@@ -33,6 +29,7 @@ var aboutModal = {
 	PageTitle: "The About Page",
 	PageContent: '<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>'
 };
+
 var createSomethingModal = {
 	ModalID: "modal-create",
 	PageID: "create",
@@ -46,7 +43,7 @@ var createAccountModal = {
 	PageID: "create-account",
 	PageHeading: "Create Account",
 	PageTitle: "Create a Mobylyze Account",
-	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
+	PageContent: '<button type="button" id="fb-img-btn" class="img-btn"></button><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
 };
 
 var testDetail = {
@@ -62,6 +59,7 @@ var youContentAnon = {
 	ContentID: "you-content-anon",
 	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
 };
+
 var youContentAuth = {
 	PageID: "page-authenticated",
 	PageHeading: "You",
@@ -97,19 +95,8 @@ function createUser(userName, password, success, failed) {
 
 	window.plugins.drupal.userSave(user, function(result) {
 		console.log(result);
-
 		window.localStorage["user"] = JSON.stringify(result);
-
-		$('#profile.page').empty();
-		var source = $("#html-content-template").html();
-		var template = Handlebars.compile(source);
-		var data = youContentAnon;
-		var user = getUser();
-		if (user !== null) {
-			data = youContentAuth;
-		}
-		var content = template(data);
-		$('#profile.page').append(content);
+		updateProfile();
 		success();
 	}, function() {
 		failed();
@@ -120,17 +107,7 @@ function createUser(userName, password, success, failed) {
 function loginUser(userName, password, success, failed) {
 	window.plugins.drupal.login(userName, password, function(result) {
 		window.localStorage["user"] = JSON.stringify(result);
-
-		$('#profile.page').empty();
-		var source = $("#html-content-template").html();
-		var template = Handlebars.compile(source);
-		var data = youContentAnon;
-		var user = getUser();
-		if (user !== null) {
-			data = youContentAuth;
-		}
-		var content = template(data);
-		$('#profile.page').append(content);
+		updateProfile();
 		success();
 	}, function() {
 		failed();
@@ -222,19 +199,28 @@ function hideOtherPages() {
 
 function showEmptyLoader(message) {
 	$('.loader').remove();
-	$('.page.current').prepend(loader);
+	
+	var loady = $('<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" /></span></div>');
+
+	$('.page.current').prepend(loady);
+	$('.loader').css('display', 'block');
+	$('.loader').css('opacity', '1.0');
+	$('.loader').css("height", $('.loader').height());
 	if (message) {
 		$(".loader-message").text(message);
 	} else {
 		$(".loader-message").empty();
 	}
-	$('.loader').css('display', 'block');
+	
 }
-
-function hideEmptyLoader() {
-	$('.loader').fadeOut('fast', function() {
-		$('.loader').remove();
-	});
+function showLoader(pageName) {
+	$('#' + pageName + ' .loader').css('display', 'block');
+	$('#' + pageName + ' .loader').css('opacity', '1.0');
+	$('#' + pageName + ' .loader').css("height", '50px');
+}
+function hideLoader(pageName) {
+	$('#' + pageName + ' .loader').css('opacity', '0');
+	$('#' + pageName + ' .loader').css("height", '0px');
 }
 
 function pullDownAction() {
@@ -327,7 +313,7 @@ function resetScroll(page) {
 		} else {
 
 		}
-	}, 0);
+	}, 10);
 }
 
 function page(tabNum) {
@@ -341,28 +327,15 @@ function page(tabNum) {
 		$("#pages div.page").css("display", "none"); //hide all
 		toPage.addClass("current");
 		toPage.css("display", "block");
-	} else {
-		fromPage.removeClass("current");
-		$("#pages div.page").css("display", "none"); //hide all
-		toPage.addClass("current");
-		toPage.css("display", "block");
-	}
-	if (tabNum == 3) {
-		getHome();
-
+		return;
 	} else {
 
-		if (tabNum == 1) {
-			getNews();
-		} else if (tabNum == 2) {
-			getEvents();
-		} else if (tabNum == 4) {
-			getAction();
-		} else if (tabNum == 5) {
-			getBundles();
-		} else {
-
-		}
+fromPage.removeClass("current");
+$("#pages div.page").css("display", "none"); //hide all
+toPage.show(0);
+toPage.addClass("current");
+console.log('showed new tab');
+		
 	}
 
 }
@@ -510,34 +483,29 @@ function slideProfileClosed() {
 //LOAD NEWS PAGE
 
 function getNews() {
-
 	if (window.plugins !== undefined && ($('#news-list li').length === 0)) {
-		showEmptyLoader("Getting News...");
-		window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
 		window.plugins.drupal.newsGetIndex(function(result) {
-
 			var source = $("#newsitem-template").html();
 			var template = Handlebars.compile(source);
 			var data = {
 				nodes: result
 			};
 			var item = template(result);
-			$('.loader').remove();
 			$('#news-list').append(item);
+			hideLoader("news");
 			resetSizing();
 			resetScroll("news");
 		}, failureCallback);
 	} else {
+		hideLoader("news");
 		resetSizing();
 		resetScroll("news");
 	}
 }
 
 function getEvents() {
-
 	if (window.plugins !== undefined && ($('#events-list li').length === 0)) {
-		showEmptyLoader("Getting Events...");
-		window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+
 		window.plugins.drupal.eventsGetIndex(function(result) {
 
 			var source = $("#eventitem-template").html();
@@ -546,15 +514,20 @@ function getEvents() {
 				nodes: result
 			};
 			var item = template(result);
-			$('.loader').remove();
+			
 			$('#events-list').append(item);
 
+			hideLoader("events");
 			resetSizing();
 			resetScroll("events");
+			
 		}, failureCallback);
 	} else {
+	
+		hideLoader("events");
 		resetSizing();
 		resetScroll("events");
+		
 	}
 }
 
@@ -567,7 +540,7 @@ function getHome() {
 	}, false);
 
 	if (window.plugins !== undefined && ($('#home-list li').length === 0)) {
-		window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+		//window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
 		window.plugins.drupal.petitionsGetIndex(function(result) {
 			$("#home-list").empty();
 
@@ -577,28 +550,40 @@ function getHome() {
 				nodes: result
 			};
 			var item = template(result);
-			$('.loader').remove();
 			$('#home-list').append(item);
-
-
+			
+			hideLoader("home");
 			resetSizing();
 			resetScroll("home");
+			
 
 		}, failureCallback);
 	} else {
+	
+		hideLoader("home");
 		resetSizing();
 		resetScroll("home");
+		
 	}
 }
 
 function getAction() {
 	resetSizing();
 	resetScroll("action");
+	setTimeout(function() {
+		hideLoader("action");
+		resetScroll("action");
+	}, 1000);
+	
 }
 
 function getBundles() {
 	resetSizing();
 	resetScroll("bundles");
+		setTimeout(function() {
+		hideLoader("bundles");
+		resetScroll("bundles");
+	}, 1000);
 }
 
 
@@ -686,6 +671,11 @@ var app = {
 		if (user !== null) {
 			$('#create-link').removeClass('hidden');
 			$('#about-link').addClass('hidden');
+		}else{
+		//open session anon
+		if (window.plugins){
+		window.plugins.drupal.openAnonymousSession(successCallback,failureCallback);
+		}
 		}
 
 
@@ -713,7 +703,51 @@ var app = {
 			page(toTab);
 		});
 
+		$("#tab-container").on('tab-change', function(e, data){
+			if (data.tab == 1) {
 
+			} else if (data.tab == 2) {
+
+			} else if (data.tab == 3) {
+
+			} else if (data.tab == 4) {
+
+			} else if (data.tab == 5) {
+
+			} else {
+
+			}
+		});
+		
+		//PAGE LOADING
+		$("#tab-container").on('afterShow', '#news', function(e){
+		if (($('#news-list li').length === 0)) {
+				showLoader('news');
+				getNews();
+				}
+		});
+		$("#tab-container").on('afterShow', '#events', function(e){
+		if (($('#events-list li').length === 0)) {
+				showLoader('events');
+				getEvents();
+				}
+		});
+		$("#tab-container").on('afterShow', '#home', function(e){
+		if (($('#home-list li').length === 0)) {
+				showLoader('home');
+				getHome();
+				}
+		});
+		$("#tab-container").on('afterShow', '#action', function(e){
+				showLoader('action');
+				getAction();
+		});
+		$("#tab-container").on('afterShow', '#bundles', function(e){
+				showLoader('bundles');
+				getBundles();
+		});
+		
+		
 		//PROFILE OPEN CLOSE
 		$('#profile-closer').on('click', function(e) {
 			e.preventDefault();
@@ -873,27 +907,59 @@ var app = {
 	}
 }; //END APP
 
-jQuery(function($) {
 
-	var _oldShow = $.fn.show;
 
-	$.fn.show = function(speed, oldCallback) {
-		return $(this).each(function() {
-			var
-			obj = $(this),
-				newCallback = function() {
-					if ($.isFunction(oldCallback)) {
-						oldCallback.apply(obj);
-					}
+//ANOTHER NEW SHOW BINDING
+(function ($) {
+    var _oldShow = $.fn.show;
 
-					obj.trigger('afterShow');
-				};
+    $.fn.show = function (/*speed, easing, callback*/) {
+        var argsArray = Array.prototype.slice.call(arguments),
+            duration = argsArray[0],
+            easing,
+            callback,
+            callbackArgIndex;
 
-			// you can trigger a before show if you want
-			obj.trigger('beforeShow');
+        // jQuery recursively calls show sometimes; we shouldn't
+        //  handle such situations. Pass it to original show method.
+        if (!this.selector) {
+            _oldShow.apply(this, argsArray);
+            return this;
+        }
 
-			// now use the old function to show the element passing the new callback
-			_oldShow.apply(obj, [speed, newCallback]);
-		});
-	};
-});
+        if (argsArray.length === 2) {
+            if ($.isFunction(argsArray[1])) {
+                callback = argsArray[1];
+                callbackArgIndex = 1;
+            } else {
+                easing = argsArray[1];
+            }
+        } else if (argsArray.length === 3) {
+            easing = argsArray[1];
+            callback = argsArray[2];
+            callbackArgIndex = 2;
+        }
+
+        return $(this).each(function () {
+            var obj = $(this),
+                oldCallback = callback,
+                newCallback = function () {
+                    if ($.isFunction(oldCallback)) {
+                        oldCallback.apply(obj);
+                    }
+
+                    obj.trigger('afterShow');
+                };
+
+            if (callback) {
+                argsArray[callbackArgIndex] = newCallback;
+            } else {
+                argsArray.push(newCallback);
+            }
+
+            obj.trigger('beforeShow');
+
+            _oldShow.apply(obj, argsArray);
+        });
+    };
+})(jQuery);

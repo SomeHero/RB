@@ -39,6 +39,7 @@
 <!--MODAL GOES HERE-->
 
 <div id="tab-container" class="container">
+<input type="hidden" value="3" id="activeTab" name="activeTab" />
 <a id="profile-closer" href="#"></a>
 <!-- START HEADER -->
 <header>
@@ -56,13 +57,14 @@
 <!-- START PAGES CONTAINER -->
 <div id="pages">
     <div id="news" class="page" tabpanel="1">
+	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting News...</span></div>
         <div id="news-scroller" class="scroller wf">
         <ul id="news-list">
         </ul>
 		</div>
     </div>
     <div id="events" class="page" tabpanel="2">
-	
+	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Events...</span></div>
 	<div id="events-scroller" class="scroller wf">
 	<div class="scrollee">
 	<ul id="events-list">
@@ -72,7 +74,7 @@
 	</div>
     </div>
 	    <div id="home" class="page current" tabpanel="3">
-		
+		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Latest...</span></div>
 		<div id="home-scroller" class="scroller wf">
 		<div class="scrollee">
 		<div id="pullDown">
@@ -85,7 +87,7 @@
 		</div>
     </div>
 	    <div id="action" class="page" tabpanel="4">
-		
+		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Actions...</span></div>
 		<div id="action-scroller" class="scroller wf">
 		<div class="scrollee">
 		<ul id="action-list">
@@ -117,7 +119,7 @@
 
     </div>
     <div id="bundles" class="page" tabpanel="5">
-
+<div id="bundle-loader" class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Bundles...</span></div>
 	<div id="bundles-scroller" class="scroller wf">
 	<div class="scrollee">
 	<ul>
@@ -196,11 +198,11 @@
 </div>
 </div>
 
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script type="text/javascript">
             if (typeof jQuery == 'undefined')
             {
-                document.write(unescape("%3Cscript src='js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+                document.write(unescape("%3Cscript src='js/jquery-1.8.min.js' type='text/javascript'%3E%3C/script%3E"));
             }
             </script>
 		<script type="text/javascript" src="js/handlebars.js"></script>
