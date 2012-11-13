@@ -3,8 +3,8 @@
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title></title>
-        <meta name="description" content="">
+        <title>Mobylyze</title>
+        <meta name="description" content="An awesome app">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width">
@@ -16,226 +16,78 @@
         <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-		
-		<!-- STYLES -->
+        
+
+<!--  ==========================================================================
+   STYLES
+   ========================================================================== -->		
 		<link rel="stylesheet" href="css/normalize.css">	
         <link rel="stylesheet" href="css/main.css">
 		
-		<!-- MODERNIZE -->
-        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+<!--  ==========================================================================
+   HEAD SCRIPTS
+   ========================================================================== -->
+        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+		<script src="js/vendor/modernizr-2.6.1.min.js"></script>
+		
     </head>
+	
+<!--  ==========================================================================
+   APP
+   ========================================================================== -->
     <body>
-<<<<<<< HEAD
-        <!-- START ALL CONTAINER -->
-        <div id="all-container" class="container">
-            <!-- START APP CONTAINER -->
-            <div id="app-container" class="container">
-                <!-- START YOU PAGE -->
-                
-                <div id="profile-container" class="container txt-rev">
-                    
-                </div>
-                
-                <!--MODAL GOES HERE-->
-                
-                <div id="tab-container" class="container">
-                    <a id="profile-closer" href="#"></a>
-                    <!-- START HEADER -->
-                    <header>
-                        <h1 id="hd-tab" class="hd-logo">
-                            
-                        </h1>
-                        <a id="profile-link" href="#profile" class="hd-btn left-btn pill-btn btn-you unslid"></a>
-                        <a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about"></a>
-                        <a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create hidden"></a>
-                    </header>
-                    <!-- START CONTENT CONTAINER -->
-                    <div id="wrapper" class="scrollable">
-                        <div id="main-content">
-                            <div id="scroll-top"></div>
-                            <!-- START PAGES CONTAINER -->
-                            <div id="pages">
-                                <div id="news" class="page" tabpanel="1">
-                                    <div id="news-scroller" class="scroller wf">
-                                        <ul id="news-list">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="events" class="page" tabpanel="2">
-                                    
-                                    <div id="events-scroller" class="scroller wf">
-                                        <div class="scrollee">
-                                            <ul id="events-list">
-                                                
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="home" class="page current" tabpanel="3">
-                                    
-                                    <div id="home-scroller" class="scroller wf">
-                                        <div class="scrollee">
-                                            <div id="pullDown">
-                                                <span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
-                                            </div>
-                                            <ul id="home-list">
-                                                
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="action" class="page" tabpanel="4">
-                                    
-                                    <div id="action-scroller" class="scroller wf">
-                                        <div class="scrollee">
-                                            <ul id="action-list">
-                                                <li>Some Stuff</li>
-                                                <li>More Stuff</li>
-                                                <li>Big Stuff</li>
-                                                <li>Small Stuff</li>
-                                                <li>Geek Stuff</li>
-                                                <li>Nerd Stuff</li>
-                                                <li>Fast Stuff</li>
-                                                <li>Slow Stuff</li>
-                                                <li>Good Stuff</li>
-                                                <li>Bad Stuff</li>
-                                                <li>Your Stuff</li>
-                                                <li>My Stuff</li>
-                                                <li>Their Stuff</li>
-                                                <li>Our Stuff</li>
-                                                <li>Super Stuff</li>
-                                                <li>Uber Stuff</li>
-                                                <li>Stuff Stuff</li>
-                                                <li>French Stuff</li>
-                                                <li>German Stuff</li>
-                                                <li>English Stuff</li>
-                                                <li>American Stuff</li>
-                                                <li>Stuff</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div id="bundles" class="page" tabpanel="5">
-                                    
-                                    <div id="bundles-scroller" class="scroller wf">
-                                        <div class="scrollee">
-                                            <ul>
-                                                <li>Some Stuff</li>
-                                                <li>More Stuff</li>
-                                                <li>Big Stuff</li>
-                                                <li>Small Stuff</li>
-                                                <li>Geek Stuff</li>
-                                                <li>Nerd Stuff</li>
-                                                <li>Fast Stuff</li>
-                                                <li>Slow Stuff</li>
-                                                <li>Good Stuff</li>
-                                                <li>Bad Stuff</li>
-                                                <li>Your Stuff</li>
-                                                <li>My Stuff</li>
-                                                <li>Their Stuff</li>
-                                                <li>Our Stuff</li>
-                                                <li>Super Stuff</li>
-                                                <li>Uber Stuff</li>
-                                                <li>Stuff Stuff</li>
-                                                <li>French Stuff</li>
-                                                <li>German Stuff</li>
-                                                <li>English Stuff</li>
-                                                <li>American Stuff</li>
-                                                <li>Stuff</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="wall" class="page">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- START FOOTER -->
-                    <footer>
-                        <nav>
-                            <ul id="tab-bar">
-                                <li id="news-tab" class="tab" tab="1">
-                                    <a href="#news">
-                                        <span class="icon"></span>
-                                        <strong>News</strong>
-                                    </a>
-                                </li>
-                                <li id="events-tab" class="tab" tab="2">
-                                    <a href="#events">
-                                        <span class="icon"></span>
-                                        <strong>Events</strong>
-                                    </a>
-                                </li>
-                                <li id="home-tab" class="tab current" tab="3">
-                                    <a href="#home" class="current">
-                                        <span class="icon"></span>
-                                        <strong>Home</strong>
-                                    </a>
-                                    <span id="home-bg"></span>
-                                </li>
-                                <li id="action-tab" class="tab" tab="4">
-                                    <a href="#action">
-                                        <span class="icon"></span>
-                                        <strong>Action</strong>
-                                    </a>
-                                </li>
-                                <li id="bundles-tab" class="tab" tab="5">
-                                    <a href="#bundles">
-                                        <span class="icon"></span>
-                                        <strong>Bundles</strong>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div id="tab-bar-bg"></div>
-                        </nav>
-                    </footer>
-                </div>
-            </div>
-        </div>
-        
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-=======
-<!-- START ALL CONTAINER -->
+<!-- ALL CONTAINER -->
 <div id="all-container" class="container">
-<!-- START APP CONTAINER -->
-<div id="app-container" class="container">
-<!-- START YOU PAGE -->
 
+<!-- APP CONTAINER -->
+<div id="app-container" class="container">
+
+<!-- PROFILE CONTAINER -->
  <div id="profile-container" class="container txt-rev">
 
   </div>
-
+  
 <!--MODAL GOES HERE-->
 
+<!-- TAB CONTAINER -->
 <div id="tab-container" class="container">
-<input type="hidden" value="3" id="activeTab" name="activeTab" />
 <a id="profile-closer" href="#"></a>
-<!-- START HEADER -->
+<!-- HEADER -->
 <header>
 <h1 id="hd-tab" class="hd-logo">
-
 </h1>
 <a id="profile-link" href="#profile" class="hd-btn left-btn pill-btn btn-you unslid"></a>
-<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about"></a>
-<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create hidden"></a>
+<<<<<<< HEAD
+<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about hidden"></a>
+<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create"></a>
 </header>
 <!-- START CONTENT CONTAINER -->
+=======
+<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about"></a>
+<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create hidden"></a>
+</header><!-- END HEADER -->
+
+<!-- CONTENT CONTAINER -->
+>>>>>>> upstream/jquery-mobile
 <div id="wrapper" class="scrollable">
+
+<!-- MAIN CONTENT -->
     <div id="main-content">
 	<div id="scroll-top"></div>
-<!-- START PAGES CONTAINER -->
+	
+<!-- PAGES CONTAINER -->
 <div id="pages">
+
+<!-- NEWS -->
     <div id="news" class="page" tabpanel="1">
 	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting News...</span></div>
         <div id="news-scroller" class="scroller wf">
         <ul id="news-list">
         </ul>
 		</div>
-    </div>
+    </div><!-- END NEWS -->
+	
+	<!-- EVENTS -->
     <div id="events" class="page" tabpanel="2">
 	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Events...</span></div>
 	<div id="events-scroller" class="scroller wf">
@@ -245,7 +97,9 @@
     </ul>
 	</div>
 	</div>
-    </div>
+    </div><!-- END EVENTS -->
+	
+	<!-- HOME -->
 	    <div id="home" class="page current" tabpanel="3">
 		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Latest...</span></div>
 		<div id="home-scroller" class="scroller wf">
@@ -258,7 +112,9 @@
         </ul>
 		</div>
 		</div>
-    </div>
+    </div><!-- END HOME -->
+	
+	<!-- ACTIONS -->
 	    <div id="action" class="page" tabpanel="4">
 		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Actions...</span></div>
 		<div id="action-scroller" class="scroller wf">
@@ -290,7 +146,9 @@
 		</div>
 		</div>
 
-    </div>
+    </div><!-- END ACTIONS -->
+	
+	<!-- BUNDLES -->
     <div id="bundles" class="page" tabpanel="5">
 <div id="bundle-loader" class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Bundles...</span></div>
 	<div id="bundles-scroller" class="scroller wf">
@@ -321,14 +179,19 @@
         </ul>
 		</div>
 		</div>
-    </div>
+    </div><!-- END BUNDLES -->
+	
+	<!-- WALL (HACK FOR UX) -->
 	<div id="wall" class="page">
-	</div>
-</div>
-</div>
-    </div>
+	</div><!-- END WALL -->
+	
+</div><!-- END PAGES -->
 
-<!-- START FOOTER -->
+</div><!-- END MAIN-CONTENT -->
+
+</div><!-- END WRAPPER -->
+
+<!-- FOOTER -->
 <footer>
 <nav>
 <ul id="tab-bar">
@@ -366,13 +229,23 @@
 </ul>
 <div id="tab-bar-bg"></div>
 </nav>
-</footer>
-</div>
-</div>
-</div>
+</footer><!-- END FOOTER -->
 
+</div><!-- END TAB CONTAINER -->
+
+<!-- DETAIL CONTAINER -->
+<div id="detail-container" class="container">
+
+</div><!-- END DETAIL CONTAINER -->
+
+</div><!-- END APP CONTAINER -->
+
+</div><!-- END ALL CONTAINER -->
+
+<!--  ==========================================================================
+   SCRIPTS
+   ========================================================================== -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
->>>>>>> upstream/jquery-mobile
         <script type="text/javascript">
             if (typeof jQuery == 'undefined')
             {
@@ -403,13 +276,18 @@
         <script>
             app.initialize();
         </script>
+
+<!--  ==========================================================================
+   TEMPLATES
+   ========================================================================== -->		
 <script id="html-content-template" type="text/x-handlebars-template">
 <div id="{{ContentID}}" class="content-container">
 {{{PageContent}}}
 </div>
 </script>
+
 <script id="detail-template" type="text/x-handlebars-template">
-<div id="{{DetailID}}" class="detail-container">
+<div id="{{DetailID}}" class="detail-view" depth="{{Depth}}">
 <header>
 <h1>
 {{ PageHeading }}
@@ -423,6 +301,7 @@
   </div>
 </div>
 </script>
+
 <script id="modal-template" type="text/x-handlebars-template">
 <div id="{{ModalID}}" class="modal-container">
 <header>
@@ -438,6 +317,7 @@
   </div>
 </div>
 </script>
+
 <script id="profile-template" type="text/x-handlebars-template">
 <header><h1> {{ PageHeading }} </h1></header>
 <div id="profile" class="page {{PageID}}">
@@ -446,6 +326,7 @@
 </div>
   </div>
 </script>
+
 <script id="newsitem-template" type="text/x-handlebars-template">
     {{#each nodes}}
     <li data-nid="{{nid}}">
@@ -461,6 +342,7 @@
     </li>
     {{/each}}
 </script>
+
 <script id="eventitem-template" type="text/x-handlebars-template">
     {{#each nodes}}
     <li data-nid="{{nid}}">
@@ -475,25 +357,11 @@
     </div>
     </li>
             {{/each}}
-            </script>
-        <script id="eventitem-template" type="text/x-handlebars-template">
+</script>
+
+<script id="homeitem-template" type="text/x-handlebars-template">
             {{#each nodes}}
-            <li data-nid="{{nid}}">
-            <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
-            <div class="item-contect">
-            <a href="#">{{title}}</a>
-            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{event_date}}</span>
-            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{location}}</span>
-            <p style="margin-top: 2px; font-size: 12px; line-height: 14px;">
-            {{teaser}}
-            </p>
-            </div>
-            </li>
-            {{/each}}
-            </script>
-        <script id="homeitem-template" type="text/x-handlebars-template">
-            {{#each nodes}}
-            <li data-nid="{{nid}}">
+            <li class="home-item" data-nid="{{nid}}">
             <a href="#"><img src="{{logo}}" />{{title}}</a>
             </li>
             {{/each}}

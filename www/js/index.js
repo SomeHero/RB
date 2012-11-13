@@ -49,10 +49,31 @@ PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" clas
 var testDetail = {
 	DetailID: "details-test",
 	PageID: "details",
+	Depth: "1",
 	PageHeading: "Item Details",
-	PageContent: '<div>ITEM DETAILS</div>'
+	PageContent: '<ul id="test-list" depth="1"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
 };
-
+var testDetail2 = {
+	DetailID: "details-test-2",
+	PageID: "details",
+	Depth: "2",
+	PageHeading: "Item Details 2",
+	PageContent: '<ul id="test-list" depth="2"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
+var testDetail3 = {
+	DetailID: "details-test-3",
+	PageID: "details",
+	Depth: "3",
+	PageHeading: "Item Details 3",
+	PageContent: '<ul id="test-list" depth="3"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
+var testDetail4 = {
+	DetailID: "details-test-4",
+	PageID: "details",
+	Depth: "4",
+	PageHeading: "Item Details 4",
+	PageContent: '<ul id="test-list" depth="4"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
 var youContentAnon = {
 	PageID: "page-anonymous",
 	PageHeading: "Log In",
@@ -172,7 +193,7 @@ function whichTransitionEvent() {
 function resetSizing() {
 	$('#profile-container').css('width', (viewport.panelwidth - 48) + 'px');
 	$('#pages > div.page').css('width', viewport.panelwidth + 'px');
-	$('#all-container').css('height', viewport.height + 'px');
+	$('.container').css('height', viewport.height + 'px');
 	$('#wrapper').css('height', (viewport.height - (appui.footerHeight + appui.headerHeight) + 'px'));
 	$('.scroller.wf').css('height', (viewport.height - (appui.footerHeight + appui.headerHeight) + 'px'));
 	$('#main-content').css('height', $('#pages > div.page.current').height() + 'px');
@@ -364,39 +385,86 @@ function createModal(modalName) {
 }
 
 function loadDetailView(template, content) {
+
+	//PREPARE DETAIL VIEW
 	var source = $("#" + template).html();
 	var template = Handlebars.compile(source);
 	var data = content;
 	var detailview = template(data);
-	$('#app-container').append(detailview);
-	resetSizing();
-	$('.detail-container#' + content.DetailID).css('left', viewport.panelwidth + 'px');
-	$('.detail-container#' + content.DetailID).css('display', 'block');
+	
+	//APPEND TO CONTAINER
+	$('#detail-container').append(detailview);
+	var viewToLoad = $('.detail-view#' + content.DetailID);
 
+	//CHECK IF DETAIL CONTAINER IS ACTIVE AND SLIDE IN IF NOT
+	if ($('#detail-container').hasClass('active')){
+	slideInDetailView();
+	}else{
+	slideInDetailContainer();
+	}
+	
+	function slideInDetailContainer(){
+	
+	//SHOW AND POSITION DETAIL CONTAINER AND VIEW
+	$('#detail-container').css('display', 'block');
+	$('#detail-container').css('left', viewport.panelwidth + 'px');
+	$('.detail-view#' + content.DetailID).css('display', 'block');
+	$('.detail-view#' + content.DetailID).css('left', '0px');
+	resetSizing();
+	
+	//ADD FIRST CLASS TO DETAIL VIEW
+	$('.detail-view#' + content.DetailID).addClass('first').addClass('active-dt');
+	
+	//SLIDE OUT TAB CONTAINER
 	$('#tab-container').animate({
 		left: -viewport.panelwidth + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
 	}, 500, function() {
-
+	
 	});
-	$('#tab-container header > *').animate({
-		opacity: 0,
-		useTranslate3d: false
-	}, 300, function() {
-
-	});
-	$('.detail-container#' + content.DetailID).animate({
+	
+	//SLIDE IN DETAIL CONTAINER
+	$('#detail-container').animate({
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
 	}, 300, function() {
-
+	$('#detail-container').addClass('active');
 	});
+	
+	}
+	
+	function slideInDetailView(){
+
+	//SHOW AND POSITION DETAIL VIEW
+	$('.detail-view#' + content.DetailID).css('display', 'block');
+	$('.detail-view#' + content.DetailID).css('left', viewport.panelwidth + 'px');
+	resetSizing();
+	
+	$('.detail-view.active-dt').animate({
+		left: -viewport.panelwidth + "px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 500, function() {
+	$('.detail-view.active-dt').removeClass('active-dt');
+	$('.detail-view#' + content.DetailID).addClass('active-dt');
+	});
+	
+	$('.detail-view#' + content.DetailID).animate({
+		left: "0px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 300, function() {
+	
+	});
+	}
 
 
 }
 
+
+//SLIDE FUNCTIONS
 function slideStart(e) {
 	if (e.originalEvent.touches) {
 		e = e.originalEvent.touches[0];
@@ -785,6 +853,7 @@ onDeviceReady: function() {
 			page(toTab);
 		});
 
+		//NOT USED FOR THE MOMENT
 		$("#tab-container").on('tab-change', function(e, data){
 			if (data.tab == 1) {
 
@@ -871,9 +940,35 @@ onDeviceReady: function() {
 
 		});
 
+		
+		//OPEN DETAILS
+		$('#app-container').on('click', '.page ul li', function(e) {
+		
+		var temp = $(this).parent().attr('depth');
+		depth = parseInt(temp);
+		
+		if (temp == undefined){
+			loadDetailView('detail-template', testDetail);
+			}else if (depth == 1){
+			loadDetailView('detail-template', testDetail2);
+			}else if (depth == 2){
+			loadDetailView('detail-template', testDetail3);
+			}else if(depth == 3){
+			loadDetailView('detail-template', testDetail4);
+			}else{
+			alert('relax, friend...just testing here');
+			}
+		});
+		
 		//CLOSE DETAILS
-		$('#all-container').on('click', '.btn-detail-back', function(e) {
+		$('#app-container').on('click', '.detail-view.active-dt .btn-detail-back', function(e) {
 			e.preventDefault();
+			var depth = parseInt($('.detail-view.active-dt').attr('depth'));
+			var nextBack = depth - 1;
+			var loadUp = $('#detail-container').find("[depth='" + nextBack + "']");
+			
+			if(nextBack == 0){
+			
 			$('#tab-container').animate({
 				left: "0px",
 				useTranslate3d: true,
@@ -882,23 +977,45 @@ onDeviceReady: function() {
 
 			});
 
-			$('#tab-container header > *').css('opacity', '1');
-
-			$(this).closest('div.detail-container').animate({
+			$('#detail-container').animate({
 				left: viewport.panelwidth + "px",
 				useTranslate3d: true
 			}, 300, function() {
-				$(this).closest('div.detail-container').remove();
+				$('#detail-container').empty();
+				$('#detail-container').removeClass('active');
 			});
 
-			$(this).closest('div.detail-container header > *').animate({
-				opacity: 0,
-				useTranslate3d: true
+			
+			}else{
+			
+			loadUp.css('left', -viewport.panelwidth + 'px');
+			loadUp.css('opacity', '1');
+			
+			loadUp.animate({
+				left: "0px",
+				useTranslate3d: true,
+				leaveTransforms: false
 			}, 300, function() {
 
 			});
 
+			
+
+			$('.detail-view.active-dt').animate({
+				left: viewport.panelwidth + "px",
+				useTranslate3d: true
+			}, 300, function() {
+				$('.detail-view.active-dt').remove();
+				loadUp.addClass('active-dt');
+			});
+
+			}
+
 		});
+		
+		
+		
+		
 
 		//FIX AFTER FORM ENTRY
 		$('#all-container').on('blur', 'input', function() {
@@ -907,10 +1024,7 @@ onDeviceReady: function() {
 			resetPositioning();
 		});
 
-		//DEBUG
-		$('#home').on('click', '#home-list li', function(e) {
-			loadDetailView("detail-template", testDetail);
-		});
+
 
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
