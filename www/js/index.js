@@ -453,11 +453,11 @@ function slideProfileClosed() {
 
 	var user = getUser();
 	if (user !== null) {
-		$('#create-link').removeClass('hidden');
-		$('#about-link').addClass('hidden');
+		//$('#create-link').removeClass('hidden');
+		//$('#about-link').addClass('hidden');
 	} else {
-		$('#about-link').removeClass('hidden');
-		$('#create-link').addClass('hidden');
+		//$('#about-link').removeClass('hidden');
+		//$('#create-link').addClass('hidden');
 	}
 
 	$('#tab-container').animate({
@@ -751,8 +751,8 @@ onDeviceReady: function() {
 		//USER SET UP
 		var user = getUser();
 		if (user !== null) {
-			$('#create-link').removeClass('hidden');
-			$('#about-link').addClass('hidden');
+			//$('#create-link').removeClass('hidden');
+			//$('#about-link').addClass('hidden');
 		}else{
 		//open session anon
 		if (window.plugins){
