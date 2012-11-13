@@ -397,8 +397,6 @@ function loadDetailView(template, content) {
 
 }
 
-
-
 function slideStart(e) {
 	if (e.originalEvent.touches) {
 		e = e.originalEvent.touches[0];
@@ -433,9 +431,7 @@ function slide(e) {
 //OPEN PROFILE
 
 function slideProfileOpen() {
-
 	updateProfile();
-
 	$('#tab-container').animate({
 		left: (viewport.panelwidth - 48) + "px",
 		useTranslate3d: true,
@@ -513,6 +509,7 @@ function getEvents() {
 			var data = {
 				nodes: result
 			};
+			
 			var item = template(result);
 			
 			$('#events-list').append(item);
@@ -522,6 +519,7 @@ function getEvents() {
 			resetScroll("events");
 			
 		}, failureCallback);
+		
 	} else {
 	
 		hideLoader("events");
@@ -661,6 +659,9 @@ var app = {
 		resetSizing();
 		resetScroll('home');
 
+		getEvents();
+		getNews();
+		
 		// remove splash screen
 		if (navigator.splashscreen) {
 			navigator.splashscreen.hide();
