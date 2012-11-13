@@ -97,7 +97,7 @@ top: 4px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2) {
 .loader p span.loader-image::before {
-content: url('../img/loader-24x24@2x.gif');
+content: url('../img/loader-24x24.gif');
 }
 }
 .loader p span.loader-message{
