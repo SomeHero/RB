@@ -3,6 +3,26 @@
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
+<<<<<<< HEAD
+            <title></title>
+            <meta name="description" content="">
+                <meta name="HandheldFriendly" content="True">
+                    <meta name="MobileOptimized" content="320">
+                        <meta name="viewport" content="width=device-width">
+                            <meta http-equiv="cleartype" content="on">
+                                <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+                                    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+                                        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+                                            <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+                                                <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+                                                    <meta name="apple-mobile-web-app-capable" content="yes">
+                                                        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                                                            <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+                                                            <link rel="stylesheet" href="css/normalize.css">
+                                                                <link rel="stylesheet" href="css/main.css">
+                                                                    <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+                                                                    </head>
+=======
         <title></title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
@@ -25,6 +45,7 @@
 		<!-- MODERNIZE -->
         <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
+>>>>>>> upstream/jquery-mobile
     <body>
         <!-- START ALL CONTAINER -->
         <div id="all-container" class="container">
@@ -227,6 +248,54 @@
         <script>
             app.initialize();
         </script>
+<<<<<<< HEAD
+        <script id="html-content-template" type="text/x-handlebars-template">
+            <div id="{{ContentID}}" class="content-container">
+            {{{PageContent}}}
+            </div>
+            </script>
+        <script id="modal-template" type="text/x-handlebars-template">
+            <div id="{{ModalID}}" class="modal-container">
+            <header>
+            <h1>
+            {{ PageHeading }}
+            <h1>
+            <a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-modal-back"><span class="hd-btn-text">Back</span></a>
+            </header>
+            <div id="{{PageID}}-page" class="modal page">
+            {{{PageContent}}}
+            </div>
+            </div>
+            </script>
+        <script id="newsitem-template" type="text/x-handlebars-template">
+            {{#each nodes}}
+            <li data-nid="{{nid}}">
+            <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
+            <div class="item-contect">
+            <a href="#">{{title}}</a>
+            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{author}}</span>
+            <p style="margin-top: 2px; font-size: 12px; line-height: 14px;">
+            {{teaser}}
+            </p>
+            </div>
+            
+            </li>
+            {{/each}}
+            </script>
+        <script id="eventitem-template" type="text/x-handlebars-template">
+            {{#each nodes}}
+            <li data-nid="{{nid}}">
+            <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
+            <div class="item-contect">
+            <a href="#">{{title}}</a>
+            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{event_date}}</span>
+            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{location}}</span>
+            <p style="margin-top: 2px; font-size: 12px; line-height: 14px;">
+            {{teaser}}
+            </p>
+            </div>
+            </li>
+=======
 <script id="html-content-template" type="text/x-handlebars-template">
 <div id="{{ContentID}}" class="content-container">
 {{{PageContent}}}
@@ -298,29 +367,20 @@
     </p>
     </div>
     </li>
-            {{/each}}
-            </script>
-        <script id="eventitem-template" type="text/x-handlebars-template">
-            {{#each nodes}}
-            <li data-nid="{{nid}}">
-            <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
-            <div class="item-contect">
-            <a href="#">{{title}}</a>
-            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{event_date}}</span>
-            <span style="margin-top: 0px; font-size: 11px; line-height: 12px; display: block;">{{location}}</span>
-            <p style="margin-top: 2px; font-size: 12px; line-height: 14px;">
-            {{teaser}}
-            </p>
-            </div>
-            </li>
+>>>>>>> upstream/jquery-mobile
             {{/each}}
             </script>
         <script id="homeitem-template" type="text/x-handlebars-template">
             {{#each nodes}}
-            <li data-nid="{{nid}}">
+            <li class="home-item" data-nid="{{nid}}">
             <a href="#"><img src="{{logo}}" />{{title}}</a>
             </li>
             {{/each}}
+<<<<<<< HEAD
             </script>
+=======
+</script>
+
+>>>>>>> upstream/jquery-mobile
     </body>
 </html>
