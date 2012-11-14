@@ -44,9 +44,10 @@ function handleStatusChange(session) {
 }
 
 //Prompt the user to login and ask for the 'email' permission
-function promptLogin() {
+function promptLogin(callback) {
     FB.login(function() {
-             facebookUserLoggedIn();
+             console.log('promptLogin complete');
+             facebookUserLoggedIn(callback);
              }, {scope: 'email'});
 }
 

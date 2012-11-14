@@ -10,6 +10,8 @@ var appui = {
 	headerHeight: 47
 };
 
+var REST_PATH = "http://ec2-54-242-131-102.compute-1.amazonaws.com/rest/"
+
 var myScroll = null;
 var newsScroll = null;
 var eventsScroll = null;
@@ -92,47 +94,134 @@ var transitionEnd = 'webkitTransitionEnd';
 
 
 //GLOBAL FUNCTIONS
-
-
-//USER FUNCTIONS
-
 function getUser() {
+    console.log('getting user from local storage');
+    
 	if (window.localStorage.length != 0 && window.localStorage['user'] != null) {
 		var currentUser = JSON.parse(window.localStorage['user']);
 		return currentUser;
 	}
 	return null;
 }
+//USER FUNCTIONS
+function loadUser(uid) {
 
-function createUser(userName, password, success, failed) {
-	var user = {
-		name: userName,
-		mail: userName,
-		pass: password,
-		signature: '<b>James R</b>',
-		firstname: 'Sebastian'
+    // Define the URL to register this user
+    var url = REST_PATH + "user/" + uid;
+    console.log(url);
+    
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "GET",
+           url: url,
+           dataType: "json",
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('got user account');
+           console.log(res);
+           // res will be an object including the uid and the uri to the new user
+           //new to go get it here
+           
+           window.localStorage["user"] = JSON.stringify(res);
+           
+           success()
+           
+           
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus);
+           failed();
+           }
+           });
+}
 
-	};
-
-	window.plugins.drupal.userSave(user, function(result) {
-		console.log(result);
-		window.localStorage["user"] = JSON.stringify(result);
-		updateProfile();
-		success();
-	}, function() {
-		failed();
-	});
-
+function createUser(userName, password, firstName, lastName, zipCode, success, failed) {
+	var newUser = {
+        "name": userName,
+        "pass": password,
+        "mail": userName,
+        "field_firstname": {
+            "und": [{"value": firstName}]
+        },
+        "field_lastname": {
+            "und": [{"value": lastName}]
+        },
+        "field_zipcode": {
+            "und": [{"value": zipCode}]
+        }
+    };
+    
+    console.log(newUser);
+    
+    // Define the URL to register this user
+    var url = REST_PATH + "user/register.json";
+    console.log(url);
+    
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(newUser),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account created');
+           
+           // res will be an object including the uid and the uri to the new user
+           //new to go get it here
+           
+           loadUser(res.uid, function() {
+                   if(success)
+                       success();
+                   }, function() {
+                    console.log('failed getting user');
+                    if(failed)
+                       failed();
+                   });
+           
+           
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Error Occured ' + textStatus);
+            failed();
+           }
+           });
+    
 }
 
 function loginUser(userName, password, success, failed) {
-	window.plugins.drupal.login(userName, password, function(result) {
-		window.localStorage["user"] = JSON.stringify(result);
-		updateProfile();
-		success();
-	}, function() {
-		failed();
-	});
+
+    // Create an object to hold the data entered in the form
+	var user = {
+    username: userName,
+    password: password
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/login
+	var url = REST_PATH + 'user/login';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged in');
+           console.log(res);
+           window.localStorage["user"] = JSON.stringify(res);
+           success();
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus);
+           failed();
+           }
+           });
 }
 
 function logoutUser(success, failed) {
@@ -160,6 +249,7 @@ function updateProfile() {
 
 	$('#profile-container').empty();
 	var user = getUser();
+    console.log("hello james");
 	var source = $('#profile-template').html();
 	var template = Handlebars.compile(source);
 	var data = youContentAnon;
@@ -607,6 +697,8 @@ function getHome() {
 
 	if (window.plugins !== undefined && ($('#home-list li').length === 0)) {
 		//window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+        
+        
 		window.plugins.drupal.petitionsGetIndex(function(result) {
 			$("#home-list").empty();
 
@@ -672,29 +764,35 @@ function nodeSuccessCallback(result) {
 function failureCallback() {
 	console.log('failed');
 }
-function facebookUserLoggedIn() {
+function facebookUserLoggedIn(callback) {
     console.log('facebook user logged in');
     
-    var user = JSON.parse(window.localStorage["facebookUser"]);
-
-
-    window.plugins.drupal.login(user.id, '12341234', function(result) {
+    var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+    console.log(fbUser);
+    
+    if(fbUser != null) {
+    window.plugins.drupal.login(fbUser.id, '', function(result) {
+                                console.log('drupal login complete');
+                                
                                 window.localStorage["user"] = JSON.stringify(result);
                                 console.log('login success');
-                                updateProfile();
                                 
                                 }, function() {
-                                alert('login failed');
+                                console.log('login failed');
                                 });
+        callback();
+    } else {
+        callback();
+    }
 };
 
-function facebookUserJoined() {
-    var userName = user.id;
-    var email = 'james100@paidthx.com';
-    var password = '12341234';
+function facebookUserJoined(callback) {
     
-    console.log(userName);
-    console.log(password);
+    var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+
+    var userName = fbUser.id;
+    var email = 'null-randomstring@localhost.com';
+    var password = 'password';
     
     var user = {
     name: userName,
@@ -709,14 +807,13 @@ function facebookUserJoined() {
                                        alert('new user failed');
                                        });
     }
-
+    callback();
 };
 
 var app = {
 	// Application Constructor
 initialize: function() {
     console.log('initialze app');
-    
     
     this.bindEvents();
 },
@@ -773,6 +870,7 @@ onDeviceReady: function() {
         navigator.splashscreen.hide();
     }
     
+    logoutUser(function() {}, function() {});
     window.localStorage.removeItem("user");
     
     //check if logged in
@@ -818,17 +916,7 @@ onDeviceReady: function() {
 			navigator.splashscreen.hide();
 		}
 
-		//USER SET UP
-		var user = getUser();
-		if (user !== null) {
-			//$('#create-link').removeClass('hidden');
-			//$('#about-link').addClass('hidden');
-		}else{
-		//open session anon
-		if (window.plugins){
-		window.plugins.drupal.openAnonymousSession(successCallback,failureCallback);
-		}
-		}
+    console.log('here');
 
 
 
@@ -908,7 +996,9 @@ onDeviceReady: function() {
 		});
 
 		$('#tab-container').on('click', '#profile-link.unslid', function(e) {
-			e.preventDefault();
+                               console.log('profile open clicked');
+                               
+            e.preventDefault();
 			slideProfileOpen();
 		});
 
@@ -1031,30 +1121,30 @@ onDeviceReady: function() {
                                 console.log('facebook button submit');
                                    
                                 e.preventDefault();
-                                promptLogin();
+                                   promptLogin(function() {
+                                               console.log('facebook signin complete');
+                                               var user = getUser();
+                                        if(user != null)
+                                        {
+                                        updateProfile();
+                                               } else {
+                                               alert('Sorry something went wrong');
+                                               }
+                                   });
         });
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
-			e.preventDefault();
-			var userName = $("#signin-username").val();
-			var password = $("#signin-password").val();
+                                   e.preventDefault();
+                                   var userName = $("#signin-username").val();
+                                   var password = $("#signin-password").val();
+                                   
+                                   loginUser(userName, password, function() {
+                                             updateProfile();
+                                             },
+                                             function() {
+                                             alert('Unable to login');
+                                             });
 
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.logout(function() {
-					console.log('user logout success');
-				}, function() {
-					console.log('user logout failed');
-				});
-
-				window.plugins.drupal.login(userName, password, function(result) {
-					window.localStorage["user"] = JSON.stringify(result);
-					console.log('login success');
-					updateProfile();
-
-				}, function() {
-					alert('login failed');
-				});
-			}
 		});
 		//SIGN OUT SUBMIT
 		$('#profile-container').on('click', '#signout-submit', function(e) {
@@ -1070,34 +1160,56 @@ onDeviceReady: function() {
 				});
 			}
 		});
+    
+        //CONNECT WITH FACEBOOk
+        $('#all-container').on('click', '#fb-btn-join', function(e) {
+                               promptLogin(function() {
+                                           
+                                           console.log('facebook join complete');
+                                           
+                                           var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+                                           
+                                           var userName = fbUser.id;
+                                           var email = '';
+                                           var password = '';
+                                           
+                                           var user = {
+                                           name: userName,
+                                           mail: userName,
+                                           pass: password
+                                           };
+                                           
+                                           if (window.plugins !== undefined) {
+                                           window.plugins.drupal.userSave(user, function() {
+                                                                          alert('new user created');
+                                                                          }, function() {
+                                                                          alert('new user failed');
+                                                                          });
+                                           }
+                                           });
+        });
 
 		//CREATE ACCOUNT
-		$('#all-container').on('click', '#create-account-submit', function(e) {
-			e.preventDefault();
-			var userName = $('#join-username').val();
-			var password = $('#join-password').val();
-			console.log(userName);
-			console.log(password);
-
-			var user = {
-				name: userName,
-				mail: userName,
-				pass: password
-			};
-
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.userSave(user, function() {
-					alert('new user created');
-				}, function() {
-					alert('new user failed');
-				});
-			}
-
-		});
+    $('#all-container').on('click', '#create-account-submit', function(e) {
+                           e.preventDefault();
+                           
+                           console.log('creating new user');
+                           var userName = $("#join-username").val();
+                           var password = $("#join-password").val();
+                           var firstName = 'James';
+                           var lastName = 'Rhodes';
+                           var zipCode = '23221';
+                           
+                           createUser(userName, password, firstName, lastName, zipCode, function() {
+                                      updateProfile();
+                                      }, function() {
+                                      alert('Unable to Create Account');
+                                      });
+                           });
 
 
 
-	},
+},
 	//END DEVICE READY
 	// Update DOM on a Received Event
 	receivedEvent: function(id) {

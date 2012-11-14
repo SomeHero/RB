@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RootBuilder/Plugins/FacebookConnectPlugin.m"
-         timestampString = "374433383.310417"
+         timestampString = "374554556.292012"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "340"
+         endingLineNumber = "340"
          landmarkName = "-responseObject"
          landmarkType = "5">
       </FileBreakpoint>
