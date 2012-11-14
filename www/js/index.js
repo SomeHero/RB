@@ -45,7 +45,7 @@ ModalID: "modal-create-account",
 PageID: "create-account",
 PageHeading: "Create Account",
 PageTitle: "Create a Mobylyze Account",
-PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
+PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="text" id="join-zip" class="required" placeholder="Zip Code" name="ZipCode"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
 };
 
 var testDetail = {
@@ -103,39 +103,35 @@ function getUser() {
 	}
 	return null;
 }
-//USER FUNCTIONS
-function loadUser(uid) {
 
+//SYSTEM FUNCTIONS
+function connect(success, failed)
+{
     // Define the URL to register this user
-    var url = REST_PATH + "user/" + uid;
+    var url = REST_PATH + "system/connect";
     console.log(url);
     
     // Use $.ajax to POST the new user
     $.ajax({
-           type: "GET",
+           type: "POST",
            url: url,
            dataType: "json",
            contentType: "application/json",
            // On success we pass the response as res
            success: function(res) {
-           console.log('got user account');
-           console.log(res);
-           // res will be an object including the uid and the uri to the new user
-           //new to go get it here
-           
-           window.localStorage["user"] = JSON.stringify(res);
-           
+
            success()
            
            
            },
            error: function(jqXHR, textStatus, errorThrown) {
-           console.log('Error Occured ' + textStatus);
            failed();
            }
            });
-}
 
+}
+//END SYSTEM FUNCTIONS
+//USER FUNCTIONS
 function createUser(userName, password, firstName, lastName, zipCode, success, failed) {
 	var newUser = {
         "name": userName,
@@ -171,15 +167,8 @@ function createUser(userName, password, firstName, lastName, zipCode, success, f
            
            // res will be an object including the uid and the uri to the new user
            //new to go get it here
-           
-           loadUser(res.uid, function() {
-                   if(success)
-                       success();
-                   }, function() {
-                    console.log('failed getting user');
-                    if(failed)
-                       failed();
-                   });
+           window.localStorage["user"] = JSON.stringify(res);
+           success();
            
            
            },
@@ -228,13 +217,7 @@ function logoutUser(success, failed) {
 
 	window.plugins.drupal.logout(function() {
 		window.localStorage.removeItem("user");
-		$('#profile.page').empty();
-		var source = $("#html-content-template").html();
-		var template = Handlebars.compile(source);
-		var data = youContentAnon;
 
-		var content = template(data);
-		$('#profile.page').append(content);
 		console.log('user has been logged out');
 		success();
 	}, function() {
@@ -860,6 +843,12 @@ onDeviceReady: function() {
     panelwidth: $('#all-container').width()
     };
     
+    connect(function() {
+            console.log('connected to drupal server success');
+            }, function() {
+            console.log('connection to drupal server failed');
+            });
+    
     //SET UP FUNCTIONS
     getHome();
     resetSizing();
@@ -1139,6 +1128,7 @@ onDeviceReady: function() {
                                    var password = $("#signin-password").val();
                                    
                                    loginUser(userName, password, function() {
+                                             console.log('signin user complete');
                                              updateProfile();
                                              },
                                              function() {
@@ -1150,15 +1140,14 @@ onDeviceReady: function() {
 		$('#profile-container').on('click', '#signout-submit', function(e) {
 			e.preventDefault();
 
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.logout(function(result) {
-					window.localStorage.removeItem("user");
-					updateProfile();
-					console.log('logout success');
-				}, function(result) {
-					console.log('logout failed');
-				});
-			}
+            logoutUser(function() {
+                                              console.log("signout complete");
+                                              updateProfile();
+                                              },
+                                              function() {
+                                              console.log("signout failed");
+                                              updateProfile();
+                                              });
 		});
     
         //CONNECT WITH FACEBOOk
@@ -1196,11 +1185,13 @@ onDeviceReady: function() {
                            console.log('creating new user');
                            var userName = $("#join-username").val();
                            var password = $("#join-password").val();
-                           var firstName = 'James';
-                           var lastName = 'Rhodes';
-                           var zipCode = '23221';
+                           var firstName = $("#join-first").val();
+                           var lastName = $("#join-first").val();
+                           var zipCode = $("#join-zip").val();
                            
                            createUser(userName, password, firstName, lastName, zipCode, function() {
+                                      console.log('login user complete');
+                                      
                                       updateProfile();
                                       }, function() {
                                       alert('Unable to Create Account');
