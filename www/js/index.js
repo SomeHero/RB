@@ -214,6 +214,7 @@ function loginUser(userName, password, success, failed) {
 }
 
 function logoutUser(success, failed) {
+<<<<<<< HEAD
     // Create an object to hold the data entered in the form
 	var user = {
     username: userName,
@@ -243,6 +244,20 @@ function logoutUser(success, failed) {
            failed();
            }
            });
+=======
+if (window.plugins !== undefined){
+	window.plugins.drupal.logout(function() {
+		window.localStorage.removeItem("user");
+
+		console.log('user has been logged out');
+		success();
+	}, function() {
+		window.localStorage.removeItem("user");
+		console.log('logout failed');
+		failed();
+	});
+	}
+>>>>>>> upstream/jquery-mobile
 }
 // END USER FUNCTIONS
 
@@ -469,7 +484,7 @@ function createModal(modalName) {
 		top: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 400, function() {
+	}, 300, function() {
 
 	});
 
@@ -511,7 +526,7 @@ function loadDetailView(template, content) {
 		left: -viewport.panelwidth + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 500, function() {
+	}, 300, function() {
 	
 	});
 	
@@ -520,7 +535,7 @@ function loadDetailView(template, content) {
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 	$('#detail-container').addClass('active');
 	});
 	
@@ -537,7 +552,7 @@ function loadDetailView(template, content) {
 		left: -viewport.panelwidth + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 500, function() {
+	}, 300, function() {
 	$('.detail-view.active-dt').removeClass('active-dt');
 	$('.detail-view#' + content.DetailID).addClass('active-dt');
 	});
@@ -546,7 +561,7 @@ function loadDetailView(template, content) {
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 	
 	});
 	}
@@ -595,7 +610,7 @@ function slideProfileOpen() {
 		left: (viewport.panelwidth - 48) + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 		$('#profile-link').removeClass("unslid").addClass("slid");
 		$('#tab-container').addClass("slid-right");
 		$('#profile-closer').css("display", "block");
@@ -623,7 +638,7 @@ function slideProfileClosed() {
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 		$('#tab-container').removeClass("slid-right");
 		$('#profile-link').removeClass("slid").addClass("unslid");
 		$('#all-container').off('touchstart', '#profile-closer', slideStart);
@@ -791,7 +806,7 @@ function getAction() {
 function getBundles() {
 	resetSizing();
 	resetScroll("bundles");
-		setTimeout(function() {
+	setTimeout(function() {
 		hideLoader("bundles");
 		resetScroll("bundles");
 	}, 1000);
@@ -923,7 +938,8 @@ onDeviceReady: function() {
     getHome();
     resetSizing();
     resetScroll('home');
-    
+    new FastClick(document.body);
+	
     // remove splash screen
     if (navigator.splashscreen) {
         navigator.splashscreen.hide();
@@ -1083,7 +1099,7 @@ onDeviceReady: function() {
 				top: (viewport.height + 40) + 'px',
 				useTranslate3d: true,
 				leaveTransforms: false
-			}, 400, function() {
+			}, 300, function() {
 				$('.modal-container.active').remove();
 				$('#all-container .modal-container').last().addClass("active");
 			});
@@ -1124,14 +1140,14 @@ onDeviceReady: function() {
 				left: "0px",
 				useTranslate3d: true,
 				leaveTransforms: false
-			}, 300, function() {
+			}, 260, function() {
 
 			});
 
 			$('#detail-container').animate({
 				left: viewport.panelwidth + "px",
 				useTranslate3d: true
-			}, 300, function() {
+			}, 400, function() {
 				$('#detail-container').empty();
 				$('#detail-container').removeClass('active');
 			});
@@ -1146,7 +1162,7 @@ onDeviceReady: function() {
 				left: "0px",
 				useTranslate3d: true,
 				leaveTransforms: false
-			}, 300, function() {
+			}, 260, function() {
 
 			});
 
@@ -1155,7 +1171,7 @@ onDeviceReady: function() {
 			$('.detail-view.active-dt').animate({
 				left: viewport.panelwidth + "px",
 				useTranslate3d: true
-			}, 300, function() {
+			}, 400, function() {
 				$('.detail-view.active-dt').remove();
 				loadUp.addClass('active-dt');
 			});
