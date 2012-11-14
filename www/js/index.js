@@ -214,17 +214,35 @@ function loginUser(userName, password, success, failed) {
 }
 
 function logoutUser(success, failed) {
-
-	window.plugins.drupal.logout(function() {
-		window.localStorage.removeItem("user");
-
-		console.log('user has been logged out');
-		success();
-	}, function() {
-		window.localStorage.removeItem("user");
-		console.log('logout failed');
-		failed();
-	});
+    // Create an object to hold the data entered in the form
+	var user = {
+    username: userName,
+    password: password
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/login
+	var url = REST_PATH + 'user/login';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged in');
+           console.log(res);
+           window.localStorage["user"] = JSON.stringify(res);
+           success();
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus);
+           failed();
+           }
+           });
 }
 // END USER FUNCTIONS
 
@@ -739,11 +757,11 @@ function getHome() {
                };
                var item = template(data);
                $('#home-list').append(item);
-               success();
+               //success();
                },
                error: function(jqXHR, textStatus, errorThrown) {
                console.log('Error Occured ' + textStatus);
-               failed();
+               //failed();
                }
             });
 			
@@ -922,15 +940,15 @@ onDeviceReady: function() {
    // }
     
     //SETUP FACEBOOK PLUGIN
-    FB.init({
-            appId: 'appid',
-            nativeInterface: CDV.FB,
-            useCachedDialogs: false
-            });
+    //FB.init({
+           // appId: 'appid',
+           // nativeInterface: CDV.FB,
+            //useCachedDialogs: false
+            //});
     
-    FB.getLoginStatus(handleStatusChange);
+    //FB.getLoginStatus(handleStatusChange);
     
-    authUser();
+    //authUser();
     //updateAuthElements();
     
     //EVENT BINDINGS

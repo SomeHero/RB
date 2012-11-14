@@ -44,9 +44,9 @@
 		5BA12AA8164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA7164D5FA9001E7B4A /* Default-Portrait@2x~ipad.png */; };
 		5BA12AAA164D5FC9001E7B4A /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AA9164D5FC9001E7B4A /* Default-Landscape~ipad.png */; };
 		5BA12AAC164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12AAB164D5FDE001E7B4A /* Default-Landscape@2x~ipad.png */; };
-		5BA12D0316514978001E7B4A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D0216514978001E7B4A /* Social.framework */; };
-		5BA12D0516514983001E7B4A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D0416514983001E7B4A /* Accounts.framework */; };
-		5BA12D071651498F001E7B4A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D061651498F001E7B4A /* AdSupport.framework */; };
+		5BA12D0316514978001E7B4A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D0216514978001E7B4A /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5BA12D0516514983001E7B4A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D0416514983001E7B4A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5BA12D071651498F001E7B4A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D061651498F001E7B4A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5BA12D0D16514F05001E7B4A /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA12D0C16514F05001E7B4A /* FacebookConnectPlugin.m */; };
 		5BA12D0F16514F6F001E7B4A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA12D0E16514F6F001E7B4A /* FacebookSDK.framework */; };
 		5BA12D1116514F89001E7B4A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BA12D1016514F89001E7B4A /* FacebookSDKResources.bundle */; };
