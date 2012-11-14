@@ -57,8 +57,8 @@
 <h1 id="hd-tab" class="hd-logo">
 </h1>
 <a id="profile-link" href="#profile" class="hd-btn left-btn pill-btn btn-you unslid"></a>
-<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about"></a>
-<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create hidden"></a>
+<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about hidden"></a>
+<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create"></a>
 </header><!-- END HEADER -->
 
 <!-- CONTENT CONTAINER -->
@@ -254,6 +254,24 @@
         <script type="text/javascript" src="cordova-2.1.0.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/drupal-phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <!-- cordova facebook plugin -->
+        <script src="cdv-plugin-fb-connect.js"></script>
+        <!-- facebook js sdk -->
+        <script src="facebook_js_sdk.js"></script>
+        
+        <!--<script src="js/_config.js"></script>-->
+        <script src="js/ui.js"></script>
+        <script src="js/auth.js"></script>
+        <script src="js/feed.js"></script>
+        <script src="js/graph_api.js"></script>
+        <script src="js/requests.js"></script>
+        <!--<script src="js/credits.js"></script>-->
+        <!--drupal api scripts --->
+        <script src="js/drupal.api.js"></script>
+        <script src="js/drupal.entity.js"></script>
+        <script src="js/drupal.node.js"></script>
+        <script src="js/drupal.system.js"></script>
+        <script src="js/drupal.user.js"></script>
         <script>
             app.initialize();
         </script>
@@ -346,7 +364,6 @@
             <a href="#"><img src="{{logo}}" />{{title}}</a>
             </li>
             {{/each}}
-</script>
-
+            </script>
     </body>
 </html>

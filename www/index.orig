@@ -3,8 +3,8 @@
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>Mobylyze</title>
-        <meta name="description" content="An awesome app">
+        <title></title>
+        <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width">
@@ -16,80 +16,55 @@
         <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        
-
-<!--  ==========================================================================
-   STYLES
-   ========================================================================== -->		
-		<link rel="stylesheet" href="css/normalize.css">	
-        <link rel="stylesheet" href="css/main.css">
-		
-<!--  ==========================================================================
-   HEAD SCRIPTS
-   ========================================================================== -->
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-		<script src="js/vendor/modernizr-2.6.1.min.js"></script>
-		
+		<link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
     </head>
-	
-<!--  ==========================================================================
-   APP
-   ========================================================================== -->
     <body>
-<!-- ALL CONTAINER -->
+<!-- START ALL CONTAINER -->
 <div id="all-container" class="container">
-
-<!-- APP CONTAINER -->
+<!-- START APP CONTAINER -->
 <div id="app-container" class="container">
+<!-- START YOU PAGE -->
 
-<!-- PROFILE CONTAINER -->
- <div id="profile-container" class="container txt-rev">
+ <div id="profile-container" class="container">
+<header>
+<h1>
+You
+</h1>
+</header>
+<div id="profile" class="page">
 
+        </div>
   </div>
-  
+
 <!--MODAL GOES HERE-->
 
-<!-- TAB CONTAINER -->
 <div id="tab-container" class="container">
 <a id="profile-closer" href="#"></a>
-<!-- HEADER -->
+<!-- START HEADER -->
 <header>
 <h1 id="hd-tab" class="hd-logo">
+
 </h1>
-<a id="profile-link" href="#profile" class="hd-btn left-btn pill-btn btn-you unslid"></a>
-<<<<<<< HEAD
-<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about hidden"></a>
-<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create"></a>
+<a id="profile-link" href="#profile" class="hd-btn left-btn btn-you unslid"><span class="hd-btn-text">You</span></a>
+<a id="about-link" href="#profile" class="hd-btn right-btn btn-about"><span class="hd-btn-text">About</span></a>
 </header>
 <!-- START CONTENT CONTAINER -->
-=======
-<a id="about-link" href="#about" class="hd-btn right-btn pill-btn btn-about"></a>
-<a id="create-link" href="#create" class="hd-btn right-btn pill-btn btn-create hidden"></a>
-</header><!-- END HEADER -->
-
-<!-- CONTENT CONTAINER -->
->>>>>>> upstream/jquery-mobile
 <div id="wrapper" class="scrollable">
-
-<!-- MAIN CONTENT -->
     <div id="main-content">
 	<div id="scroll-top"></div>
-	
-<!-- PAGES CONTAINER -->
+<!-- START PAGES CONTAINER -->
 <div id="pages">
-
-<!-- NEWS -->
-    <div id="news" class="page" tabpanel="1">
-	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting News...</span></div>
+    <div id="news" class="page" tabnum="1">
         <div id="news-scroller" class="scroller wf">
         <ul id="news-list">
         </ul>
 		</div>
-    </div><!-- END NEWS -->
+    </div>
+    <div id="events" class="page" tabnum="2">
 	
-	<!-- EVENTS -->
-    <div id="events" class="page" tabpanel="2">
-	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Events...</span></div>
 	<div id="events-scroller" class="scroller wf">
 	<div class="scrollee">
 	<ul id="events-list">
@@ -97,26 +72,19 @@
     </ul>
 	</div>
 	</div>
-    </div><!-- END EVENTS -->
-	
-	<!-- HOME -->
-	    <div id="home" class="page current" tabpanel="3">
-		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Latest...</span></div>
+    </div>
+	    <div id="home" class="page current" tabnum="3">
+		
 		<div id="home-scroller" class="scroller wf">
 		<div class="scrollee">
-		<div id="pullDown">
-			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
-		</div>
 		<ul id="home-list">
 
         </ul>
 		</div>
 		</div>
-    </div><!-- END HOME -->
-	
-	<!-- ACTIONS -->
-	    <div id="action" class="page" tabpanel="4">
-		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Actions...</span></div>
+    </div>
+	    <div id="action" class="page" tabnum="4">
+		
 		<div id="action-scroller" class="scroller wf">
 		<div class="scrollee">
 		<ul id="action-list">
@@ -146,11 +114,9 @@
 		</div>
 		</div>
 
-    </div><!-- END ACTIONS -->
-	
-	<!-- BUNDLES -->
-    <div id="bundles" class="page" tabpanel="5">
-<div id="bundle-loader" class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Bundles...</span></div>
+    </div>
+    <div id="bundles" class="page" tabnum="5">
+
 	<div id="bundles-scroller" class="scroller wf">
 	<div class="scrollee">
 	<ul>
@@ -179,19 +145,14 @@
         </ul>
 		</div>
 		</div>
-    </div><!-- END BUNDLES -->
-	
-	<!-- WALL (HACK FOR UX) -->
+    </div>
 	<div id="wall" class="page">
-	</div><!-- END WALL -->
-	
-</div><!-- END PAGES -->
+	</div>
+</div>
+</div>
+    </div>
 
-</div><!-- END MAIN-CONTENT -->
-
-</div><!-- END WRAPPER -->
-
-<!-- FOOTER -->
+<!-- START FOOTER -->
 <footer>
 <nav>
 <ul id="tab-bar">
@@ -212,14 +173,13 @@
 		<span class="icon"></span>
 		<strong>Home</strong>
 		</a>
-		<span id="home-bg"></span>
+		<span id="home-bg"><span>
     </li>
     <li id="action-tab" class="tab" tab="4">
         <a href="#action">
 		<span class="icon"></span>
 		<strong>Action</strong>
 		</a>
-    </li>
     <li id="bundles-tab" class="tab" tab="5">
         <a href="#bundles">
 		<span class="icon"></span>
@@ -229,27 +189,16 @@
 </ul>
 <div id="tab-bar-bg"></div>
 </nav>
-</footer><!-- END FOOTER -->
+</footer>
+</div>
+</div>
+</div>
 
-</div><!-- END TAB CONTAINER -->
-
-<!-- DETAIL CONTAINER -->
-<div id="detail-container" class="container">
-
-</div><!-- END DETAIL CONTAINER -->
-
-</div><!-- END APP CONTAINER -->
-
-</div><!-- END ALL CONTAINER -->
-
-<!--  ==========================================================================
-   SCRIPTS
-   ========================================================================== -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript">
             if (typeof jQuery == 'undefined')
             {
-                document.write(unescape("%3Cscript src='js/jquery-1.8.min.js' type='text/javascript'%3E%3C/script%3E"));
+                document.write(unescape("%3Cscript src='js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
             }
             </script>
 		<script type="text/javascript" src="js/handlebars.js"></script>
@@ -257,76 +206,31 @@
 		<script type="text/javascript" src="js/jquery.animate-enhanced.js"></script>
 		<script type="text/javascript" src="js/noClickDelay.js"></script>
         <script type="text/javascript" src="js/helper.js"></script>
-		<script type="text/javascript" src="js/touchswipe.js"></script>
         <script type="text/javascript" src="cordova-2.1.0.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/drupal-phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <!-- cordova facebook plugin -->
-        <script src="cdv-plugin-fb-connect.js"></script>
-        <!-- facebook js sdk -->
-        <script src="facebook_js_sdk.js"></script>
-        
-        <!--<script src="js/_config.js"></script>-->
-        <script src="js/ui.js"></script>
-        <script src="js/auth.js"></script>
-        <script src="js/feed.js"></script>
-        <script src="js/graph_api.js"></script>
-        <script src="js/requests.js"></script>
-        <!--<script src="js/credits.js"></script>-->
         <script>
             app.initialize();
         </script>
-
-<!--  ==========================================================================
-   TEMPLATES
-   ========================================================================== -->		
 <script id="html-content-template" type="text/x-handlebars-template">
 <div id="{{ContentID}}" class="content-container">
 {{{PageContent}}}
 </div>
 </script>
-
-<script id="detail-template" type="text/x-handlebars-template">
-<div id="{{DetailID}}" class="detail-view" depth="{{Depth}}">
-<header>
-<h1>
-{{ PageHeading }}
-<h1>
-<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-detail-back"><span class="hd-btn-text">Back</span></a>
-</header>
-<div class="page-holder">
-<div id="{{PageID}}-page" class="detail page">
-{{{PageContent}}}
-  </div>
-  </div>
-</div>
-</script>
-
 <script id="modal-template" type="text/x-handlebars-template">
 <div id="{{ModalID}}" class="modal-container">
 <header>
 <h1>
 {{ PageHeading }}
 <h1>
-<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-back btn-modal-back"><span class="hd-btn-text">Back</span></a>
+<a id="{{PageID}}-back-link" href="#" class="hd-btn left-btn btn-modal-back">Back</a>
 </header>
-<div class="page-holder">
 <div id="{{PageID}}-page" class="modal page">
+<h2>{{PageTitle}}</h2>
 {{{PageContent}}}
-  </div>
   </div>
 </div>
 </script>
-
-<script id="profile-template" type="text/x-handlebars-template">
-<header><h1> {{ PageHeading }} </h1></header>
-<div id="profile" class="page {{PageID}}">
-<div id="{{ContentID}}" class="content-container">
-{{{PageContent}}}
-</div>
-  </div>
-</script>
-
 <script id="newsitem-template" type="text/x-handlebars-template">
     {{#each nodes}}
     <li data-nid="{{nid}}">
@@ -342,9 +246,8 @@
     </li>
     {{/each}}
 </script>
-
 <script id="eventitem-template" type="text/x-handlebars-template">
-    {{#each nodes}}
+            {{#each nodes}}
     <li data-nid="{{nid}}">
     <img src="{{logo}}" width="50"  style="float: left; padding-left; 10px; display: block; margin-right: 12px;"/>
     <div class="item-contect">
@@ -358,13 +261,12 @@
     </li>
             {{/each}}
 </script>
-
 <script id="homeitem-template" type="text/x-handlebars-template">
             {{#each nodes}}
-            <li class="home-item" data-nid="{{nid}}">
+            <li data-nid="{{nid}}">
             <a href="#"><img src="{{logo}}" />{{title}}</a>
             </li>
             {{/each}}
-            </script>
+</script>
     </body>
 </html>
