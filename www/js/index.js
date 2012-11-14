@@ -214,7 +214,7 @@ function loginUser(userName, password, success, failed) {
 }
 
 function logoutUser(success, failed) {
-
+if (window.plugins !== undefined){
 	window.plugins.drupal.logout(function() {
 		window.localStorage.removeItem("user");
 
@@ -225,6 +225,7 @@ function logoutUser(success, failed) {
 		console.log('logout failed');
 		failed();
 	});
+	}
 }
 // END USER FUNCTIONS
 
@@ -905,7 +906,8 @@ onDeviceReady: function() {
     getHome();
     resetSizing();
     resetScroll('home');
-    
+    new FastClick(document.body);
+	
     // remove splash screen
     if (navigator.splashscreen) {
         navigator.splashscreen.hide();
