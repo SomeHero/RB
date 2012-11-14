@@ -670,6 +670,19 @@ function getNews(success, failed) {
 	}
 }
 
+function pageLoaded(pageName) {
+			console.log('hiding preloader');
+			hideLoader(pageName);
+			resetSizing();
+			console.log('resetting scroll');
+			resetScroll(pageName);
+}
+function pageFailed(pageName) {
+			hideLoader(pageName);
+			resetSizing();
+			resetScroll(pageName);
+}
+
 function getEvents(success, failed) {
 	if ($('#events-list li').length === 0) {
 
@@ -694,11 +707,12 @@ function getEvents(success, failed) {
                };
                var item = template(data);
                $('#events-list').append(item);
-               success();
+			   console.log('calling pageloaded');
+               pageLoaded('events');
                },
                error: function(jqXHR, textStatus, errorThrown) {
                console.log('Error Occured ' + textStatus);
-               failed();
+               pageFailed('events');
                }
             });
 			
@@ -922,24 +936,6 @@ onDeviceReady: function() {
     
     logoutUser(function() {}, function() {});
    
-    //check if logged in
-    //var user = getUser();
-    //if (user !== null) {
-       // $('#create-link').removeClass('hidden');
-        //$('#about-link').addClass('hidden');
-   // }
-    
-    //SETUP FACEBOOK PLUGIN
-    //FB.init({
-           // appId: 'appid',
-           // nativeInterface: CDV.FB,
-            //useCachedDialogs: false
-            //});
-    
-    //FB.getLoginStatus(handleStatusChange);
-    
-    //authUser();
-    //updateAuthElements();
     
     //EVENT BINDINGS
     
@@ -963,15 +959,7 @@ onDeviceReady: function() {
 			resetScroll("home");
         });
 
-        getEvents(function() {
-              hideLoader("events");
-              resetSizing();
-              resetScroll("events");
-              }, function() {
-              hideLoader("events");
-              resetSizing();
-              resetScroll("events");
-              });
+        getEvents(pageLoaded('events'), pageFailed('events'));
     
         getNews(function() {
 			hideLoader("news");
@@ -1092,8 +1080,7 @@ onDeviceReady: function() {
 		});
 
 		$('#tab-container').on('click', '#profile-link.unslid', function(e) {
-                               console.log('profile open clicked');
-                               
+            console.log('profile open clicked');
             e.preventDefault();
 			slideProfileOpen();
 		});
