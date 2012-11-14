@@ -207,7 +207,7 @@ function loginUser(userName, password, success, failed) {
            success();
            },
            error: function(jqXHR, textStatus, errorThrown) {
-           console.log('Error Occured ' + textStatus);
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
            failed();
            }
            });
@@ -216,7 +216,7 @@ function loginUser(userName, password, success, failed) {
 function logoutUser(success, failed) {
     // Define the url which contains the full url
 	// in this case, we'll connecting to http://example.com/api/rest/user/logout
-	var url = REST_PATH + 'user/login';
+	var url = REST_PATH + 'user/logout';
 	
     // Use $.ajax to POST the new user
     $.ajax({
@@ -233,7 +233,7 @@ function logoutUser(success, failed) {
             success();
            },
            error: function(jqXHR, textStatus, errorThrown) {
-            console.log('Error Occured ' + textStatus);
+            console.log('Error Occured ' + textStatus + ": " + errorThrown);
             window.localStorage.removeItem("user");
             failed();
            }
@@ -635,7 +635,7 @@ function slideProfileClosed() {
 function getNews(success, failed) {
 	if ($('#news-list li').length === 0) {
         // Define the url which contains the full url
-        // in this case, we'll connecting to http://example.com/api/rest/user/login
+        // in this case, we'll connecting to http://example.com/api/rest/news
         var url = REST_PATH + 'news';
         
         // Use $.ajax to POST the new user
