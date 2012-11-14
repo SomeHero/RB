@@ -214,15 +214,8 @@ function loginUser(userName, password, success, failed) {
 }
 
 function logoutUser(success, failed) {
-<<<<<<< HEAD
-    // Create an object to hold the data entered in the form
-	var user = {
-    username: userName,
-    password: password
-	}
-	
-	// Define the url which contains the full url
-	// in this case, we'll connecting to http://example.com/api/rest/user/login
+    // Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/logout
 	var url = REST_PATH + 'user/login';
 	
     // Use $.ajax to POST the new user
@@ -233,31 +226,18 @@ function logoutUser(success, failed) {
            data: JSON.stringify(user),
            contentType: "application/json",
            // On success we pass the response as res
-           success: function(res) {
-           console.log('account logged in');
-           console.log(res);
-           window.localStorage["user"] = JSON.stringify(res);
-           success();
+           success: function() {
+            console.log('account logged out');
+            window.localStorage.removeItem("user");
+           
+            success();
            },
            error: function(jqXHR, textStatus, errorThrown) {
-           console.log('Error Occured ' + textStatus);
-           failed();
+            console.log('Error Occured ' + textStatus);
+            window.localStorage.removeItem("user");
+            failed();
            }
-           });
-=======
-if (window.plugins !== undefined){
-	window.plugins.drupal.logout(function() {
-		window.localStorage.removeItem("user");
-
-		console.log('user has been logged out');
-		success();
-	}, function() {
-		window.localStorage.removeItem("user");
-		console.log('logout failed');
-		failed();
-	});
-	}
->>>>>>> upstream/jquery-mobile
+    });
 }
 // END USER FUNCTIONS
 
@@ -652,7 +632,7 @@ function slideProfileClosed() {
 
 //LOAD NEWS PAGE
 
-function getNews() {
+function getNews(success, failed) {
 	if ($('#news-list li').length === 0) {
         // Define the url which contains the full url
         // in this case, we'll connecting to http://example.com/api/rest/user/login
@@ -683,18 +663,14 @@ function getNews() {
                }
                });
         
-        hideLoader("news");
-		resetSizing();
-		resetScroll("news");
+
 
 	} else {
-		hideLoader("news");
-		resetSizing();
-		resetScroll("news");
+		success();
 	}
 }
 
-function getEvents() {
+function getEvents(success, failed) {
 	if ($('#events-list li').length === 0) {
 
 		// Define the url which contains the full url
@@ -725,22 +701,16 @@ function getEvents() {
                failed();
                }
             });
-
-			hideLoader("events");
-			resetSizing();
-			resetScroll("events");
 			
 		
 	} else {
 	
-		hideLoader("events");
-		resetSizing();
-		resetScroll("events");
+		success();
 		
 	}
 }
 
-function getHome() {
+function getHome(success, failed) {
 	pullDownEl = document.getElementById('pullDown');
 	pullDownOffset = pullDownEl.offsetHeight;
 
@@ -772,23 +742,18 @@ function getHome() {
                };
                var item = template(data);
                $('#home-list').append(item);
-               //success();
+               success();
                },
                error: function(jqXHR, textStatus, errorThrown) {
                console.log('Error Occured ' + textStatus);
                //failed();
                }
             });
-			
-			hideLoader("home");
-			resetSizing();
-			resetScroll("home");
+
 			
 	} else {
 	
-		hideLoader("home");
-		resetSizing();
-		resetScroll("home");
+		success();
 		
 	}
 }
@@ -935,7 +900,17 @@ onDeviceReady: function() {
             });
     
     //SET UP FUNCTIONS
-    getHome();
+    getHome(function() {
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+            }, function() {
+            
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+    });
+    
     resetSizing();
     resetScroll('home');
     new FastClick(document.body);
@@ -946,8 +921,7 @@ onDeviceReady: function() {
     }
     
     logoutUser(function() {}, function() {});
-    window.localStorage.removeItem("user");
-    
+   
     //check if logged in
     //var user = getUser();
     //if (user !== null) {
@@ -979,12 +953,35 @@ onDeviceReady: function() {
                    });
 
 		//SET UP FUNCTIONS
-		getHome();
-		resetSizing();
-		resetScroll('home');
+        getHome(function() {
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+            }, function() {
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+        });
 
-		getEvents();
-		getNews();
+        getEvents(function() {
+              hideLoader("events");
+              resetSizing();
+              resetScroll("events");
+              }, function() {
+              hideLoader("events");
+              resetSizing();
+              resetScroll("events");
+              });
+    
+        getNews(function() {
+			hideLoader("news");
+			resetSizing();
+			resetScroll("news");
+            }, function() {
+			hideLoader("news");
+			resetSizing();
+			resetScroll("news");
+            });
 		
 		// remove splash screen
 		if (navigator.splashscreen) {
@@ -1039,19 +1036,43 @@ onDeviceReady: function() {
 		$("#tab-container").on('afterShow', '#news', function(e){
 		if (($('#news-list li').length === 0)) {
 				showLoader('news');
-				getNews();
+                               getNews(function() {
+                                       hideLoader("news");
+                                       resetSizing();
+                                       resetScroll("news");
+                                       }, function() {
+                                       hideLoader("news");
+                                       resetSizing();
+                                       resetScroll("news");
+                                       });
 				}
 		});
 		$("#tab-container").on('afterShow', '#events', function(e){
 		if (($('#events-list li').length === 0)) {
 				showLoader('events');
-				getEvents();
+                               getEvents(function() {
+                                         hideLoader("events");
+                                         resetSizing();
+                                         resetScroll("events");
+                                         }, function() {
+                                         hideLoader("events");
+                                         resetSizing();
+                                         resetScroll("events");
+                                         });
 				}
 		});
 		$("#tab-container").on('afterShow', '#home', function(e){
 		if (($('#home-list li').length === 0)) {
 				showLoader('home');
-				getHome();
+                getHome(function() {
+                                       hideLoader("home");
+                                       resetSizing();
+                                       resetScroll("home");
+                                       }, function() {
+                                       hideLoader("home");
+                                       resetSizing();
+                                       resetScroll("home");
+                                       });
 				}
 		});
 		$("#tab-container").on('afterShow', '#action', function(e){
