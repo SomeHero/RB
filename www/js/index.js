@@ -78,7 +78,7 @@ var youContentAnon = {
 	PageID: "page-anonymous",
 	PageHeading: "Log In",
 	ContentID: "you-content-anon",
-	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
+	PageContent: '<div class="fb-button"><button type="button" id="fb-btn-signin" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
 };
 
 var youContentAuth = {
@@ -673,6 +673,8 @@ function failureCallback() {
 	console.log('failed');
 }
 function facebookUserLoggedIn() {
+    console.log('facebook user logged in');
+    
     var user = JSON.parse(window.localStorage["facebookUser"]);
 
 
@@ -1024,8 +1026,13 @@ onDeviceReady: function() {
 			resetPositioning();
 		});
 
-
-
+        //FACEBOOK LOGIN
+        $('#profile-container').on('click', '#fb-btn-signin', function(e) {
+                                console.log('facebook button submit');
+                                   
+                                e.preventDefault();
+                                promptLogin();
+        });
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
 			e.preventDefault();
