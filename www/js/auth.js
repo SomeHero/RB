@@ -44,11 +44,8 @@ function handleStatusChange(session) {
 }
 
 //Prompt the user to login and ask for the 'email' permission
-function promptLogin(callback) {
-    FB.login(function() {
-             console.log('promptLogin complete');
-             facebookUserLoggedIn(callback);
-             }, {scope: 'email'});
+function promptLogin() {
+    FB.login(null, {scope: 'email'});
 }
 
 //This will prompt the user to grant you acess to their Facebook Likes

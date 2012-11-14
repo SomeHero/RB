@@ -45,7 +45,7 @@ ModalID: "modal-create-account",
 PageID: "create-account",
 PageHeading: "Create Account",
 PageTitle: "Create a Mobylyze Account",
-PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="text" id="join-zip" class="required" placeholder="Zip Code" name="ZipCode"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
+PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="text" id="join-zip" class="required" placeholder="Zip Code" name="ZipCode"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
 };
 
 var testDetail = {
@@ -232,7 +232,7 @@ function updateProfile() {
 
 	$('#profile-container').empty();
 	var user = getUser();
-    console.log("hello james");
+    
 	var source = $('#profile-template').html();
 	var template = Handlebars.compile(source);
 	var data = youContentAnon;
@@ -620,19 +620,40 @@ function slideProfileClosed() {
 //LOAD NEWS PAGE
 
 function getNews() {
-	if (window.plugins !== undefined && ($('#news-list li').length === 0)) {
-		window.plugins.drupal.newsGetIndex(function(result) {
-			var source = $("#newsitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			var item = template(result);
-			$('#news-list').append(item);
-			hideLoader("news");
-			resetSizing();
-			resetScroll("news");
-		}, failureCallback);
+	if ($('#news-list li').length === 0) {
+        // Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/user/login
+        var url = REST_PATH + 'news';
+        
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#news-list').append(item);
+               success();
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               failed();
+               }
+               });
+        
+        hideLoader("news");
+		resetSizing();
+		resetScroll("news");
+
 	} else {
 		hideLoader("news");
 		resetSizing();
@@ -641,25 +662,41 @@ function getNews() {
 }
 
 function getEvents() {
-	if (window.plugins !== undefined && ($('#events-list li').length === 0)) {
+	if ($('#events-list li').length === 0) {
 
-		window.plugins.drupal.eventsGetIndex(function(result) {
-
-			var source = $("#eventitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			
-			var item = template(result);
-			
-			$('#events-list').append(item);
+		// Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/events
+        var url = REST_PATH + 'events';
+        
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#events-list').append(item);
+               success();
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               failed();
+               }
+            });
 
 			hideLoader("events");
 			resetSizing();
 			resetScroll("events");
 			
-		}, failureCallback);
 		
 	} else {
 	
@@ -678,27 +715,42 @@ function getHome() {
 		e.preventDefault();
 	}, false);
 
-	if (window.plugins !== undefined && ($('#home-list li').length === 0)) {
-		//window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
+	if ($('#home-list li').length === 0) {
+		
         
+		// Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/user/petitions
+        var url = REST_PATH + 'petitions';
         
-		window.plugins.drupal.petitionsGetIndex(function(result) {
-			$("#home-list").empty();
-
-			var source = $("#homeitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			var item = template(result);
-			$('#home-list').append(item);
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#home-list').append(item);
+               success();
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               failed();
+               }
+            });
 			
 			hideLoader("home");
 			resetSizing();
 			resetScroll("home");
 			
-
-		}, failureCallback);
 	} else {
 	
 		hideLoader("home");
@@ -754,7 +806,7 @@ function facebookUserLoggedIn(callback) {
     console.log(fbUser);
     
     if(fbUser != null) {
-    window.plugins.drupal.login(fbUser.id, '', function(result) {
+        loginUser(fbUser.id, '', function(result) {
                                 console.log('drupal login complete');
                                 
                                 window.localStorage["user"] = JSON.stringify(result);
@@ -876,9 +928,9 @@ onDeviceReady: function() {
             useCachedDialogs: false
             });
     
-    //FB.getLoginStatus(handleStatusChange);
+    FB.getLoginStatus(handleStatusChange);
     
-    //authUser();
+    authUser();
     //updateAuthElements();
     
     //EVENT BINDINGS
@@ -1110,16 +1162,7 @@ onDeviceReady: function() {
                                 console.log('facebook button submit');
                                    
                                 e.preventDefault();
-                                   promptLogin(function() {
-                                               console.log('facebook signin complete');
-                                               var user = getUser();
-                                        if(user != null)
-                                        {
-                                        updateProfile();
-                                               } else {
-                                               alert('Sorry something went wrong');
-                                               }
-                                   });
+                                promptLogin();
         });
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
