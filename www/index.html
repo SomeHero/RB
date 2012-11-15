@@ -39,22 +39,25 @@
    APP
    ========================================================================== -->
     <body>
-<!-- ALL CONTAINER -->
+<!-- ALL CONTAINER (FORMATTING)  -->
 <div id="all-container" class="container">
 
-<!-- APP CONTAINER -->
+<!-- APP CONTAINER (VIEWPORT) -->
 <div id="app-container" class="container">
 
 <!-- PROFILE CONTAINER -->
  <div id="profile-container" class="container txt-rev">
 
-  </div>
+ </div>
   
-<!--MODAL GOES HERE-->
+<!--MODAL CONTAINERS INSERTED HERE-->
 
 <!-- TAB CONTAINER -->
 <div id="tab-container" class="container">
 <a id="profile-closer" href="#"></a>
+
+<!-- TAB VIEW -->
+<div id="tab-view" class="view">
 <!-- HEADER -->
 <header>
 <h1 id="hd-tab" class="hd-logo">
@@ -66,20 +69,22 @@
 
 <!-- CONTENT CONTAINER -->
 <div id="wrapper" class="scrollable">
-
-<!-- MAIN CONTENT -->
-    <div id="main-content">
-	<div id="scroll-top"></div>
+<div id="scroll-top"></div>
 	
-<!-- PAGES CONTAINER -->
+<!-- PAGES -->
 <div id="pages">
 
 <!-- NEWS -->
     <div id="news" class="page" tabpanel="1">
 	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting News...</span></div>
         <div id="news-scroller" class="scroller wf">
-        <ul id="news-list">
+		<div class="scrollee">
+		<div id="pull-news" class="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+		</div>
+        <ul id="news-list" class="main-list">
         </ul>
+		</div>
 		</div>
     </div><!-- END NEWS -->
 	
@@ -88,7 +93,10 @@
 	<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Events...</span></div>
 	<div id="events-scroller" class="scroller wf">
 	<div class="scrollee">
-	<ul id="events-list">
+	<div id="pull-events" class="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+		</div>
+	<ul id="events-list" class="main-list">
 	
     </ul>
 	</div>
@@ -100,22 +108,25 @@
 		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Latest...</span></div>
 		<div id="home-scroller" class="scroller wf">
 		<div class="scrollee">
-		<div id="pullDown">
+		<div id="pull-home" class="pullDown">
 			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
 		</div>
-		<ul id="home-list">
+		<ul id="home-list" class="main-list">
 
         </ul>
 		</div>
 		</div>
     </div><!-- END HOME -->
 	
-	<!-- ACTIONS -->
+	<!-- ACTION -->
 	    <div id="action" class="page" tabpanel="4">
 		<div class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Actions...</span></div>
 		<div id="action-scroller" class="scroller wf">
 		<div class="scrollee">
-		<ul id="action-list">
+		<div id="pull-action" class="pullDown">
+			<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+		</div>
+		<ul id="action-list" class="main-list">
 		 <li>Some Stuff</li>
             <li>More Stuff</li>
             <li>Big Stuff</li>
@@ -149,7 +160,10 @@
 <div id="bundle-loader" class="loader"><p><span class="loader-image" /></span><span class="loader-message" />Getting Bundles...</span></div>
 	<div id="bundles-scroller" class="scroller wf">
 	<div class="scrollee">
-	<ul>
+	<div id="pull-bundles" class="pullDown">
+	<span class="pullDownIcon"></span><span class="pullDownLabel">Pull down to refresh...</span>
+		</div>
+	<ul id="bundles-list" class="main-list">
             <li>Some Stuff</li>
             <li>More Stuff</li>
             <li>Big Stuff</li>
@@ -182,8 +196,6 @@
 	</div><!-- END WALL -->
 	
 </div><!-- END PAGES -->
-
-</div><!-- END MAIN-CONTENT -->
 
 </div><!-- END WRAPPER -->
 
@@ -226,7 +238,7 @@
 <div id="tab-bar-bg"></div>
 </nav>
 </footer><!-- END FOOTER -->
-
+</div><!-- END TAB VIEW -->
 </div><!-- END TAB CONTAINER -->
 
 <!-- DETAIL CONTAINER -->
@@ -239,7 +251,7 @@
 </div><!-- END ALL CONTAINER -->
 
 <!--  ==========================================================================
-   SCRIPTS
+   LIBRARIES
    ========================================================================== -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
         <script type="text/javascript">
@@ -256,9 +268,8 @@
 		<script type="text/javascript" src="js/fastclick.js"></script>
         <script type="text/javascript" src="cordova-2.1.0.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/drupal-phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-		
-        <!-- cordova facebook plugin -->
+		 
+		 <!-- cordova facebook plugin -->
         <script src="cdv-plugin-fb-connect.js"></script>
         <!-- facebook js sdk -->
         <script src="facebook_js_sdk.js"></script>
@@ -276,8 +287,16 @@
         <script src="js/drupal.node.js"></script>
         <script src="js/drupal.system.js"></script>
         <script src="js/drupal.user.js"></script>
+		
+		
+<!--  ==========================================================================
+   CUSTOM
+   ========================================================================== -->	
+		
+        <script type="text/javascript" src="js/app.js"></script>
+
         <script>
-            app.initialize();
+            sh.init();
         </script>
 
 <!--  ==========================================================================
@@ -290,7 +309,7 @@
 </script>
 
 <script id="detail-template" type="text/x-handlebars-template">
-<div id="{{DetailID}}" class="detail-view" depth="{{Depth}}">
+<div id="{{DetailID}}" class="detail-view view" depth="{{Depth}}">
 <header>
 <h1>
 {{ PageHeading }}
@@ -307,6 +326,7 @@
 
 <script id="modal-template" type="text/x-handlebars-template">
 <div id="{{ModalID}}" class="modal-container">
+<div id="{{ModalID}}-view" class="view">
 <header>
 <h1>
 {{ PageHeading }}
@@ -316,6 +336,7 @@
 <div class="page-holder">
 <div id="{{PageID}}-page" class="modal page">
 {{{PageContent}}}
+  </div>
   </div>
   </div>
 </div>

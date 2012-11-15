@@ -113,7 +113,7 @@ top: 0px;
    PULL TO REFRESH
    ========================================================================== */
  
-#pullDown, #pullUp {
+.pullDown, #pullUp {
 	background:#fff;
 	height:40px;
 	line-height:40px;
@@ -123,7 +123,7 @@ top: 0px;
 	font-size:14px;
 	color:#888;
 }
-#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+.pullDown .pullDownIcon, #pullUp .pullUpIcon  {
 	display:block; float:left;
 	width:40px; height:40px;
 	background:url(../img/pull-icon@2x.png) 0 0 no-repeat;
@@ -131,22 +131,14 @@ top: 0px;
 	-webkit-transition-property:-webkit-transform;
 	-webkit-transition-duration:250ms;	
 }
-#pullDown .pullDownIcon {
+.pullDown .pullDownIcon {
 	-webkit-transform:rotate(0deg) translateZ(0);
 }
-#pullUp .pullUpIcon  {
+.pullDown.flip .pullDownIcon {
 	-webkit-transform:rotate(-180deg) translateZ(0);
 }
 
-#pullDown.flip .pullDownIcon {
-	-webkit-transform:rotate(-180deg) translateZ(0);
-}
-
-#pullUp.flip .pullUpIcon {
-	-webkit-transform:rotate(0deg) translateZ(0);
-}
-
-#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+.pullDown.loading .pullDownIcon {
 	background-position:0 100%;
 	-webkit-transform:rotate(0deg) translateZ(0);
 	-webkit-transition-duration:0ms;
@@ -886,13 +878,7 @@ background-color:#ffffff;
     padding:1px 0;
 	min-height:100px;
 }
-#main-content {
-	position:absolute;
-    z-index:1;
-    width:100%;
-    padding:0px;
-	overflow:hidden;
-}
+
 .myScrollbarV {
 	position:absolute;
 	z-index:100;

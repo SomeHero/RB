@@ -24,29 +24,7 @@ var startClientX = 0;
 var startPixelOffset = 0;
 var pixelOffset = 0;
 
-var aboutModal = {
-	ModalID: "modal-about",
-	PageID: "about",
-	PageHeading: "About",
-	PageTitle: "The About Page",
-	PageContent: '<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>'
-};
 
-var createSomethingModal = {
-	ModalID: "modal-create",
-	PageID: "create",
-	PageHeading: "Create",
-	PageTitle: "Create",
-	PageContent: '<p>Here you can create something, I believe.</p><div id="create-buttons-holder"><button type="button" id="poll-button" class="rb-btn blue">+ Create Poll</button><button type="button" id="petition-button" class="rb-btn blue">+ Create Petition</button><button type="button" id="campaign-button" class="rb-btn blue">+ Create Campaign</button><button type="button" id="bundle-button" class="rb-btn blue">+ Create Bundle</button></div>'
-};
-
-var createAccountModal = {
-ModalID: "modal-create-account",
-PageID: "create-account",
-PageHeading: "Create Account",
-PageTitle: "Create a Mobylyze Account",
-PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="text" id="join-zip" class="required" placeholder="Zip Code" name="ZipCode"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
-};
 
 var testDetail = {
 	DetailID: "details-test",
