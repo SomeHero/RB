@@ -5,6 +5,8 @@ var viewport = {
 	panelwidth: $('#all-container').width()
 };
 
+var isFacebookUser = false;
+
 var appui = {
 	footerHeight: 48,
 	headerHeight: 47
@@ -213,9 +215,19 @@ function loginUser(userName, password, success, failed) {
            });
 }
 
-function logoutUser(success, failed) {
+function logoutUser(userName, success, failed) {
+    
+    console.log('logging out user ' + userName);
+    
     // Define the url which contains the full url
 	// in this case, we'll connecting to http://example.com/api/rest/user/logout
+    // Create an object to hold the data entered in the form
+	var user = {
+    username: userName
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/login
 	var url = REST_PATH + 'user/logout';
 	
     // Use $.ajax to POST the new user
@@ -226,19 +238,53 @@ function logoutUser(success, failed) {
            data: JSON.stringify(user),
            contentType: "application/json",
            // On success we pass the response as res
-           success: function() {
-            console.log('account logged out');
-            window.localStorage.removeItem("user");
-           
-            success();
+           success: function(res) {
+           console.log('account logged out');
+           success();
            },
            error: function(jqXHR, textStatus, errorThrown) {
-            console.log('Error Occured ' + textStatus + ": " + errorThrown);
-            window.localStorage.removeItem("user");
-            failed();
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
+           failed();
            }
-    });
+           
+           });
+
 }
+function loginFacebookUser(id, accessToken, success, failed) {
+    
+    console.log('loggin in facebook user');
+    
+    // Create an object to hold the data entered in the form
+	var user = {
+    service: 'facebook',
+    id: id,
+    accesstoken: accessToken
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/loginService
+	var url = REST_PATH + 'user/loginService';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged in');
+           console.log(res);
+           success(res);
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
+           failed();
+           }
+           });
+}
+
 // END USER FUNCTIONS
 
 function updateProfile() {
@@ -670,8 +716,20 @@ function getNews(success, failed) {
 	}
 }
 
+function pageLoaded(pageName) {
+			console.log('hiding preloader');
+			hideLoader(pageName);
+			resetSizing();
+			console.log('resetting scroll');
+			resetScroll(pageName);
+}
+function pageFailed(pageName) {
+			hideLoader(pageName);
+			resetSizing();
+			resetScroll(pageName);
+}
+
 function getEvents(success, failed) {
-	if ($('#events-list li').length === 0) {
 
 		// Define the url which contains the full url
         // in this case, we'll connecting to http://example.com/api/rest/events
@@ -694,20 +752,14 @@ function getEvents(success, failed) {
                };
                var item = template(data);
                $('#events-list').append(item);
-               success();
+			   console.log('calling pageloaded');
+               pageLoaded('events');
                },
                error: function(jqXHR, textStatus, errorThrown) {
                console.log('Error Occured ' + textStatus);
-               failed();
+               pageFailed('events');
                }
             });
-			
-		
-	} else {
-	
-		success();
-		
-	}
 }
 
 function getHome(success, failed) {
@@ -800,16 +852,20 @@ function failureCallback() {
 function facebookUserLoggedIn(callback) {
     console.log('facebook user logged in');
     
+    var fbSession = JSON.parse(window.localStorage["facebookSession"]);
     var fbUser = JSON.parse(window.localStorage["facebookUser"]);
-    console.log(fbUser);
+    
+    isFacebookUser = true;
     
     if(fbUser != null) {
-        loginUser(fbUser.id, '', function(result) {
-                                console.log('drupal login complete');
+        loginFacebookUser(fbUser.id, fbSession.authResponse.accessToken, function(result) {
+                                console.log('facebook login complete');
                                 
-                                window.localStorage["user"] = JSON.stringify(result);
-                                console.log('login success');
-                                
+                                var user = JSON.stringify(result);
+                                console.log("User is: " + user);
+                                window.localStorage["user"] = user;
+                          updateProfile();
+                          
                                 }, function() {
                                 console.log('login failed');
                                 });
@@ -818,6 +874,35 @@ function facebookUserLoggedIn(callback) {
         callback();
     }
 };
+function facebookUserLoggedOut()
+{
+    console.log('facebook user logged out');
+    
+    window.localStorage.removeItem("facebookSession");
+    window.localStorage.removeItem("facebookUser");
+    
+    isFacebookUser = false;
+    
+    var user = JSON.parse(window.localStorage["user"]);
+    
+    
+    if(user != null) {
+        logoutUser(user.user.name, function() {
+                   window.localStorage.removeItem("user");
+                   
+                   updateProfile();
+                   }, function() {
+                   window.localStorage.removeItem("user");
+                   
+                   updateProfile();
+                   });
+    }
+    else {
+        window.localStorage.removeItem("user");
+        
+        updateProfile();
+    }
+}
 
 function facebookUserJoined(callback) {
     
@@ -899,20 +984,6 @@ onDeviceReady: function() {
             console.log('connection to drupal server failed');
             });
     
-    //SET UP FUNCTIONS
-    getHome(function() {
-			hideLoader("home");
-			resetSizing();
-			resetScroll("home");
-            }, function() {
-            
-			hideLoader("home");
-			resetSizing();
-			resetScroll("home");
-    });
-    
-    resetSizing();
-    resetScroll('home');
     new FastClick(document.body);
 	
     // remove splash screen
@@ -920,25 +991,14 @@ onDeviceReady: function() {
         navigator.splashscreen.hide();
     }
     
-    logoutUser(function() {}, function() {});
-   
-    //check if logged in
-    //var user = getUser();
-    //if (user !== null) {
-       // $('#create-link').removeClass('hidden');
-        //$('#about-link').addClass('hidden');
-   // }
-    
     //SETUP FACEBOOK PLUGIN
-    //FB.init({
-           // appId: 'appid',
-           // nativeInterface: CDV.FB,
-            //useCachedDialogs: false
-            //});
-    
-    //FB.getLoginStatus(handleStatusChange);
-    
-    //authUser();
+    FB.init({
+            appId: '332189543469634',
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false
+            });
+    FB.getLoginStatus(handleStatusChange);
+    authUser();
     //updateAuthElements();
     
     //EVENT BINDINGS
@@ -963,15 +1023,7 @@ onDeviceReady: function() {
 			resetScroll("home");
         });
 
-        getEvents(function() {
-              hideLoader("events");
-              resetSizing();
-              resetScroll("events");
-              }, function() {
-              hideLoader("events");
-              resetSizing();
-              resetScroll("events");
-              });
+        getEvents(pageLoaded('events'), pageFailed('events'));
     
         getNews(function() {
 			hideLoader("news");
@@ -1048,7 +1100,8 @@ onDeviceReady: function() {
 				}
 		});
 		$("#tab-container").on('afterShow', '#events', function(e){
-		if (($('#events-list li').length === 0)) {
+                $('#events-list').empty();
+                               
 				showLoader('events');
                                getEvents(function() {
                                          hideLoader("events");
@@ -1059,7 +1112,7 @@ onDeviceReady: function() {
                                          resetSizing();
                                          resetScroll("events");
                                          });
-				}
+				
 		});
 		$("#tab-container").on('afterShow', '#home', function(e){
 		if (($('#home-list li').length === 0)) {
@@ -1092,8 +1145,7 @@ onDeviceReady: function() {
 		});
 
 		$('#tab-container').on('click', '#profile-link.unslid', function(e) {
-                               console.log('profile open clicked');
-                               
+            console.log('profile open clicked');
             e.preventDefault();
 			slideProfileOpen();
 		});
@@ -1200,7 +1252,7 @@ onDeviceReady: function() {
 			}
 
 		});
-		
+    
 		
 		
 		
@@ -1217,7 +1269,17 @@ onDeviceReady: function() {
                                 console.log('facebook button submit');
                                    
                                 e.preventDefault();
-                                promptLogin();
+                                   FB.login(
+                                            function(response) {
+                                            var fbSession = JSON.parse(window.localStorage["facebookSession"]);
+                                            var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+                                            
+                                            console.log("FBUser: " + fbUser);
+                                            console.log("FBSession: " + fbSession);
+
+                                            },
+                                            { scope: "email" }
+                                            );
         });
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
@@ -1238,42 +1300,50 @@ onDeviceReady: function() {
 		$('#profile-container').on('click', '#signout-submit', function(e) {
 			e.preventDefault();
 
-            logoutUser(function() {
-                                              console.log("signout complete");
+            console.log('signout clicked');
+            
+                                   if(isFacebookUser === true) {
+                                   FB.logout(function(response) {
+                                             alert('facebook logged out');
+                                             });
+                                   }
+                                   else {
+                                   var user = JSON.parse(window.localStorage["user"]);
+                                   
+                                   
+                                   if(user != null) {
+                                    logoutUser(user.user.name, function() {
+                                              window.localStorage.removeItem("user");
+                                              
                                               updateProfile();
-                                              },
-                                              function() {
-                                              console.log("signout failed");
-                                              updateProfile();
+                                              }, function() {
+                                               window.localStorage.removeItem("user");
+                                               
+                                               updateProfile();
                                               });
+                                   }
+                                   else {
+                                    window.localStorage.removeItem("user");
+                                   
+                                    updateProfile();
+                                   }
+                                   }
 		});
     
         //CONNECT WITH FACEBOOk
         $('#all-container').on('click', '#fb-btn-join', function(e) {
-                               promptLogin(function() {
-                                           
-                                           console.log('facebook join complete');
-                                           
-                                           var fbUser = JSON.parse(window.localStorage["facebookUser"]);
-                                           
-                                           var userName = fbUser.id;
-                                           var email = '';
-                                           var password = '';
-                                           
-                                           var user = {
-                                           name: userName,
-                                           mail: userName,
-                                           pass: password
-                                           };
-                                           
-                                           if (window.plugins !== undefined) {
-                                           window.plugins.drupal.userSave(user, function() {
-                                                                          alert('new user created');
-                                                                          }, function() {
-                                                                          alert('new user failed');
-                                                                          });
-                                           }
-                                           });
+                               FB.login(
+                                        function(response) {
+                                        var fbSession = JSON.parse(window.localStorage["facebookSession"]);
+                                        var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+                                        
+                                        console.log("FBUser: " + fbUser);
+                                        console.log("FBSession: " + fbSession);
+                                        
+                                        },
+                                        { scope: "email" }
+                                        );
+
         });
 
 		//CREATE ACCOUNT

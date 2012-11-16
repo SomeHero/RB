@@ -273,6 +273,8 @@
 
 - (void) logout:(CDVInvokedUrlCommand*)command
 {
+    NSLog(@"%@", FBSession.activeSession);
+    
     if (!FBSession.activeSession.isOpen) {
         return;
     }

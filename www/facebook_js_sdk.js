@@ -6171,6 +6171,7 @@ FB.provide('', {
    * @param cb {Function} The callback function.
    */
   logout: function(cb) {
+           console.log('logging out of facebook');
     FB.ui({ method: 'auth.logout', display: 'hidden' }, cb);
   }
 });

@@ -30,14 +30,15 @@ CDV.FB = {
       
     params = params || { scope: '' };
     cordova.exec(function(e) { // login
+
         if (e.authResponse && e.authResponse.expiresIn) {
           var expirationTime = e.authResponse.expiresIn === 0
           ? 0 
           : (new Date()).getTime() + e.authResponse.expiresIn * 1000;
           e.authResponse.expirationTime = expirationTime; 
         }
-                 console.log(e.authResponse);
-        localStorage.setItem('cdv_fb_session', JSON.stringify(e.authResponse));
+                 console.log("Response: " + e.authResponse);
+        localStorage.setItem('cdv_fb_session', JSON.stringify(e));
         FB.Auth.setAuthResponse(e.authResponse, 'connected');
         if (cb) cb(e);
     }, (fail?fail:null), 'org.apache.cordova.facebook.Connect', 'login', params.scope.split(',') );
