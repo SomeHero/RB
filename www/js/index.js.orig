@@ -1,14 +1,18 @@
 //GLOBAL VARS
 var viewport = {
-width: $(window).width(),
-height: $(window).height(),
-panelwidth: $('#all-container').width()
+	width: $(window).width(),
+	height: $(window).height(),
+	panelwidth: $('#all-container').width()
 };
+
+var isFacebookUser = false;
 
 var appui = {
 	footerHeight: 48,
 	headerHeight: 47
 };
+
+var REST_PATH = "http://ec2-54-242-131-102.compute-1.amazonaws.com/rest/"
 
 var myScroll = null;
 var newsScroll = null;
@@ -23,49 +27,62 @@ var startPixelOffset = 0;
 var pixelOffset = 0;
 
 var aboutModal = {
-ModalID: "modal-about",
-PageID: "about",
-PageHeading: "About",
-PageTitle: "The About Page",
-PageContent: '<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>'
+	ModalID: "modal-about",
+	PageID: "about",
+	PageHeading: "About",
+	PageTitle: "The About Page",
+	PageContent: '<p>Lorem ipsum dolor sit amet, sed inermis persequeris deterruisset eu, ei quod solet commodo quo. Cum an bonorum nominavi voluptua, has at hinc audiam. Eirmod reformidans mea ei, has cetero eligendi ullamcorper et. Eu nibh prima eum, quem hinc splendide eu vel. Graeco percipit prodesset mei et, ex duo vide omnis. Nulla postulant imperdiet per et, sanctus graecis honestatis duo et, ei pro eripuit apeirian.</p>'
 };
 
 var createSomethingModal = {
-ModalID: "modal-create",
-PageID: "create",
-PageHeading: "Create",
-PageTitle: "Create",
-PageContent: '<p>Here you can create something, I believe.</p><div id="create-buttons-holder"><button type="button" id="poll-button" class="rb-btn blue">+ Create Poll</button><button type="button" id="petition-button" class="rb-btn blue">+ Create Petition</button><button type="button" id="campaign-button" class="rb-btn blue">+ Create Campaign</button><button type="button" id="bundle-button" class="rb-btn blue">+ Create Bundle</button></div>'
+	ModalID: "modal-create",
+	PageID: "create",
+	PageHeading: "Create",
+	PageTitle: "Create",
+	PageContent: '<p>Here you can create something, I believe.</p><div id="create-buttons-holder"><button type="button" id="poll-button" class="rb-btn blue">+ Create Poll</button><button type="button" id="petition-button" class="rb-btn blue">+ Create Petition</button><button type="button" id="campaign-button" class="rb-btn blue">+ Create Campaign</button><button type="button" id="bundle-button" class="rb-btn blue">+ Create Bundle</button></div>'
 };
 
 var createAccountModal = {
-<<<<<<< HEAD
 ModalID: "modal-create-account",
 PageID: "create-account",
 PageHeading: "Create Account",
 PageTitle: "Create a Mobylyze Account",
-PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
-=======
-	ModalID: "modal-create-account",
-	PageID: "create-account",
-	PageHeading: "Create Account",
-	PageTitle: "Create a Mobylyze Account",
-	PageContent: '<button type="button" id="fb-img-btn" class="img-btn"></button><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
->>>>>>> upstream/jquery-mobile
+PageContent: '<div class="fb-button"><button type="button" id="fb-btn-join" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="join-form"><form id="the-join-form" name="join-form"><div class="field-grouper"><input type="text" id="join-first" class="required" placeholder="First Name" name="FirstName"><input type="text" id="join-last" class="required" placeholder="Last Name" name="LastName"><input type="email" id="join-username" class="required" placeholder="Email Address" name="Email"><input type="text" id="join-zip" class="required" placeholder="Zip Code" name="ZipCode"><input type="password" id="join-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="create-account-submit" class="rb-btn red">Create Account</button></form></div><div id="main-body-sub-links"></div>'
 };
 
 var testDetail = {
 	DetailID: "details-test",
 	PageID: "details",
+	Depth: "1",
 	PageHeading: "Item Details",
-	PageContent: '<div>ITEM DETAILS</div>'
+	PageContent: '<ul id="test-list" depth="1"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
 };
-
+var testDetail2 = {
+	DetailID: "details-test-2",
+	PageID: "details",
+	Depth: "2",
+	PageHeading: "Item Details 2",
+	PageContent: '<ul id="test-list" depth="2"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
+var testDetail3 = {
+	DetailID: "details-test-3",
+	PageID: "details",
+	Depth: "3",
+	PageHeading: "Item Details 3",
+	PageContent: '<ul id="test-list" depth="3"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
+var testDetail4 = {
+	DetailID: "details-test-4",
+	PageID: "details",
+	Depth: "4",
+	PageHeading: "Item Details 4",
+	PageContent: '<ul id="test-list" depth="4"><li>Some Stuff</li><li>More Stuff</li><li>Big Stuff</li><li>Small Stuff</li><li>Geek Stuff</li><li>Nerd Stuff</li><li>Fast Stuff</li></ul>'
+};
 var youContentAnon = {
 	PageID: "page-anonymous",
 	PageHeading: "Log In",
 	ContentID: "you-content-anon",
-	PageContent: '<div class="fb-button"><button type="button" id="fb-btn" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
+	PageContent: '<div class="fb-button"><button type="button" id="fb-btn-signin" class="rb-btn fb">Connect with Facebook</button></div><div class="or"> - &nbsp;OR&nbsp; -</div><div id="signin-form"><div class="field-grouper"><input type="email" id="signin-username" class="required" placeholder="Email Address" name="Email"><input type="password" id="signin-password" class="required" placeholder="Password" name="Password"></div><button type="button" id="signin-submit" class="rb-btn red">Log In</button></div><br><div id="main-body-sub-links">Don\'t have an account? <a id="btn-create-account" href="#" data-ajax="false">Create One Now</a></p></div>'
 };
 
 var youContentAuth = {
@@ -79,11 +96,9 @@ var transitionEnd = 'webkitTransitionEnd';
 
 
 //GLOBAL FUNCTIONS
-
-
-//USER FUNCTIONS
-
 function getUser() {
+    console.log('getting user from local storage');
+    
 	if (window.localStorage.length != 0 && window.localStorage['user'] != null) {
 		var currentUser = JSON.parse(window.localStorage['user']);
 		return currentUser;
@@ -91,62 +106,192 @@ function getUser() {
 	return null;
 }
 
-function createUser(userName, password, success, failed) {
-	var user = {
-		name: userName,
-		mail: userName,
-		pass: password,
-		signature: '<b>James R</b>',
-		firstname: 'Sebastian'
+//SYSTEM FUNCTIONS
+function connect(success, failed)
+{
+    // Define the URL to register this user
+    var url = REST_PATH + "system/connect";
+    console.log(url);
+    
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
 
-	};
+           success()
+           
+           
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           failed();
+           }
+           });
 
-	window.plugins.drupal.userSave(user, function(result) {
-		console.log(result);
-		window.localStorage["user"] = JSON.stringify(result);
-		updateProfile();
-		success();
-	}, function() {
-		failed();
-	});
-
+}
+//END SYSTEM FUNCTIONS
+//USER FUNCTIONS
+function createUser(userName, password, firstName, lastName, zipCode, success, failed) {
+	var newUser = {
+        "name": userName,
+        "pass": password,
+        "mail": userName,
+        "field_firstname": {
+            "und": [{"value": firstName}]
+        },
+        "field_lastname": {
+            "und": [{"value": lastName}]
+        },
+        "field_zipcode": {
+            "und": [{"value": zipCode}]
+        }
+    };
+    
+    console.log(newUser);
+    
+    // Define the URL to register this user
+    var url = REST_PATH + "user/register.json";
+    console.log(url);
+    
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(newUser),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account created');
+           
+           // res will be an object including the uid and the uri to the new user
+           //new to go get it here
+           window.localStorage["user"] = JSON.stringify(res);
+           success();
+           
+           
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Error Occured ' + textStatus);
+            failed();
+           }
+           });
+    
 }
 
 function loginUser(userName, password, success, failed) {
-	window.plugins.drupal.login(userName, password, function(result) {
-		window.localStorage["user"] = JSON.stringify(result);
-		updateProfile();
-		success();
-	}, function() {
-		failed();
-	});
+
+    // Create an object to hold the data entered in the form
+	var user = {
+    username: userName,
+    password: password
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/login
+	var url = REST_PATH + 'user/login';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged in');
+           console.log(res);
+           window.localStorage["user"] = JSON.stringify(res);
+           success();
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
+           failed();
+           }
+           });
 }
 
-function logoutUser(success, failed) {
+function logoutUser(userName, success, failed) {
+    
+    console.log('logging out user ' + userName);
+    
+    // Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/logout
+    // Create an object to hold the data entered in the form
+	var user = {
+    username: userName
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/login
+	var url = REST_PATH + 'user/logout';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged out');
+           success();
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
+           failed();
+           }
+           
+           });
 
-	window.plugins.drupal.logout(function() {
-		window.localStorage.removeItem("user");
-		$('#profile.page').empty();
-		var source = $("#html-content-template").html();
-		var template = Handlebars.compile(source);
-		var data = youContentAnon;
-
-		var content = template(data);
-		$('#profile.page').append(content);
-		console.log('user has been logged out');
-		success();
-	}, function() {
-		window.localStorage.removeItem("user");
-		console.log('logout failed');
-		failed();
-	});
 }
+function loginFacebookUser(id, accessToken, success, failed) {
+    
+    console.log('loggin in facebook user');
+    
+    // Create an object to hold the data entered in the form
+	var user = {
+    service: 'facebook',
+    id: id,
+    accesstoken: accessToken
+	}
+	
+	// Define the url which contains the full url
+	// in this case, we'll connecting to http://example.com/api/rest/user/loginService
+	var url = REST_PATH + 'user/loginService';
+	
+    // Use $.ajax to POST the new user
+    $.ajax({
+           type: "POST",
+           url: url,
+           dataType: "json",
+           data: JSON.stringify(user),
+           contentType: "application/json",
+           // On success we pass the response as res
+           success: function(res) {
+           console.log('account logged in');
+           console.log(res);
+           success(res);
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+           console.log('Error Occured ' + textStatus + ": " + errorThrown);
+           failed();
+           }
+           });
+}
+
 // END USER FUNCTIONS
 
 function updateProfile() {
-    
+
 	$('#profile-container').empty();
 	var user = getUser();
+    
 	var source = $('#profile-template').html();
 	var template = Handlebars.compile(source);
 	var data = youContentAnon;
@@ -169,7 +314,7 @@ function whichTransitionEvent() {
 		'MozTransition': 'transitionend',
 		'WebkitTransition': 'webkitTransitionEnd'
 	};
-    
+
 	for (t in transitions) {
 		if (el.style[t] !== undefined) {
 			return transitions[t];
@@ -180,7 +325,7 @@ function whichTransitionEvent() {
 function resetSizing() {
 	$('#profile-container').css('width', (viewport.panelwidth - 48) + 'px');
 	$('#pages > div.page').css('width', viewport.panelwidth + 'px');
-	$('#all-container').css('height', viewport.height + 'px');
+	$('.container').css('height', viewport.height + 'px');
 	$('#wrapper').css('height', (viewport.height - (appui.footerHeight + appui.headerHeight) + 'px'));
 	$('.scroller.wf').css('height', (viewport.height - (appui.footerHeight + appui.headerHeight) + 'px'));
 	$('#main-content').css('height', $('#pages > div.page.current').height() + 'px');
@@ -221,13 +366,6 @@ function showEmptyLoader(message) {
 	}
 	
 }
-<<<<<<< HEAD
-
-function hideEmptyLoader() {
-	$('.loader').fadeOut('fast', function() {
-                         $('.loader').remove();
-                         });
-=======
 function showLoader(pageName) {
 	$('#' + pageName + ' .loader').css('display', 'block');
 	$('#' + pageName + ' .loader').css('opacity', '1.0');
@@ -236,102 +374,24 @@ function showLoader(pageName) {
 function hideLoader(pageName) {
 	$('#' + pageName + ' .loader').css('opacity', '0');
 	$('#' + pageName + ' .loader').css("height", '0px');
->>>>>>> upstream/jquery-mobile
 }
 
 function pullDownAction() {
 	var el, li, i;
 	el = document.getElementById('home-list');
-    
+
 	for (i = 0; i < 3; i++) {
 		li = document.createElement('li');
 		li.innerText = 'New Home Item ' + (++generatedCount);
 		el.insertBefore(li, el.childNodes[0]);
 	}
-    
+
 	homeScroll.refresh();
 }
 
 
 function resetScroll(page) {
 	setTimeout(function() {
-<<<<<<< HEAD
-               if (page == "home") {
-               if (homeScroll !== null) {
-               homeScroll.refresh();
-               } else {
-               homeScroll = new iScroll('home-scroller', {
-                                        hideScrollbar: true,
-                                        scrollbarClass: 'myScrollbar',
-                                        useTransition: true,
-                                        topOffset: pullDownOffset,
-                                        onRefresh: function() {
-                                        if (pullDownEl.className.match('loading')) {
-                                        pullDownEl.className = '';
-                                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
-                                        }
-                                        },
-                                        onScrollMove: function() {
-                                        if (this.y > 5 && !pullDownEl.className.match('flip')) {
-                                        pullDownEl.className = 'flip';
-                                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Release to refresh...';
-                                        this.minScrollY = 0;
-                                        } else if (this.y < 5 && pullDownEl.className.match('flip')) {
-                                        pullDownEl.className = '';
-                                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Pull down to refresh...';
-                                        this.minScrollY = -pullDownOffset;
-                                        }
-                                        },
-                                        onScrollEnd: function() {
-                                        if (pullDownEl.className.match('flip')) {
-                                        pullDownEl.className = 'loading';
-                                        pullDownEl.querySelector('.pullDownLabel').innerHTML = 'Loading...';
-                                        pullDownAction(); // Execute custom function (ajax call?)
-                                        }
-                                        }
-                                        });
-               }
-               } else if (page == "news") {
-               if (newsScroll !== null) {
-               newsScroll.refresh();
-               } else {
-               newsScroll = new iScroll('news-scroller', {
-                                        hideScrollbar: true,
-                                        scrollbarClass: 'myScrollbar'
-                                        });
-               }
-               } else if (page == "events") {
-               if (eventsScroll !== null) {
-               eventsScroll.refresh();
-               } else {
-               eventsScroll = new iScroll('events-scroller', {
-                                          hideScrollbar: true,
-                                          scrollbarClass: 'myScrollbar'
-                                          });
-               }
-               } else if (page == "action") {
-               if (actionScroll !== null) {
-               actionScroll.refresh();
-               } else {
-               actionScroll = new iScroll('action-scroller', {
-                                          hideScrollbar: true,
-                                          scrollbarClass: 'myScrollbar'
-                                          });
-               }
-               } else if (page == "bundles") {
-               if (bundlesScroll !== null) {
-               bundlesScroll.refresh();
-               } else {
-               bundlesScroll = new iScroll('bundles-scroller', {
-                                           hideScrollbar: true,
-                                           scrollbarClass: 'myScrollbar'
-                                           });
-               }
-               } else {
-               
-               }
-               }, 0);
-=======
 		if (page == "home") {
 			if (homeScroll !== null) {
 				homeScroll.refresh();
@@ -407,7 +467,6 @@ function resetScroll(page) {
 
 		}
 	}, 10);
->>>>>>> upstream/jquery-mobile
 }
 
 function page(tabNum) {
@@ -421,30 +480,6 @@ function page(tabNum) {
 		$("#pages div.page").css("display", "none"); //hide all
 		toPage.addClass("current");
 		toPage.css("display", "block");
-<<<<<<< HEAD
-	} else {
-		fromPage.removeClass("current");
-		$("#pages div.page").css("display", "none"); //hide all
-		toPage.addClass("current");
-		toPage.css("display", "block");
-	}
-	if (tabNum == 3) {
-		getHome();
-        
-	} else {
-        
-		if (tabNum == 1) {
-			getNews();
-		} else if (tabNum == 2) {
-			getEvents();
-		} else if (tabNum == 4) {
-			getAction();
-		} else if (tabNum == 5) {
-			getBundles();
-		} else {
-            
-		}
-=======
 		return;
 	} else {
 
@@ -454,9 +489,8 @@ toPage.show(0);
 toPage.addClass("current");
 console.log('showed new tab');
 		
->>>>>>> upstream/jquery-mobile
 	}
-    
+
 }
 
 function createModal(modalName) {
@@ -473,49 +507,96 @@ function createModal(modalName) {
 	$('.modal-container#modal-' + modalName.PageID).addClass("active");
 	$('.modal-container#modal-' + modalName.PageID).addClass("slid-up");
 	$('.modal-container#modal-' + modalName.PageID).animate({
-                                                            top: "0px",
-                                                            useTranslate3d: true,
-                                                            leaveTransforms: false
-                                                            }, 400, function() {
-                                                            
-                                                            });
-    
+		top: "0px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 300, function() {
+
+	});
+
 }
 
 function loadDetailView(template, content) {
+
+	//PREPARE DETAIL VIEW
 	var source = $("#" + template).html();
 	var template = Handlebars.compile(source);
 	var data = content;
 	var detailview = template(data);
-	$('#app-container').append(detailview);
-	resetSizing();
-	$('.detail-container#' + content.DetailID).css('left', viewport.panelwidth + 'px');
-	$('.detail-container#' + content.DetailID).css('display', 'block');
+	
+	//APPEND TO CONTAINER
+	$('#detail-container').append(detailview);
+	var viewToLoad = $('.detail-view#' + content.DetailID);
 
+	//CHECK IF DETAIL CONTAINER IS ACTIVE AND SLIDE IN IF NOT
+	if ($('#detail-container').hasClass('active')){
+	slideInDetailView();
+	}else{
+	slideInDetailContainer();
+	}
+	
+	function slideInDetailContainer(){
+	
+	//SHOW AND POSITION DETAIL CONTAINER AND VIEW
+	$('#detail-container').css('display', 'block');
+	$('#detail-container').css('left', viewport.panelwidth + 'px');
+	$('.detail-view#' + content.DetailID).css('display', 'block');
+	$('.detail-view#' + content.DetailID).css('left', '0px');
+	resetSizing();
+	
+	//ADD FIRST CLASS TO DETAIL VIEW
+	$('.detail-view#' + content.DetailID).addClass('first').addClass('active-dt');
+	
+	//SLIDE OUT TAB CONTAINER
 	$('#tab-container').animate({
 		left: -viewport.panelwidth + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 500, function() {
-
-	});
-	$('#tab-container header > *').animate({
-		opacity: 0,
-		useTranslate3d: false
 	}, 300, function() {
-
+	
 	});
-	$('.detail-container#' + content.DetailID).animate({
+	
+	//SLIDE IN DETAIL CONTAINER
+	$('#detail-container').animate({
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
-
+	}, 260, function() {
+	$('#detail-container').addClass('active');
 	});
+	
+	}
+	
+	function slideInDetailView(){
+
+	//SHOW AND POSITION DETAIL VIEW
+	$('.detail-view#' + content.DetailID).css('display', 'block');
+	$('.detail-view#' + content.DetailID).css('left', viewport.panelwidth + 'px');
+	resetSizing();
+	
+	$('.detail-view.active-dt').animate({
+		left: -viewport.panelwidth + "px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 300, function() {
+	$('.detail-view.active-dt').removeClass('active-dt');
+	$('.detail-view#' + content.DetailID).addClass('active-dt');
+	});
+	
+	$('.detail-view#' + content.DetailID).animate({
+		left: "0px",
+		useTranslate3d: true,
+		leaveTransforms: false
+	}, 260, function() {
+	
+	});
+	}
 
 
 }
 
+
+//SLIDE FUNCTIONS
 function slideStart(e) {
 	if (e.originalEvent.touches) {
 		e = e.originalEvent.touches[0];
@@ -550,18 +631,12 @@ function slide(e) {
 //OPEN PROFILE
 
 function slideProfileOpen() {
-<<<<<<< HEAD
-    
 	updateProfile();
-    
-=======
-	updateProfile();
->>>>>>> upstream/jquery-mobile
 	$('#tab-container').animate({
 		left: (viewport.panelwidth - 48) + "px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 		$('#profile-link').removeClass("unslid").addClass("slid");
 		$('#tab-container').addClass("slid-right");
 		$('#profile-closer').css("display", "block");
@@ -578,18 +653,18 @@ function slideProfileClosed() {
 
 	var user = getUser();
 	if (user !== null) {
-		$('#create-link').removeClass('hidden');
-		$('#about-link').addClass('hidden');
+		//$('#create-link').removeClass('hidden');
+		//$('#about-link').addClass('hidden');
 	} else {
-		$('#about-link').removeClass('hidden');
-		$('#create-link').addClass('hidden');
+		//$('#about-link').removeClass('hidden');
+		//$('#create-link').addClass('hidden');
 	}
-    
+
 	$('#tab-container').animate({
 		left: "0px",
 		useTranslate3d: true,
 		leaveTransforms: false
-	}, 300, function() {
+	}, 260, function() {
 		$('#tab-container').removeClass("slid-right");
 		$('#profile-link').removeClass("slid").addClass("unslid");
 		$('#all-container').off('touchstart', '#profile-closer', slideStart);
@@ -603,128 +678,134 @@ function slideProfileClosed() {
 
 //LOAD NEWS PAGE
 
-function getNews() {
-<<<<<<< HEAD
-    
-=======
->>>>>>> upstream/jquery-mobile
-	if (window.plugins !== undefined && ($('#news-list li').length === 0)) {
-		window.plugins.drupal.newsGetIndex(function(result) {
-<<<<<<< HEAD
-                                           
-                                           var source = $("#newsitem-template").html();
-                                           var template = Handlebars.compile(source);
-                                           var data = {
-                                           nodes: result
-                                           };
-                                           var item = template(result);
-                                           $('.loader').remove();
-                                           $('#news-list').append(item);
-                                           resetSizing();
-                                           resetScroll("news");
-                                           }, failureCallback);
-=======
-			var source = $("#newsitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			var item = template(result);
-			$('#news-list').append(item);
-			hideLoader("news");
-			resetSizing();
-			resetScroll("news");
-		}, failureCallback);
->>>>>>> upstream/jquery-mobile
+function getNews(success, failed) {
+	if ($('#news-list li').length === 0) {
+        // Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/news
+        var url = REST_PATH + 'news';
+        
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#news-list').append(item);
+               success();
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               failed();
+               }
+               });
+        
+
+
 	} else {
-		hideLoader("news");
-		resetSizing();
-		resetScroll("news");
+		success();
 	}
 }
 
-function getEvents() {
-<<<<<<< HEAD
-    
-=======
->>>>>>> upstream/jquery-mobile
-	if (window.plugins !== undefined && ($('#events-list li').length === 0)) {
-
-		window.plugins.drupal.eventsGetIndex(function(result) {
-<<<<<<< HEAD
-                                             
-                                             var source = $("#eventitem-template").html();
-                                             var template = Handlebars.compile(source);
-                                             var data = {
-                                             nodes: result
-                                             };
-                                             var item = template(result);
-                                             $('.loader').remove();
-                                             $('#events-list').append(item);
-                                             
-                                             resetSizing();
-                                             resetScroll("events");
-                                             }, failureCallback);
-=======
-
-			var source = $("#eventitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			
-			var item = template(result);
-			
-			$('#events-list').append(item);
-
-			hideLoader("events");
+function pageLoaded(pageName) {
+			console.log('hiding preloader');
+			hideLoader(pageName);
 			resetSizing();
-			resetScroll("events");
-			
-		}, failureCallback);
-		
->>>>>>> upstream/jquery-mobile
-	} else {
-	
-		hideLoader("events");
-		resetSizing();
-		resetScroll("events");
-		
-	}
+			console.log('resetting scroll');
+			resetScroll(pageName);
+}
+function pageFailed(pageName) {
+			hideLoader(pageName);
+			resetSizing();
+			resetScroll(pageName);
 }
 
-function getHome() {
+function getEvents(success, failed) {
+
+		// Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/events
+        var url = REST_PATH + 'events';
+        
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#events-list').append(item);
+			   console.log('calling pageloaded');
+               pageLoaded('events');
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               pageFailed('events');
+               }
+            });
+}
+
+function getHome(success, failed) {
 	pullDownEl = document.getElementById('pullDown');
 	pullDownOffset = pullDownEl.offsetHeight;
-    
+
 	document.addEventListener('touchmove', function(e) {
-                              e.preventDefault();
-                              }, false);
-    
-	if (window.plugins !== undefined && ($('#home-list li').length === 0)) {
-		//window.plugins.drupal.openAnonymousSession(successCallback, failureCallback);
-		window.plugins.drupal.petitionsGetIndex(function(result) {
-			$("#home-list").empty();
+		e.preventDefault();
+	}, false);
 
-			var source = $("#homeitem-template").html();
-			var template = Handlebars.compile(source);
-			var data = {
-				nodes: result
-			};
-			var item = template(result);
-			$('#home-list').append(item);
-			
-			hideLoader("home");
-			resetSizing();
-			resetScroll("home");
-			
+	if ($('#home-list li').length === 0) {
+		
+        
+		// Define the url which contains the full url
+        // in this case, we'll connecting to http://example.com/api/rest/user/petitions
+        var url = REST_PATH + 'petitions';
+        
+        // Use $.ajax to POST the new user
+        $.ajax({
+               type: "GET",
+               url: url,
+               dataType: "json",
+               data: JSON.stringify(user),
+               contentType: "application/json",
+               // On success we pass the response as res
+               success: function(result) {
+               console.log(result);
+               var source = $("#newsitem-template").html();
+               var template = Handlebars.compile(source);
+               var data = {
+               nodes: result
+               };
+               var item = template(data);
+               $('#home-list').append(item);
+               success();
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+               console.log('Error Occured ' + textStatus);
+               //failed();
+               }
+            });
 
-		}, failureCallback);
+			
 	} else {
 	
-		hideLoader("home");
-		resetSizing();
-		resetScroll("home");
+		success();
 		
 	}
 }
@@ -742,7 +823,7 @@ function getAction() {
 function getBundles() {
 	resetSizing();
 	resetScroll("bundles");
-		setTimeout(function() {
+	setTimeout(function() {
 		hideLoader("bundles");
 		resetScroll("bundles");
 	}, 1000);
@@ -768,27 +849,68 @@ function nodeSuccessCallback(result) {
 function failureCallback() {
 	console.log('failed');
 }
-function facebookUserLoggedIn() {
-    var user = JSON.parse(window.localStorage["facebookUser"]);
-
-
-    window.plugins.drupal.login(user.id, '12341234', function(result) {
-                                window.localStorage["user"] = JSON.stringify(result);
-                                console.log('login success');
-                                updateProfile();
-                                
-                                }, function() {
-                                alert('login failed');
-                                });
-};
-
-function facebookUserJoined() {
-    var userName = user.id;
-    var email = 'james100@paidthx.com';
-    var password = '12341234';
+function facebookUserLoggedIn(callback) {
+    console.log('facebook user logged in');
     
-    console.log(userName);
-    console.log(password);
+    var fbSession = JSON.parse(window.localStorage["facebookSession"]);
+    var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+    
+    isFacebookUser = true;
+    
+    if(fbUser != null) {
+        loginFacebookUser(fbUser.id, fbSession.authResponse.accessToken, function(result) {
+                                console.log('facebook login complete');
+                                
+                                var user = JSON.stringify(result);
+                                console.log("User is: " + user);
+                                window.localStorage["user"] = user;
+                          updateProfile();
+                          
+                                }, function() {
+                                console.log('login failed');
+                                });
+        callback();
+    } else {
+        callback();
+    }
+};
+function facebookUserLoggedOut()
+{
+    console.log('facebook user logged out');
+    
+    window.localStorage.removeItem("facebookSession");
+    window.localStorage.removeItem("facebookUser");
+    
+    isFacebookUser = false;
+    
+    var user = JSON.parse(window.localStorage["user"]);
+    
+    
+    if(user != null) {
+        logoutUser(user.user.name, function() {
+                   window.localStorage.removeItem("user");
+                   
+                   updateProfile();
+                   }, function() {
+                   window.localStorage.removeItem("user");
+                   
+                   updateProfile();
+                   });
+    }
+    else {
+        window.localStorage.removeItem("user");
+        
+        updateProfile();
+    }
+}
+
+function facebookUserJoined(callback) {
+    
+    var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+
+    var userName = fbUser.id;
+    var email = 'null-randomstring@localhost.com';
+    var password = 'password';
     
     var user = {
     name: userName,
@@ -803,14 +925,13 @@ function facebookUserJoined() {
                                        alert('new user failed');
                                        });
     }
-
+    callback();
 };
 
 var app = {
 	// Application Constructor
 initialize: function() {
     console.log('initialze app');
-    
     
     this.bindEvents();
 },
@@ -857,36 +978,33 @@ onDeviceReady: function() {
     panelwidth: $('#all-container').width()
     };
     
-    //SET UP FUNCTIONS
-    getHome();
-    resetSizing();
-    resetScroll('home');
+    connect(function() {
+            console.log('connected to drupal server success');
+            }, function() {
+            console.log('connection to drupal server failed');
+            });
     
+    new FastClick(document.body);
+	
     // remove splash screen
     if (navigator.splashscreen) {
         navigator.splashscreen.hide();
     }
     
-    window.localStorage.removeItem("user");
-    
-    //check if logged in
-    //var user = getUser();
-    //if (user !== null) {
-       // $('#create-link').removeClass('hidden');
-        //$('#about-link').addClass('hidden');
-   // }
-    
+<<<<<<< HEAD
     //SETUP FACEBOOK PLUGIN
     FB.init({
-            appId: 'appid',
+            appId: '332189543469634',
             nativeInterface: CDV.FB,
             useCachedDialogs: false
             });
-    
-    //FB.getLoginStatus(handleStatusChange);
-    
-    //authUser();
+    FB.getLoginStatus(handleStatusChange);
+    authUser();
     //updateAuthElements();
+=======
+    logoutUser(function() {}, function() {});
+   
+>>>>>>> upstream/jquery-mobile
     
     //EVENT BINDINGS
     
@@ -900,33 +1018,34 @@ onDeviceReady: function() {
                    });
 
 		//SET UP FUNCTIONS
-		getHome();
-		resetSizing();
-		resetScroll('home');
+        getHome(function() {
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+            }, function() {
+			hideLoader("home");
+			resetSizing();
+			resetScroll("home");
+        });
 
-		getEvents();
-		getNews();
+        getEvents(pageLoaded('events'), pageFailed('events'));
+    
+        getNews(function() {
+			hideLoader("news");
+			resetSizing();
+			resetScroll("news");
+            }, function() {
+			hideLoader("news");
+			resetSizing();
+			resetScroll("news");
+            });
 		
 		// remove splash screen
 		if (navigator.splashscreen) {
 			navigator.splashscreen.hide();
 		}
 
-		//USER SET UP
-		var user = getUser();
-		//if (user !== null) {
-			$('#create-link').removeClass('hidden');
-			$('#about-link').addClass('hidden');
-<<<<<<< HEAD
-		//}
-=======
-		}else{
-		//open session anon
-		if (window.plugins){
-		window.plugins.drupal.openAnonymousSession(successCallback,failureCallback);
-		}
-		}
->>>>>>> upstream/jquery-mobile
+    console.log('here');
 
 
 
@@ -953,6 +1072,7 @@ onDeviceReady: function() {
 			page(toTab);
 		});
 
+		//NOT USED FOR THE MOMENT
 		$("#tab-container").on('tab-change', function(e, data){
 			if (data.tab == 1) {
 
@@ -973,19 +1093,44 @@ onDeviceReady: function() {
 		$("#tab-container").on('afterShow', '#news', function(e){
 		if (($('#news-list li').length === 0)) {
 				showLoader('news');
-				getNews();
+                               getNews(function() {
+                                       hideLoader("news");
+                                       resetSizing();
+                                       resetScroll("news");
+                                       }, function() {
+                                       hideLoader("news");
+                                       resetSizing();
+                                       resetScroll("news");
+                                       });
 				}
 		});
 		$("#tab-container").on('afterShow', '#events', function(e){
-		if (($('#events-list li').length === 0)) {
+                $('#events-list').empty();
+                               
 				showLoader('events');
-				getEvents();
-				}
+                               getEvents(function() {
+                                         hideLoader("events");
+                                         resetSizing();
+                                         resetScroll("events");
+                                         }, function() {
+                                         hideLoader("events");
+                                         resetSizing();
+                                         resetScroll("events");
+                                         });
+				
 		});
 		$("#tab-container").on('afterShow', '#home', function(e){
 		if (($('#home-list li').length === 0)) {
 				showLoader('home');
-				getHome();
+                getHome(function() {
+                                       hideLoader("home");
+                                       resetSizing();
+                                       resetScroll("home");
+                                       }, function() {
+                                       hideLoader("home");
+                                       resetSizing();
+                                       resetScroll("home");
+                                       });
 				}
 		});
 		$("#tab-container").on('afterShow', '#action', function(e){
@@ -1005,7 +1150,8 @@ onDeviceReady: function() {
 		});
 
 		$('#tab-container').on('click', '#profile-link.unslid', function(e) {
-			e.preventDefault();
+            console.log('profile open clicked');
+            e.preventDefault();
 			slideProfileOpen();
 		});
 
@@ -1031,7 +1177,7 @@ onDeviceReady: function() {
 				top: (viewport.height + 40) + 'px',
 				useTranslate3d: true,
 				leaveTransforms: false
-			}, 400, function() {
+			}, 300, function() {
 				$('.modal-container.active').remove();
 				$('#all-container .modal-container').last().addClass("active");
 			});
@@ -1039,34 +1185,82 @@ onDeviceReady: function() {
 
 		});
 
+		
+		//OPEN DETAILS
+		$('#app-container').on('click', '.page ul li', function(e) {
+		
+		var temp = $(this).parent().attr('depth');
+		depth = parseInt(temp);
+		
+		if (temp == undefined){
+			loadDetailView('detail-template', testDetail);
+			}else if (depth == 1){
+			loadDetailView('detail-template', testDetail2);
+			}else if (depth == 2){
+			loadDetailView('detail-template', testDetail3);
+			}else if(depth == 3){
+			loadDetailView('detail-template', testDetail4);
+			}else{
+			alert('relax, friend...just testing here');
+			}
+		});
+		
 		//CLOSE DETAILS
-		$('#all-container').on('click', '.btn-detail-back', function(e) {
+		$('#app-container').on('click', '.detail-view.active-dt .btn-detail-back', function(e) {
 			e.preventDefault();
+			var depth = parseInt($('.detail-view.active-dt').attr('depth'));
+			var nextBack = depth - 1;
+			var loadUp = $('#detail-container').find("[depth='" + nextBack + "']");
+			
+			if(nextBack == 0){
+			
 			$('#tab-container').animate({
 				left: "0px",
 				useTranslate3d: true,
 				leaveTransforms: false
-			}, 300, function() {
+			}, 260, function() {
 
 			});
 
-			$('#tab-container header > *').css('opacity', '1');
-
-			$(this).closest('div.detail-container').animate({
+			$('#detail-container').animate({
 				left: viewport.panelwidth + "px",
 				useTranslate3d: true
-			}, 300, function() {
-				$(this).closest('div.detail-container').remove();
+			}, 400, function() {
+				$('#detail-container').empty();
+				$('#detail-container').removeClass('active');
 			});
 
-			$(this).closest('div.detail-container header > *').animate({
-				opacity: 0,
+			
+			}else{
+			
+			loadUp.css('left', -viewport.panelwidth + 'px');
+			loadUp.css('opacity', '1');
+			
+			loadUp.animate({
+				left: "0px",
+				useTranslate3d: true,
+				leaveTransforms: false
+			}, 260, function() {
+
+			});
+
+			
+
+			$('.detail-view.active-dt').animate({
+				left: viewport.panelwidth + "px",
 				useTranslate3d: true
-			}, 300, function() {
-
+			}, 400, function() {
+				$('.detail-view.active-dt').remove();
+				loadUp.addClass('active-dt');
 			});
+
+			}
 
 		});
+    
+		
+		
+		
 
 		//FIX AFTER FORM ENTRY
 		$('#all-container').on('blur', 'input', function() {
@@ -1075,86 +1269,121 @@ onDeviceReady: function() {
 			resetPositioning();
 		});
 
-		//DEBUG
-		$('#home').on('click', '#home-list li', function(e) {
-			loadDetailView("detail-template", testDetail);
-		});
+        //FACEBOOK LOGIN
+        $('#profile-container').on('click', '#fb-btn-signin', function(e) {
+                                console.log('facebook button submit');
+                                   
+                                e.preventDefault();
+                                   FB.login(
+                                            function(response) {
+                                            var fbSession = JSON.parse(window.localStorage["facebookSession"]);
+                                            var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+                                            
+                                            console.log("FBUser: " + fbUser);
+                                            console.log("FBSession: " + fbSession);
 
+                                            },
+                                            { scope: "email" }
+                                            );
+        });
 		//SIGN IN SUBMIT
 		$('#profile-container').on('click', '#signin-submit', function(e) {
-			e.preventDefault();
-			var userName = $("#signin-username").val();
-			var password = $("#signin-password").val();
+                                   e.preventDefault();
+                                   var userName = $("#signin-username").val();
+                                   var password = $("#signin-password").val();
+                                   
+                                   loginUser(userName, password, function() {
+                                             console.log('signin user complete');
+                                             updateProfile();
+                                             },
+                                             function() {
+                                             alert('Unable to login');
+                                             });
 
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.logout(function() {
-					console.log('user logout success');
-				}, function() {
-					console.log('user logout failed');
-				});
-
-				window.plugins.drupal.login(userName, password, function(result) {
-					window.localStorage["user"] = JSON.stringify(result);
-					console.log('login success');
-					updateProfile();
-
-				}, function() {
-					alert('login failed');
-				});
-			}
 		});
 		//SIGN OUT SUBMIT
 		$('#profile-container').on('click', '#signout-submit', function(e) {
 			e.preventDefault();
 
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.logout(function(result) {
-					window.localStorage.removeItem("user");
-					updateProfile();
-					console.log('logout success');
-				}, function(result) {
-					console.log('logout failed');
-				});
-			}
+            console.log('signout clicked');
+            
+                                   if(isFacebookUser === true) {
+                                   FB.logout(function(response) {
+                                             alert('facebook logged out');
+                                             });
+                                   }
+                                   else {
+                                   var user = JSON.parse(window.localStorage["user"]);
+                                   
+                                   
+                                   if(user != null) {
+                                    logoutUser(user.user.name, function() {
+                                              window.localStorage.removeItem("user");
+                                              
+                                              updateProfile();
+                                              }, function() {
+                                               window.localStorage.removeItem("user");
+                                               
+                                               updateProfile();
+                                              });
+                                   }
+                                   else {
+                                    window.localStorage.removeItem("user");
+                                   
+                                    updateProfile();
+                                   }
+                                   }
 		});
+    
+        //CONNECT WITH FACEBOOk
+        $('#all-container').on('click', '#fb-btn-join', function(e) {
+                               FB.login(
+                                        function(response) {
+                                        var fbSession = JSON.parse(window.localStorage["facebookSession"]);
+                                        var fbUser = JSON.parse(window.localStorage["facebookUser"]);
+                                        
+                                        console.log("FBUser: " + fbUser);
+                                        console.log("FBSession: " + fbSession);
+                                        
+                                        },
+                                        { scope: "email" }
+                                        );
+
+        });
 
 		//CREATE ACCOUNT
-		$('#all-container').on('click', '#create-account-submit', function(e) {
-			e.preventDefault();
-			var userName = $('#join-username').val();
-			var password = $('#join-password').val();
-			console.log(userName);
-			console.log(password);
-
-			var user = {
-				name: userName,
-				mail: userName,
-				pass: password
-			};
-
-			if (window.plugins !== undefined) {
-				window.plugins.drupal.userSave(user, function() {
-					alert('new user created');
-				}, function() {
-					alert('new user failed');
-				});
-			}
-
-		});
+    $('#all-container').on('click', '#create-account-submit', function(e) {
+                           e.preventDefault();
+                           
+                           console.log('creating new user');
+                           var userName = $("#join-username").val();
+                           var password = $("#join-password").val();
+                           var firstName = $("#join-first").val();
+                           var lastName = $("#join-first").val();
+                           var zipCode = $("#join-zip").val();
+                           
+                           createUser(userName, password, firstName, lastName, zipCode, function() {
+                                      console.log('login user complete');
+                                      
+                                      updateProfile();
+                                      }, function() {
+                                      alert('Unable to Create Account');
+                                      });
+                           });
 
 
 
-	},
+},
 	//END DEVICE READY
 	// Update DOM on a Received Event
-receivedEvent: function(id) {
-    var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-    console.log('Received Event: ' + id);
-}
+	receivedEvent: function(id) {
+		var parentElement = document.getElementById(id);
+		var listeningElement = parentElement.querySelector('.listening');
+		var receivedElement = parentElement.querySelector('.received');
+		listeningElement.setAttribute('style', 'display:none;');
+		receivedElement.setAttribute('style', 'display:block;');
+		console.log('Received Event: ' + id);
+	}
 }; //END APP
 
 
